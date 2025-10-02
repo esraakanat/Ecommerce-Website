@@ -15,13 +15,5 @@ export default defineConfig(({ mode }) => {
       port,
       strictPort: true,
     },
-    build: {
-      rollupOptions: {
-        external: [],
-        output: {
-          manualChunks: undefined,
-        },
-      },
-    },
   }
 })
