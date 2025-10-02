@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CategoryLoading from "../../../../shared/components/loading/CategoryLoading";
 import { useCategories } from "../../hooks/useCategories";
+import cellPhoneIcon from "../../../../assets/home-assets/Category-CellPhone.svg";
+import computerIcon from "../../../../assets/home-assets/Category-Computer.svg";
+import smartWatchIcon from "../../../../assets/home-assets/SmartWatch.svg";
+import cameraIcon from "../../../../assets/home-assets/Category-Camera.svg";
+import headphoneIcon from "../../../../assets/home-assets/Category-Headphone.svg";
+import gameIcon from "../../../../assets/home-assets/Game.svg";
 
 
 const CategoryFilter = () => {
@@ -89,7 +95,7 @@ const CategoryFilter = () => {
   >
     <div className="mb-2 text-2xl">
       <img 
-        src={"/src/assets/home assets/Category-CellPhone.svg"} 
+        src={cellPhoneIcon} 
         alt="all products" 
         className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" 
       />
@@ -112,19 +118,19 @@ const CategoryFilter = () => {
       <div className="mb-2 text-2xl">
         {/* الأيقونات حسب الكاتيجوري */}
         {cat.name.toLowerCase().includes("clothes") && (
-          <img src={"/src/assets/home assets/Category-Computer.svg"} alt="clothes" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img src={computerIcon} alt="clothes" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
         )}
         {cat.name.toLowerCase().includes("electronics") && (
-          <img src={"/src/assets/home assets/SmartWatch.svg"} alt="electronics" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img src={smartWatchIcon} alt="electronics" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
         )}
         {cat.name.toLowerCase().includes("furniture") && (
-          <img src={"/src/assets/home assets/Category-Camera.svg"} alt="furniture" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img src={cameraIcon} alt="furniture" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
         )}
         {cat.name.toLowerCase().includes("shoes") && (
-          <img src={"/src/assets/home assets/Category-Headphone.svg"} alt="shoes" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img src={headphoneIcon} alt="shoes" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
         )}
         {cat.name.toLowerCase().includes("miscellaneous") && (
-          <img src={"/src/assets/home assets/Game.svg"} alt="Miscellaneous" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img src={gameIcon} alt="Miscellaneous" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
         )}
       </div>
       <span className="text-sm font-medium text-center">{cat.name}</span>

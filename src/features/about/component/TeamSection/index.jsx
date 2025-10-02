@@ -2,9 +2,9 @@ import React from "react";
 import image46 from "../../../../assets/about assets/image 46.png";
 import image51 from "../../../../assets/about assets/image 51.png";
 import image47 from "../../../../assets/about assets/image 47.png";
-import twitterIcon from "../../../../assets/home assets/tiwtter.svg";
-import instagramIcon from "../../../../assets/home assets/instagram.svg";
-import linkedinIcon from "../../../../assets/home assets/linkedin.svg";
+import twitterIcon from "../../../../assets/home-assets/tiwtter.svg";
+import instagramIcon from "../../../../assets/home-assets/instagram.svg";
+import linkedinIcon from "../../../../assets/home-assets/linkedin.svg";
 
 export default function TeamSection() {
   const members = [

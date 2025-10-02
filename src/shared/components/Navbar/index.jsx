@@ -6,10 +6,10 @@ import { useUserCart } from "../../../features/cart/hooks/useUserCart";
 import useAuthStore from "../../../features/auth/store";
 import ProfileMenu from "../../../features/home/components/ProfileMenu";
 import SearchModal from "../SearchModal";
-import arrowIcon from "../../../assets/home assets/arrow1.svg";
-import searchIcon from "../../../assets/home assets/seach.svg";
-import wishlistIcon from "../../../assets/home assets/WishlistIcon.svg";
-import cartIcon from "../../../assets/home assets/CartIcon.svg";
+import arrowIcon from "../../../assets/home-assets/arrow1.svg";
+import searchIcon from "../../../assets/home-assets/seach.svg";
+import wishlistIcon from "../../../assets/home-assets/WishlistIcon.svg";
+import cartIcon from "../../../assets/home-assets/CartIcon.svg";
 
 const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
   const [searchQuery, setSearchQuery] = useState("");

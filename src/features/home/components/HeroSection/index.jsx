@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHeroSection } from "../../hooks/useHeroSection";
-import appleLogo from "../../../../assets/home assets/1200px-Apple_gray_logo 1.svg";
-import heroImage from "../../../../assets/home assets/hero.png";
+import appleLogo from "../../../../assets/home-assets/1200px-Apple_gray_logo 1.svg";
+import heroImage from "../../../../assets/home-assets/hero.png";
 
 const HeroSection = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

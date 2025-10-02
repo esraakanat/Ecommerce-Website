@@ -1,5 +1,5 @@
 import React from 'react';
-import jblImage from '../../../../assets/home assets/jbl.png';
+import jblImage from '../../../../assets/home-assets/jbl.png';
 
 const MusicBanner = () => {
   return (

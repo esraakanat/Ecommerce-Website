@@ -1,8 +1,8 @@
 import React from 'react';
-import ps5Image from '../../../../assets/home assets/ps5.png';
-import womanImage from '../../../../assets/home assets/woman.png';
-import product3Image from '../../../../assets/home assets/3.png';
-import perfumeImage from '../../../../assets/home assets/perfum.png';
+import ps5Image from '../../../../assets/home-assets/ps5.png';
+import womanImage from '../../../../assets/home-assets/woman.png';
+import product3Image from '../../../../assets/home-assets/3.png';
+import perfumeImage from '../../../../assets/home-assets/perfum.png';
 
 const ProductShowcase = () => {
   return (

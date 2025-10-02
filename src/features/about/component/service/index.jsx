@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import deliveryIcon from '../../../../assets/home assets/delivery.svg';
-import serviceIcon from '../../../../assets/home assets/service.svg';
-import secureIcon from '../../../../assets/home assets/secure.svg';
+import deliveryIcon from '../../../../assets/home-assets/delivery.svg';
+import serviceIcon from '../../../../assets/home-assets/service.svg';
+import secureIcon from '../../../../assets/home-assets/secure.svg';
 
 const ServiceSection = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);

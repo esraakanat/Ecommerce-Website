@@ -1,12 +1,12 @@
 import React from 'react';
-import arrowIcon from '../../assets/home assets/arrow.svg';
-import qrCode from '../../assets/home assets/qr.png';
-import googlePlay from '../../assets/home assets/google play.png';
-import appStore from '../../assets/home assets/appstore.png';
-import facebookIcon from '../../assets/home assets/facebook.svg';
-import twitterIcon from '../../assets/home assets/tiwtter.svg';
-import instagramIcon from '../../assets/home assets/instagram.svg';
-import linkedinIcon from '../../assets/home assets/linkedin.svg';
+import arrowIcon from '../../assets/home-assets/arrow.svg';
+import qrCode from '../../assets/home-assets/qr.png';
+import googlePlay from '../../assets/home-assets/google play.png';
+import appStore from '../../assets/home-assets/appstore.png';
+import facebookIcon from '../../assets/home-assets/facebook.svg';
+import twitterIcon from '../../assets/home-assets/tiwtter.svg';
+import instagramIcon from '../../assets/home-assets/instagram.svg';
+import linkedinIcon from '../../assets/home-assets/linkedin.svg';
 
 const Footer = () => {
   return (
