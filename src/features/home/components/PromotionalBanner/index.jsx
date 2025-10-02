@@ -1,4 +1,5 @@
 import React from 'react';
+import jblImage from '../../../../assets/home assets/jbl.png';
 
 const MusicBanner = () => {
   return (
@@ -42,7 +43,7 @@ const MusicBanner = () => {
             
             {/* Image */}
             <img 
-              src="/src/assets/home assets/jbl.png" 
+              src={jblImage} 
               alt="JBL Speaker" 
               className="relative z-10 w-3/4 sm:w-2/3 md:w-5/6 lg:w-2/3 max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[350px] object-contain drop-shadow-2xl transition-all duration-300"
             />

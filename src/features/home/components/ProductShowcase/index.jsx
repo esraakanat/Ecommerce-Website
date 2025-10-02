@@ -1,4 +1,8 @@
 import React from 'react';
+import ps5Image from '../../../../assets/home assets/ps5.png';
+import womanImage from '../../../../assets/home assets/woman.png';
+import product3Image from '../../../../assets/home assets/3.png';
+import perfumeImage from '../../../../assets/home assets/perfum.png';
 
 const ProductShowcase = () => {
   return (
@@ -34,7 +38,7 @@ const ProductShowcase = () => {
           {/* Image - Right Side */}
           <div className="w-full md:w-[50%] h-48 md:h-full flex items-center justify-center">
             <img 
-              src="/src/assets/home assets/ps5.png" 
+              src={ps5Image} 
               alt="PlayStation 5" 
               className="w-full h-full object-contain md:object-cover opacity-80"
             />
@@ -59,7 +63,7 @@ const ProductShowcase = () => {
             {/* Image */}
             <div className="w-full sm:w-[40%] h-32 sm:h-full flex items-center justify-center">
               <img 
-                src="/src/assets/home assets/woman.png" 
+                src={womanImage} 
                 alt="Women's Collections" 
                 className="w-full h-full object-contain sm:object-cover opacity-70"
               />
@@ -84,7 +88,7 @@ const ProductShowcase = () => {
     {/* Image */}
     <div className="w-full md:w-[50%] h-24 md:h-full flex items-center justify-center">
       <img 
-        src="/src/assets/home assets/3.png" 
+        src={product3Image} 
         alt="Speakers" 
         className="w-full h-full object-contain md:object-cover opacity-70"
       />
@@ -107,7 +111,7 @@ const ProductShowcase = () => {
     {/* Image */}
     <div className="w-full md:w-[50%] h-24 md:h-full flex items-center justify-center">
       <img 
-        src="/src/assets/home assets/perfum.png" 
+        src={perfumeImage} 
         alt="Perfume" 
         className="w-full h-full object-contain md:object-cover opacity-70"
       />

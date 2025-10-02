@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import shoppingImage from "../../../../assets/about assets/shopping.png";
 /**
  * Responsive About page section
  * - Mobile-first layout
@@ -44,7 +45,7 @@ export default function About() {
                 {/* Maintain aspect ratio on small screens; allow taller on large */}
                 <div className="aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-[480px] bg-[#F3A9BF]">
                   <img
-                    src="/src/assets/about assets/shopping.png"
+                    src={shoppingImage}
                     alt="Shoppers with bags"
                     className="h-full w-full object-cover"
                     loading="lazy"

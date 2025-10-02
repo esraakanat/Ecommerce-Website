@@ -3,6 +3,10 @@ import { useUserCart } from '../../../cart/hooks/useUserCart';
 import useCouponStore from '../../../cart/store/couponStore';
 import { toast } from 'react-toastify';
 import SuccessModal from '../../../../shared/components/SuccessModal';
+import bKashIcon from '../../../../assets/check out assets/image 30.svg';
+import visaIcon from '../../../../assets/check out assets/image 31.svg';
+import mastercardIcon from '../../../../assets/check out assets/image 32.svg';
+import nagadIcon from '../../../../assets/check out assets/image 33.svg';
 
 const Checkoutcomponent = () => {
   const { items, getTotalPrice, clearCart } = useUserCart();
@@ -306,10 +310,10 @@ const Checkoutcomponent = () => {
                   />
                   <label className="ml-2 text-black font-base font-poppins text-[12px]">Bank</label>
                   <div className="ml-4 flex space-x-2">
-                    <img src="/src/assets/check out assets/image 30.svg" alt="bKash" className="h-4" />
-                    <img src="/src/assets/check out assets/image 31.svg" alt="Visa" className="h-4" />
-                    <img src="/src/assets/check out assets/image 32.svg" alt="Mastercard" className="h-4" />
-                    <img src="/src/assets/check out assets/image 33.svg" alt="Nagad" className="h-4" />
+                    <img src={bKashIcon} alt="bKash" className="h-4" />
+                    <img src={visaIcon} alt="Visa" className="h-4" />
+                    <img src={mastercardIcon} alt="Mastercard" className="h-4" />
+                    <img src={nagadIcon} alt="Nagad" className="h-4" />
                   </div>
                 </div>
                 <div className="flex items-center">

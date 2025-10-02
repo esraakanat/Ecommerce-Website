@@ -1,4 +1,8 @@
 import React from "react";
+import shopIcon from "../../../../assets/about assets/shop.svg";
+import saleIcon from "../../../../assets/about assets/Sale.svg";
+import shoppingBagIcon from "../../../../assets/about assets/Shopping bag.svg";
+import moneyBagIcon from "../../../../assets/about assets/Moneybag.svg";
 
 // Responsive Tailwind-only cards
 export default function StatsCards() {
@@ -31,7 +35,7 @@ export default function StatsCards() {
             <div className={ring}>
               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
                 <img
-                  src="/src/assets/about assets/shop.svg"
+                  src={shopIcon}
                   alt="customer"
                   className="w-12 h-12 px-2 bg-black rounded-full"
                 />
@@ -46,7 +50,7 @@ export default function StatsCards() {
             <div className={ring}>
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-2 border-gray-400">
                 <img
-                  src="/src/assets/about assets/Sale.svg"
+                  src={saleIcon}
                   alt="customer"
                   className="w-12 h-12 px-2 bg-white rounded-full"
                 />
@@ -61,7 +65,7 @@ export default function StatsCards() {
             <div className={ring}>
               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 p-1 border-gray-400">
                 <img
-                  src="/src/assets/about assets/Shopping bag.svg"
+                  src={shoppingBagIcon}
                   alt="customer"
                   className="w-12 h-12 px-2 bg-black rounded-full"
                 />
@@ -76,7 +80,7 @@ export default function StatsCards() {
             <div className={ring}>
               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
                 <img
-                  src="/src/assets/about assets/Moneybag.svg"
+                  src={moneyBagIcon}
                   alt="customer"
                   className="w-12 h-12 px-2 bg-black rounded-full"
                 />

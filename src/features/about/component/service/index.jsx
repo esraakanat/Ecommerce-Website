@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import deliveryIcon from '../../../../assets/home assets/delivery.svg';
+import serviceIcon from '../../../../assets/home assets/service.svg';
+import secureIcon from '../../../../assets/home assets/secure.svg';
 
 const ServiceSection = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -24,7 +27,7 @@ const ServiceSection = () => {
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="relative">
               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
-                <img src="/src/assets/home assets/delivery.svg" alt="delivery" className="w-12 h-12 px-2 bg-black rounded-full" />
+                <img src={deliveryIcon} alt="delivery" className="w-12 h-12 px-2 bg-black rounded-full" />
               </div>
             </div>
             <h3 className="text-lg font-bold font-poppins text-black uppercase tracking-wide">
@@ -39,7 +42,7 @@ const ServiceSection = () => {
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="relative">
               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
-                <img src="/src/assets/home assets/service.svg" alt="customer" className="w-12 h-12 px-2 bg-black rounded-full" />
+                <img src={serviceIcon} alt="customer" className="w-12 h-12 px-2 bg-black rounded-full" />
               </div>
             </div>
             <h3 className="text-lg font-bold  font-poppins text-black uppercase tracking-wide">
@@ -54,7 +57,7 @@ const ServiceSection = () => {
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="relative">
               <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
-                <img src="/src/assets/home assets/secure.svg" alt="money" className="w-12 h-12 px-2 bg-black rounded-full" />
+                <img src={secureIcon} alt="money" className="w-12 h-12 px-2 bg-black rounded-full" />
               </div>
             </div>
             <h3 className="text-lg font-bold font-poppins text-black uppercase tracking-wide">
