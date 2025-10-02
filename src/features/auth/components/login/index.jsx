@@ -6,6 +6,7 @@ import { loginSchema, loginDefaultValues } from './config';
 import { loginUser } from '../../services/api';
 import useAuthStore from '../../store';
 import { getNextUrl, getSafeRedirectUrl } from '../../../../shared/utilities/authRedirect';
+import loginImage from '../../../../assets/login assets/dl.beatsnoop 1.png';
 
 function Login() {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ function Login() {
                     <div className="relative w-full h-full flex items-center justify-center scale-95 sm:scale-100 lg:scale-100">
                         {/* Original Image */}
                         <img 
-                            src="/src/assets/sign up assets/dl.beatsnoop 1.png" 
+                            src={loginImage} 
                             alt="Shopping illustration" 
                             className="w-full h-full object-contain lg:object-cover lg:object-left"
                         />
