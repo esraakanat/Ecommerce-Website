@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHeroSection } from "../../hooks/useHeroSection";
+import appleLogo from "../../../../assets/home assets/1200px-Apple_gray_logo 1.svg";
+import heroImage from "../../../../assets/home assets/hero.png";
 
 const HeroSection = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -196,7 +198,7 @@ const HeroSection = () => {
         <div className="absolute top-10 md:top-6 left-6 z-10">
           <div className="flex items-center mb-4">
             <img
-              src="/src/assets/home assets/1200px-Apple_gray_logo 1.svg"
+              src={appleLogo}
               alt="Apple"
               className="h-6 w-6 md:h-10 md:w-10 mr-2"
             />
@@ -236,7 +238,7 @@ const HeroSection = () => {
 <div className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 w-full max-w-[400px] md:max-w-[350px] lg:max-w-[300px]">
   <div className="relative w-full aspect-[16/9]">
     <img
-      src="/src/assets/home assets/hero.png"
+      src={heroImage}
       alt="iPhone 14"
       className="w-full h-full object-contain"
     />
