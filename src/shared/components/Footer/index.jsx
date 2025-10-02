@@ -1,4 +1,12 @@
 import React from 'react';
+import arrowIcon from '../../assets/home assets/arrow.svg';
+import qrCode from '../../assets/home assets/qr.png';
+import googlePlay from '../../assets/home assets/google play.png';
+import appStore from '../../assets/home assets/appstore.png';
+import facebookIcon from '../../assets/home assets/facebook.svg';
+import twitterIcon from '../../assets/home assets/tiwtter.svg';
+import instagramIcon from '../../assets/home assets/instagram.svg';
+import linkedinIcon from '../../assets/home assets/linkedin.svg';
 
 const Footer = () => {
   return (
@@ -31,7 +39,7 @@ const Footer = () => {
                   className="w-full px-4 py-3 border border-white bg-black backdrop-blur-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent rounded-lg transition-all duration-300"
                 />
                 <button className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-lg hover:from-red-600 hover:to-pink-600 transition-all duration-300 group-hover:scale-110">
-                  <img src="/src/assets/home assets/arrow.svg" alt="send" className="h-4 w-4 text-white" />
+                  <img src={arrowIcon} alt="send" className="h-4 w-4 text-white" />
                 </button>
               </div>
             </div>
@@ -138,16 +146,16 @@ const Footer = () => {
               <div className="flex items-start space-x-4">
                 {/* QR Code */}
                 <div className="w-20 h-20 bg-white rounded-lg p-1 shadow-lg">
-                  <img src="/src/assets/home assets/qr.png" alt="QR Code" className="w-full h-full object-cover rounded" />
+                  <img src={qrCode} alt="QR Code" className="w-full h-full object-cover rounded" />
                 </div>
                 
                 {/* App Store Badges */}
                 <div className="space-y-3">
                   <div className="transform hover:scale-105 transition-transform">
-                    <img src="/src/assets/home assets/google play.png" alt="Google Play" className="w-24 h-auto" />
+                    <img src={googlePlay} alt="Google Play" className="w-24 h-auto" />
                   </div>
                   <div className="transform hover:scale-105 transition-transform">
-                    <img src="/src/assets/home assets/appstore.png" alt="App Store" className="w-24 h-auto" />
+                    <img src={appStore} alt="App Store" className="w-24 h-auto" />
                   </div>
                 </div>
               </div>
@@ -158,16 +166,16 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
                 <a href="#" className="w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-red-500 transition-all duration-300 transform hover:scale-110">
-                  <img src="/src/assets/home assets/facebook.svg" alt="Facebook" className="w-5 h-5" />
+                  <img src={facebookIcon} alt="Facebook" className="w-5 h-5" />
                 </a>
                 <a href="#" className="w-10 h-10 bg-black  rounded-full flex items-center justify-center hover:bg-red-500 transition-all duration-300 transform hover:scale-110">
-                  <img src="/src/assets/home assets/tiwtter.svg" alt="Twitter" className="w-5 h-5" />
+                  <img src={twitterIcon} alt="Twitter" className="w-5 h-5" />
                 </a>
                 <a href="#" className="w-10 h-10 bg-black  rounded-full flex items-center justify-center hover:bg-red-500 transition-all duration-300 transform hover:scale-110">
-                  <img src="/src/assets/home assets/instagram.svg" alt="Instagram" className="w-5 h-5" />
+                  <img src={instagramIcon} alt="Instagram" className="w-5 h-5" />
                 </a>
                 <a href="#" className="w-10 h-10 bg-black  rounded-full flex items-center justify-center hover:bg-red-500 transition-all duration-300 transform hover:scale-110">
-                  <img src="/src/assets/home assets/linkedin.svg" alt="LinkedIn" className="w-5 h-5" />
+                  <img src={linkedinIcon} alt="LinkedIn" className="w-5 h-5" />
                 </a>
               </div>
             </div>

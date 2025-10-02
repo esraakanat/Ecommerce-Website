@@ -6,6 +6,8 @@ import { signUpSchema, signUpDefaultValues } from './config';
 import { registerUser } from '../../services/api';
 import useAuthStore from '../../store';
 import { getNextUrl, getSafeRedirectUrl } from '../../../../shared/utilities/authRedirect';
+import signupImage from '../../../../assets/sign up assets/dl.beatsnoop 1.png';
+import googleIcon from '../../../../assets/sign up assets/Icon-Google.svg';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -61,7 +63,7 @@ function SignUp() {
                     <div className="relative w-full h-full flex items-center justify-center scale-95 sm:scale-100 lg:scale-100">
                         {/* Original Image */}
                         <img 
-                            src="/src/assets/sign up assets/dl.beatsnoop 1.png" 
+                            src={signupImage} 
                             alt="Shopping illustration" 
                             className="w-full h-full object-contain lg:object-cover lg:object-left"
                         />
@@ -181,7 +183,7 @@ function SignUp() {
                                 className="w-full bg-white border border-gray-300 text-black font-poppins py-2.5 sm:py-3 rounded-md font-medium text-sm sm:text-base flex items-center justify-center space-x-2 hover:bg-gray-50 transition-colors shadow-sm"
                             >
                                 <img 
-                                    src="/src/assets/sign up assets/Icon-Google.svg" 
+                                    src={googleIcon} 
                                     alt="Google" 
                                     className="w-4 h-4 sm:w-5 sm:h-5"
                                 />

@@ -6,6 +6,10 @@ import { useUserCart } from "../../../features/cart/hooks/useUserCart";
 import useAuthStore from "../../../features/auth/store";
 import ProfileMenu from "../../../features/home/components/ProfileMenu";
 import SearchModal from "../SearchModal";
+import arrowIcon from "../../../assets/home assets/arrow1.svg";
+import searchIcon from "../../../assets/home assets/seach.svg";
+import wishlistIcon from "../../../assets/home assets/WishlistIcon.svg";
+import cartIcon from "../../../assets/home assets/CartIcon.svg";
 
 const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,7 +74,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
           English
         </p>
         <img
-          src="/src/assets/home assets/arrow1.svg"
+          src={arrowIcon}
           alt="Arrow"
           className="ml-1 sm:ml-2 h-2 w-3"
         />
@@ -152,7 +156,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
                   className="absolute inset-y-0 right-0 pr-2 flex items-center hover:bg-gray-100 rounded-r-md transition-colors"
                 >
                   <img
-                    src="/src/assets/home assets/seach.svg"
+                    src={searchIcon}
                     alt="Search"
                     className="h-3 w-3 sm:h-4 sm:w-4"
                   />
@@ -164,7 +168,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
                 <>
                   <Link to="/wishlist" className="p-1 sm:p-2 text-gray-600 hover:text-black relative">
                     <img
-                      src="/src/assets/home assets/WishlistIcon.svg"
+                      src={wishlistIcon}
                       alt="Wishlist"
                       className="h-5 w-5 sm:h-6 sm:w-6"
                     />
@@ -176,7 +180,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
                   </Link>
                   <Link to="/cart" className="p-1 sm:p-2 text-gray-600 hover:text-black relative">
                     <img
-                      src="/src/assets/home assets/CartIcon.svg"
+                      src={cartIcon}
                       alt="Cart"
                       className="h-5 w-5 sm:h-6 sm:w-6"
                     />
