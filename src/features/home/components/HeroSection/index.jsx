@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useHeroSection } from "../../hooks/useHeroSection";
 import appleLogo from "../../../../assets/home-assets/1200px-Apple_gray_logo 1.svg";
 import heroImage from "../../../../assets/home-assets/hero.png";
+import arrowIcon from "../../../../assets/home-assets/Vector (3).svg";
 
 const HeroSection = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -172,43 +173,40 @@ const HeroSection = () => {
         </nav>
       </div>
 
-      <div className="relative bg-black mt-4 sm:mt-6 mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-24 
-  rounded-md overflow-hidden w-full 
-  min-h-[250px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[420px] xl:min-h-[480px] 
-  flex flex-col sm:flex-row items-center px-6 sm:px-8 md:px-10">
+      <div className="relative bg-black  sm:mt-6 md:mt-12 mx-4  sm:mx-8 md:mx-12 lg:mr-12 xl:mr-24
+  rounded-sm overflow-hidden w-full  
+  min-h-[150px] sm:min-h-[320px] md:min-h-[280px] lg:min-h-[320px] xl:min-h-[380px] 
+  flex flex-col sm:flex-row items-center px-6 sm:px-8 md:px-8">
 
   {/* النصوص */}
-  <div className="sm:basis-[40%] xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 sm:pr-6">
+  <div className="sm:basis-[40%] xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 sm:pr-6 lg:ml-8 ">
     <div className="flex items-center mb-3">
       <img
         src={appleLogo}
         alt="Apple"
-        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9 mr-2"
+        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-11 lg:w-11 mr-2 "
       />
-      <span className="text-white text-xs sm:text-sm md:text-base font-poppins">
+      <span className="text-white text-xs sm:text-sm md:text-base font-poppins tracking-wider">
         iPhone 14 Series
       </span>
     </div>
 
-    <h2 className="text-white text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-poppins leading-tight">
-      Up to 10% <br className="hidden sm:block" /> off Voucher
+    <h2 className="text-white lg:py-4 text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-poppins tracking-wider">
+      <div>Up to 10%</div>
+      <div className="mt-4">off Voucher</div>
     </h2>
 
     <Link
       to="/products"
-      className="mt-4 inline-flex items-center text-[#FAFAFA] text-sm sm:text-base font-poppins underline hover:text-gray-300 transition-colors"
+      className="mt-4 inline-flex items-center text-[#FAFAFA] text-md sm:text-base font-poppins underline hover:text-gray-300 transition-colors tracking-wide underline-offset-8"
     >
       Shop Now
-      <svg
-        className="h-3 w-3 sm:h-4 sm:w-4 ml-2"
-        fill="white"
-        viewBox="0 0 8 13"
-      >
-        <path
-          d="M4.95 6.63597L0 1.68597L1.414 0.271973L7.778 6.63597L1.414 13L0 11.586L4.95 6.63597Z"
-          fill="white"
-        />
-      </svg>
+       <img
+         src={arrowIcon}
+         alt="Arrow"
+         className="h-5 w-5 sm:h-4 mt-2 sm:w-4 ml-2 brightness-0 invert"
+       />
+      
     </Link>
   </div>
 
@@ -222,12 +220,12 @@ const HeroSection = () => {
   </div>
 
   {/* نقاط التبديل */}
-  <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+  <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+    <div className="w-3 h-3 bg-red-500 border-2 border-white rounded-full"></div>
+    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
   </div>
 </div>
 

@@ -44,7 +44,7 @@ function BestSellingProducts() {
 
     if (error) {
         return (
-            <div className="px-4 py-8 max-w-7xl mx-auto">
+            <div className="px-8 py-8 max-w-8xl mx-auto">
                 <div className="text-center">
                     <h3 className="text-lg font-medium text-gray-900 mb-2">Failed to Load Best Selling Products</h3>
                     <p className="text-gray-500 mb-4">We couldn't load the best selling products. Please try again.</p>
@@ -60,16 +60,16 @@ function BestSellingProducts() {
     }
 
     return (
-        <div className="px-4 py-8 max-w-7xl mx-auto">
+        <div className="px-8 py-8 max-w-8xl mx-auto">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                         <div>
                         <div className="flex items-center gap-2 mb-8 ml-12">
-                            <div className="w-3 h-8 rounded-sm bg-[#DB4444]"></div>
-                            <h2 className="text-sm font-normal text-[#DB4444] font-inter">This Month</h2>
+                            <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
+                            <h2 className="text-sm font-semibold text-[#DB4444] font-inter">This Month</h2>
                         </div>
                         {/* Flash Sales Title */}
-                        <h1 className="text-2xl font-bold ml-10 text-black font-inter">Best Selling Products</h1>
+                        <h1 className="text-2xl font-bold ml-10 text-black font-inter tracking-wider">Best Selling Products</h1>
                     </div>
                 {/* View All Button */}
                 <button 
@@ -82,7 +82,7 @@ function BestSellingProducts() {
                             behavior: 'smooth'
                         });
                     }}
-                    className="bg-[#DB4444] text-white px-6 py-2 rounded-sm font-base text-[14px] p-12 mr-10 mt-16 font-poppins hover:bg-red-600 transition-colors"
+                    className="bg-[#DB4444] text-white px-4 py-2 mr-10 sm:px-6 sm:py-2  mt-16 md:px-4 md:mr-6 lg:mr-8 xl:mr-12 md:py-2 rounded-sm font-base text-[14px] p-12  font-poppins hover:bg-red-600 transition-colors"
                 >
                     View All
                 </button>

@@ -141,46 +141,50 @@ function FlashProducts() {
     }
 
     return (
-        <div className="px-4 py-8 max-w-7xl mx-auto">
+        <div className="px-8 py-8 max-w-8xl mx-auto">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
                     <div>
                         {/* Today's Label */}
-                        <div className="flex items-center gap-2 ml-10 mb-8">
-                            <div className="w-3 h-8 rounded-sm bg-[#DB4444]"></div>
-                            <h2 className="text-sm font-normal text-[#DB4444] font-inter">Today's</h2>
+                        <div className="flex items-center gap-2 ml-10 mb-4">
+                            <div className="w-4 h-8 rounded-sm bg-[#DB4444]"></div>
+                            <h2 className="text-sm font-semibold text-[#DB4444] font-inter ">Today's</h2>
                         </div>
                         {/* Flash Sales Title */}
-                        <h1 className="text-2xl font-bold ml-10 text-black font-inter">Flash Sales</h1>
+                        <h1 className="text-2xl font-bold ml-10 text-black font-inter tracking-wider">Flash Sales</h1>
                     </div>
                     
                     {/* Countdown Timer */}
-                    <div className="flex items-center gap-2 mt-16 ml-8">
+                    <div className="flex items-center gap-2 mt-12 md:ml-8 ">
                         <div className="text-center">
-                            <div className="text-lg font-bold text-black">{timeLeft.days.toString().padStart(2, '0')}</div>
-                            <div className="text-xs text-gray-500">Days</div>
+                        <div className="text-xs text-black">Days</div>
+                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black tracking-wider">{timeLeft.days.toString().padStart(2, '0')}</div>
+                           
                         </div>
                         <div className="text-[#DB4444] text-lg font-bold">:</div>
                         <div className="text-center">
-                            <div className="text-lg font-bold text-black">{timeLeft.hours.toString().padStart(2, '0')}</div>
-                            <div className="text-xs text-gray-500">Hours</div>
+                        <div className="text-xs text-black">Hours</div>
+                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                          
                         </div>
                         <div className="text-[#DB4444] text-lg font-bold">:</div>
                         <div className="text-center">
-                            <div className="text-lg font-bold text-black">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-                            <div className="text-xs text-gray-500">Minutes</div>
+                        <div className="text-xs text-black">Minutes</div>
+                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                     
                         </div>
                         <div className="text-[#DB4444] text-lg font-bold">:</div>
                         <div className="text-center">
-                            <div className="text-lg font-bold text-black">{timeLeft.seconds.toString().padStart(2, '0')}</div>
-                            <div className="text-xs text-gray-500">Seconds</div>
+                        <div className="text-xs text-black">Seconds</div>
+                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+                        
                         </div>
                     </div>
                 </div>
                 
                 {/* Navigation Arrows */}
-                <div className="flex gap-2 mr-10 mt-16">
+                <div className="flex gap-2  md:mr-10 mt-16">
                     <button 
                         onClick={prevSlide}
                         className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"

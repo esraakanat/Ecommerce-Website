@@ -83,7 +83,7 @@ const CategoryFilter = () => {
   if (error) {
     return (
       <div className="bg-white py-8">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="px-8 py-8 max-w-8xl mx-auto">
           <div className="text-center">
             <h3 className="text-lg font-medium text-gray-900 mb-2">Failed to Load Categories</h3>
             <p className="text-gray-500 mb-4">We couldn't load the categories. Please try again.</p>
@@ -101,14 +101,14 @@ const CategoryFilter = () => {
 
   return (
     <div className="bg-white py-8">
-      <div className="max-w-7xl sm:mx-8 md:mx-16 lg:mx-32 px-4"> 
+      <div className="px-8 py-8 max-w-8xl mx-auto"> 
         {/* عنوان + خط احمر */}
         <div className="flex items-center mb-4 ml-8">
-          <div className="w-3 h-8 bg-[#DB4444] mr-2 rounded-sm"></div>
-          <span className="text-sm font-medium font-poppins text-[#DB4444]">Categories</span>
+          <div className="w-4 h-7 bg-[#DB4444] mr-2 rounded-sm"></div>
+          <span className="text-sm font-semibold font-poppins text-[#DB4444]">Categories</span>
         </div>
         
-        <h2 className="text-xl md:text-2xl font-bold font-inter text-gray-900 mb-8 ml-8">
+        <h2 className="text-xl md:text-2xl font-bold font-inter text-gray-900 mb-8 ml-8 tracking-wider">
           Browse By Category
         </h2>
 

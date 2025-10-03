@@ -111,16 +111,16 @@ function ExploreOurProducts() {
     }
 
     return (
-        <div className="px-4 py-8 max-w-7xl mx-auto">
+        <div className="px-8 py-8 max-w-8xl mx-auto">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
             <div>
                         <div className="flex items-center gap-2 mb-8 ml-12">
-                            <div className="w-3 h-8 rounded-sm bg-[#DB4444]"></div>
-                            <h2 className="text-sm font-normal text-[#DB4444] font-inter">Our Products</h2>
+                            <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
+                            <h2 className="text-sm font-semibold text-[#DB4444] font-inter">Our Products</h2>
                         </div>
                         {/* Flash Sales Title */}
-                        <h1 className="text-2xl font-bold ml-12 text-black font-inter">Explore Our Products</h1>
+                        <h1 className="text-2xl font-bold ml-12 text-black font-inter tracking-wider">Explore Our Products</h1>
                     </div>
                 
                  {/* Navigation Arrows */}

@@ -5,22 +5,23 @@ import product3Image from '../../../../assets/home-assets/3.png';
 import perfumeImage from '../../../../assets/home-assets/perfum.png';
 const ProductShowcase = () => {
   return (
-    <div className="px-8 py-8 max-w-7xl mx-auto">
+    <div className="px-8 py-8 max-w-8xl mx-auto">
        {/* Featured Section */}
-  <div className="flex flex-col gap-2 mb-6">
+  <div className="flex flex-col gap-2 mb-6 ">
     {/* المربع والكلمة في صف واحد */}
-    <div className="flex items-center gap-2">
-      <div className="w-3 h-7 rounded-sm bg-[#DB4444]"></div>
+    <div className="flex items-center gap-2 md:ml-10 xl:ml-12 ">
+      <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
       <span className="text-[#DB4444] text-sm font-medium font-inter">Featured</span>
     </div>
 
     {/* New Arrival تحتهم */}
-    <p className="text-black text-2xl font-semibold font-inter mb-4">New Arrival</p>
+    <p className="text-black text-2xl font-semibold font-inter mb-4 md:ml-10 xl:ml-12">New Arrival</p>
   
   
         
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 h-auto md:h-[400px]">
+        <div className=" md:w-[750px] lg:w-[950px] xl:w-[1350px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-auto md:h-[400px] ">
         {/* PlayStation 5 Section - Left Large */}
         <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex flex-col md:flex-row">
           {/* Text Content - Left Side */}
@@ -155,6 +156,7 @@ const ProductShowcase = () => {
           </div>
         </div>
       </div>
+        </div>
 
      
     </div>
