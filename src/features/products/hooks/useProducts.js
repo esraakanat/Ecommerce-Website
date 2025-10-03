@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import httpClient from '../../../lib/axios';
+import { ensureProductImage } from '../../../shared/utils/imageUtils';
 
 // Hook for fetching products with filters
 export const useProducts = ({ 
@@ -14,12 +15,13 @@ export const useProducts = ({
     queryKey: ['products', { category, sortBy, showOffers, page, limit }],
     queryFn: async () => {
       try {
-        const params = { 
-          offset: (page - 1) * limit,
-          limit: limit,
-          mix_categories: true,
-          allowedCategories: ['Clothes', 'Electronics', 'Shoes', 'Miscellaneous', 'Furniture']
-        };
+      // For sorting to work properly, we need to fetch all products first, then sort, then paginate
+      const params = { 
+        offset: 0, // Always start from 0
+        limit: 1000, // Fetch more products to enable proper sorting
+        mix_categories: true,
+        allowedCategories: ['Clothes', 'Electronics', 'Shoes', 'Miscellaneous', 'Furniture']
+      };
       
       // Add category filter if not 'all'
       if (category !== 'all') {
@@ -33,40 +35,15 @@ export const useProducts = ({
         }
       }
       
-      // Add sorting to API params
-      if (sortBy !== 'default') {
-        if (sortBy === 'price-low-high') {
-          params.sortBy = 'price';
-          params.sortOrder = 'asc';
-        } else if (sortBy === 'price-high-low') {
-          params.sortBy = 'price';
-          params.sortOrder = 'desc';
-        }
-      }
-      
-      console.log('API Request Debug:', { params, url: '/products' });
-      
+      // Note: API doesn't support sorting, so we'll sort locally after fetching
       const response = await httpClient.get('/products', { params });
       
-      console.log('API Response Debug:', {
-        data: response.data,
-        dataLength: response.data?.length,
-        headers: response.headers,
-        status: response.status,
-        params
-      });
-      
       if (response.data && response.data.length > 0) {
-        // Filter products with valid images
-        const productsWithImages = response.data.filter(product => 
-          product.images && 
-          product.images.length > 0 && 
-          product.images[0] && 
-          product.images[0] !== '' &&
-          !product.images[0].includes('placeholder') &&
-          !product.images[0].includes('600') &&
-          !product.images[0].includes('400')
-        );
+        // Add default image for products without images
+        const productsWithDefaultImages = response.data.map(ensureProductImage);
+        
+        // Now filter products (all should have images now)
+        const productsWithImages = productsWithDefaultImages;
         
         // Add offers to products
         const productsWithOffers = addOffersToProducts(productsWithImages);
@@ -75,55 +52,27 @@ export const useProducts = ({
         const sortedProducts = sortProducts(productsWithOffers, sortBy);
         
         // Filter by offers if needed
-        const productsWithOffersFiltered = sortedProducts.filter(product => product.hasOffer);
-        const finalProducts = showOffers ? productsWithOffersFiltered : sortedProducts;
+        const filteredProducts = showOffers ? sortedProducts.filter(product => product.hasOffer) : sortedProducts;
         
-        console.log('Sale Filter Debug:', {
-          showOffers,
-          totalProducts: sortedProducts.length,
-          productsWithOffers: productsWithOffersFiltered.length,
-          finalProducts: finalProducts.length
-        });
+        // Apply pagination after sorting
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+        const finalProducts = filteredProducts.slice(startIndex, endIndex);
+        
         
         // Calculate pagination correctly
-        // Get real total count by making a separate API call if needed
-        let totalCount = response.headers['x-total-count'];
-        
-        if (!totalCount) {
-          // If no total count header, estimate based on current response
-          if (response.data.length === limit) {
-            // If we got full limit, assume there are many more products
-            // Make a conservative estimate: at least 3-4 pages worth
-            totalCount = Math.max(50, (page * limit) + 20);
-          } else {
-            // If we got less than limit, this is probably the last page
-            totalCount = (page - 1) * limit + response.data.length;
-          }
-        }
-        
+        const totalCount = filteredProducts.length;
         const totalPages = Math.max(1, Math.ceil(totalCount / limit));
-        const hasMoreData = response.data.length === limit; // If we got full limit, there might be more
+        const hasMoreData = endIndex < filteredProducts.length;
         
-        // Ensure we always have at least 2 pages if we got full limit
-        const finalTotalPages = response.data.length === limit ? Math.max(2, totalPages) : totalPages;
-        
-        console.log('Pagination Calculation:', {
-          responseDataLength: response.data.length,
-          limit,
-          page,
-          totalCount,
-          totalPages,
-          hasMoreData,
-          hasTotalCountHeader: !!response.headers['x-total-count']
-        });
-        
+       
         
         
         return {
           products: finalProducts,
           totalCount,
           hasMoreData,
-          totalPages: finalTotalPages
+          totalPages
         };
       }
       
@@ -223,7 +172,6 @@ const addOffersToProducts = (productsList) => {
     }
   }
   
-  console.log('Offers added:', productsWithOffers.filter(p => p.hasOffer).length, 'out of', productsList.length);
   
   return productsWithOffers;
 };
@@ -236,10 +184,18 @@ const sortProducts = (productsList, sortType) => {
   
   switch (sortType) {
     case 'price-low-high':
-      return sortedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
+      return sortedProducts.sort((a, b) => {
+        const priceA = a.hasOffer ? a.discountedPrice : a.price;
+        const priceB = b.hasOffer ? b.discountedPrice : b.price;
+        return (priceA || 0) - (priceB || 0);
+      });
     
     case 'price-high-low':
-      return sortedProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+      return sortedProducts.sort((a, b) => {
+        const priceA = a.hasOffer ? a.discountedPrice : a.price;
+        const priceB = b.hasOffer ? b.discountedPrice : b.price;
+        return (priceB || 0) - (priceA || 0);
+      });
     
     default:
       return sortedProducts;

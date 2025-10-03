@@ -7,7 +7,6 @@ export const useProductDetails = (productId) => {
     queryKey: ['productDetails', { productId }],
     queryFn: async () => {
       try {
-        console.log('Fetching product details for ID:', productId);
         
         if (!productId) {
           throw new Error('Product ID is required');
@@ -15,7 +14,6 @@ export const useProductDetails = (productId) => {
         
         const response = await httpClient.get(`/products/${productId}`);
         
-        console.log('Product details fetched:', response.data);
         
         if (!response.data) {
           throw new Error('Product not found');

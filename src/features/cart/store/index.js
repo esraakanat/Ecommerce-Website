@@ -113,7 +113,6 @@ const useCartStore = create(
         }));
         set({ items: resetItems });
         saveCartData(resetItems);
-        console.log('✅ Cart quantities reset to reasonable values');
       },
       
       // Load cart for current user
@@ -124,14 +123,12 @@ const useCartStore = create(
         // Check for corrupted quantities and fix them
         const hasCorruptedQuantities = items.some(item => item.quantity > 100);
         if (hasCorruptedQuantities) {
-          console.log('⚠️ Detected corrupted quantities, fixing...');
           const fixedItems = items.map(item => ({
             ...item,
             quantity: Math.min(item.quantity, 10) // Cap at 10 items
           }));
           set({ items: fixedItems });
           saveCartData(fixedItems);
-          console.log('✅ Cart quantities fixed');
         } else {
           set({ items: items });
         }
@@ -149,7 +146,6 @@ const useCartStore = create(
               // Check if migration has already been done for this session
               const migrationKey = `migration-done-${useAuthStore.getState().user?.id}`;
               if (localStorage.getItem(migrationKey)) {
-                console.log('Migration already done this session, skipping...');
                 return;
               }
               
@@ -190,7 +186,6 @@ const useCartStore = create(
               // Clear guest cart
               localStorage.removeItem(currentGuestCartKey);
               localStorage.removeItem('current-guest-cart-key');
-              console.log('✅ Guest cart migrated to user cart');
             }
           }
         }

@@ -31,9 +31,6 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
   
   // Console log for auth status
   if (isAuthenticated) {
-    console.log('المستخدم مسجل:', user.name);
-  } else {
-    console.log('المستخدم غير مسجل');
   }
 
 
@@ -149,8 +146,14 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setIsSearchModalOpen(true)}
-          className="w-full px-3 py-2 pr-8 text-xs sm:text-sm bg-[#F5F5F5] font-poppins border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all"
+          className="w-full px-3 py-2 pr-8 pl-8 text-xs sm:text-sm bg-[#F5F5F5] font-poppins border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all"
         />
+        {/* Keyboard shortcut indicator */}
+        <div className="absolute left-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+          <kbd className="inline-flex items-center px-1 py-0.5 text-xs font-mono text-gray-500 bg-gray-200 border border-gray-300 rounded">
+            /
+          </kbd>
+        </div>
         <button
           onClick={() => setIsSearchModalOpen(true)}
           className="absolute inset-y-0 right-0 pr-2 flex items-center hover:bg-gray-100 rounded-r-md transition-colors"

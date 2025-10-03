@@ -7,12 +7,10 @@ export const useHeroSection = () => {
     queryKey: ['heroSection'],
     queryFn: async () => {
       try {
-        console.log('Fetching hero section data...');
         
         const response = await httpClient.get("/categories");
         
         if (response.data && response.data.length > 0) {
-          console.log('All categories from API:', response.data.map(cat => cat.name));
           
           // تصفية الفئات المطلوبة فقط
           const allowedCategories = ['Shoes', 'Electronics', 'Furniture', 'Clothes', 'Miscellaneous'];
@@ -22,7 +20,6 @@ export const useHeroSection = () => {
             )
           );
           
-          console.log('Filtered categories for hero section:', filteredCategories.map(cat => cat.name));
           
           return {
             categories: filteredCategories,

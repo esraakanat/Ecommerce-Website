@@ -47,7 +47,6 @@ export const useProductSearch = (searchQuery, limit = 16) => {
       }
 
       try {
-        console.log('Searching for products:', searchQuery);
         
         const response = await httpClient.get(`/products`, {
           params: { 
@@ -58,7 +57,6 @@ export const useProductSearch = (searchQuery, limit = 16) => {
         });
         
         if (response.data && response.data.length > 0) {
-          console.log('Search API response:', response.data.length, 'products found');
           
           // Filter products with valid images
           const productsWithImages = response.data.filter(product => 
@@ -71,7 +69,6 @@ export const useProductSearch = (searchQuery, limit = 16) => {
             !product.images[0].includes('400')
           );
           
-          console.log('Products with valid images:', productsWithImages.length);
           
           // Add offers to search results
           const productsWithOffers = addOffersToProducts(productsWithImages);

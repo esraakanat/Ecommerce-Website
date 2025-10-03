@@ -10,6 +10,7 @@ import Pagination from "../../../../shared/components/Pagination";
 import { useUserWishlist } from "../../../whislist/hooks/useUserWishlist";
 import { useUserCart } from "../../../cart/hooks/useUserCart";
 import { useProducts, useCategories } from "../../hooks/useProducts";
+import { getProductImage, handleImageError } from "../../../../shared/utils/imageUtils";
 import { toast } from "react-toastify";
 
 export default function ProductsList({ 
@@ -68,21 +69,6 @@ export default function ProductsList({
   // Always show pagination when there are products
   const shouldShowPagination = true;
   
-  // Debug pagination values
-  console.log('Pagination Debug:', {
-    totalPages,
-    hasMorePages,
-    productsLength: products.length,
-    limit,
-    totalProducts,
-    shouldShowPagination,
-    page,
-    loading,
-    error,
-    selectedCategory,
-    sortBy,
-    showOffers
-  });
   
   
   
@@ -150,7 +136,6 @@ export default function ProductsList({
 
   // Handle page change
   const handlePageChange = (newPage) => {
-    console.log('ProductList handlePageChange called:', { newPage, currentPage: page });
     setPage(newPage);
     updateURL(selectedCategory, sortBy, showOffers, newPage);
     // React Query will automatically refetch when page state changes
@@ -346,22 +331,17 @@ export default function ProductsList({
         )}
         
         {!loading && !error && products.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-2">
             {products.map((product, index) => (
-            <Link key={product.id} to={`/products/${product.id}`} className="bg-white rounded-lg p-1 relative group w-[75%] mx-auto block hover:shadow-lg transition-shadow">
+            <Link key={product.id} to={`/products/${product.id}`} className="bg-white rounded-lg p-1 relative group w-full sm:w-[75%] sm:mx-auto block hover:shadow-lg transition-shadow">
               {/* Product Image Container */}
               <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
-                <div 
-                  className="w-full h-full flex items-center justify-center"
-                  style={{ 
-                    backgroundColor: '#F5F5F5',
-                    backgroundImage: `url(${product.images?.[0]})`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                </div>
+                <img
+                  src={getProductImage(product)}
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                  onError={handleImageError}
+                />
                 
                 {/* Add to Cart Button - Inside Image */}
                 <div className="absolute bottom-0 left-0 right-0">

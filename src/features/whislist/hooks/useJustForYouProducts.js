@@ -7,7 +7,6 @@ export const useJustForYouProducts = () => {
     queryKey: ['justForYouProducts'],
     queryFn: async () => {
       try {
-        console.log('Fetching Just For You products (optimized)...');
         
         // OPTIMIZATION: Fetch multiple products in fewer API calls
         const productsWithImages = [];
@@ -52,7 +51,6 @@ export const useJustForYouProducts = () => {
           }
         }
         
-        console.log('Just For You products fetched (optimized):', productsWithImages.length);
         
         return {
           products: productsWithImages,

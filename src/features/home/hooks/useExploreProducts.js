@@ -7,7 +7,6 @@ export const useExploreProducts = (page = 0) => {
     queryKey: ['exploreProducts', { page }],
     queryFn: async () => {
       try {
-        console.log('Fetching explore products for page:', page);
         
         // Fetch 8 products for the current page
         const allProducts = [];
@@ -47,7 +46,6 @@ export const useExploreProducts = (page = 0) => {
                 };
                 
                 allProducts.push(exploreProduct);
-                console.log(`Added explore product ${allProducts.length} for page ${page}: ${product.title}`);
               }
             }
             
@@ -58,7 +56,6 @@ export const useExploreProducts = (page = 0) => {
           }
         }
         
-        console.log('Explore products fetched for page', page, ':', allProducts.length);
         
         if (allProducts.length === 0) {
           throw new Error("No explore products found. Please try again later.");

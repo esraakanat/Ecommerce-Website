@@ -7,7 +7,6 @@ export const useFlashProducts = () => {
     queryKey: ['flashProducts'],
     queryFn: async () => {
       try {
-        console.log('Fetching flash products (optimized)...');
         
         // OPTIMIZATION: Fetch multiple products in fewer API calls
         const allProducts = [];
@@ -55,7 +54,6 @@ export const useFlashProducts = () => {
                   };
                   
                   allProducts.push(flashProduct);
-                  console.log(`Added flash product ${allProducts.length}: ${product.title}`);
                 }
               }
             }
@@ -67,7 +65,6 @@ export const useFlashProducts = () => {
           }
         }
         
-        console.log('Flash products fetched (optimized):', allProducts.length);
         
         if (allProducts.length === 0) {
           throw new Error("No flash sale products found. Please try again later.");

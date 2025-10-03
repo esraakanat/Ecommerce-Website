@@ -16,6 +16,7 @@ const ProductSorting = ({
         value={sortBy}
         onChange={(e) => onSortChange(e.target.value)}
         className="px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white min-w-[150px] shadow-sm"
+        style={{ zIndex: 1000, pointerEvents: 'auto' }}
       >
         <option value="default">Default</option>
         <option value="price-low-high">Price: Low to High</option>

@@ -6,6 +6,7 @@ import ProductListSkeleton from "../../../../shared/components/loading/ProductLi
 import ProductsErrorState from "../../../../shared/components/error/ProductsErrorState";
 import EmptyProducts from "../../../../shared/components/empty/EmptyProducts";
 import { useExploreProducts } from "../../hooks/useExploreProducts";
+import { getProductImage, handleImageError } from "../../../../shared/utils/imageUtils";
 import { toast } from "react-toastify";
 
 function ExploreOurProducts() {
@@ -115,7 +116,7 @@ function ExploreOurProducts() {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
             <div>
-                        <div className="flex items-center gap-2 mb-8 ml-12">
+                        <div className="flex items-center gap-2 mb-8 ">
                             <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
                             <h2 className="text-sm font-semibold text-[#DB4444] font-inter">Our Products</h2>
                         </div>
@@ -164,17 +165,12 @@ function ExploreOurProducts() {
                     >
                         {/* Product Image Container */}
                         <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
-                            <div 
-                                className="w-full h-full flex items-center justify-center"
-                                style={{ 
-                                    backgroundColor: '#F5F5F5',
-                                    backgroundImage: `url(${product.images?.[0]})`,
-                                    backgroundSize: 'contain',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: 'center'
-                                }}
-                            >
-                            </div>
+                            <img
+                                src={getProductImage(product)}
+                                alt={product.title}
+                                className="w-full h-full object-cover"
+                                onError={handleImageError}
+                            />
                             
                             {/* NEW Badge */}
                             {product.hasNewBadge && (

@@ -7,7 +7,6 @@ export const useBestSellingProducts = () => {
     queryKey: ['bestSellingProducts'],
     queryFn: async () => {
       try {
-        console.log('Fetching best selling products...');
         
         // Fetch 4 best selling products
         const allProducts = [];
@@ -46,7 +45,6 @@ export const useBestSellingProducts = () => {
                 };
                 
                 allProducts.push(bestSellingProduct);
-                console.log(`Added best selling product ${allProducts.length}: ${product.title}`);
               }
             }
             
@@ -57,7 +55,6 @@ export const useBestSellingProducts = () => {
           }
         }
         
-        console.log('Best selling products fetched:', allProducts.length);
         
         if (allProducts.length === 0) {
           throw new Error("No best selling products found. Please try again later.");

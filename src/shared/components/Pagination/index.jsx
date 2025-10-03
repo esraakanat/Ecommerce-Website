@@ -11,12 +11,9 @@ const Pagination = ({
   // if (totalPages <= 1 && !hasMorePages && currentPage === 1) return null;
 
   const handlePageChange = (page) => {
-    console.log('Pagination handlePageChange called:', { page, totalPages, currentPage });
     if (page >= 1 && page <= totalPages) {
-      console.log('Calling onPageChange with page:', page);
       onPageChange(page);
     } else {
-      console.log('Page change blocked:', { page, totalPages });
     }
   };
 

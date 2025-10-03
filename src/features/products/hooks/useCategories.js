@@ -7,12 +7,10 @@ export const useCategories = () => {
     queryKey: ['categories'],
     queryFn: async () => {
       try {
-        console.log('Fetching categories...');
         
         const response = await httpClient.get("/categories");
         
         if (response.data && response.data.length > 0) {
-          console.log('All categories from API:', response.data.map(cat => cat.name));
           
           // تصفية الفئات المطلوبة فقط
           const allowedCategories = ['Shoes', 'Electronics', 'Furniture', 'Clothes', 'Miscellaneous'];
@@ -22,7 +20,6 @@ export const useCategories = () => {
             )
           );
           
-          console.log('Filtered categories:', filteredCategories.map(cat => cat.name));
           
           return {
             categories: filteredCategories,

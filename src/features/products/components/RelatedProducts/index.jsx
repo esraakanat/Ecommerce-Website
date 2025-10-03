@@ -11,7 +11,6 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  console.log('RelatedProducts - currentProductId:', currentProductId);
   
   const { addToCart, removeFromCart, items } = useUserCart();
 
@@ -151,7 +150,6 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
                 </h3>
                 <p className="text-[#DB4444] font-poppins font-medium text-xs sm:text-sm">
                   ${product.price || 'N/A'}
-                  {console.log('Related product data:', product)}
                 </p>
 
                 {/* Rating - Responsive */}

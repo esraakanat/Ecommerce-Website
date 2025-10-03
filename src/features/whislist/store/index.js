@@ -101,7 +101,6 @@ const useWishlistStore = create(
               // Check if migration has already been done for this session
               const migrationKey = `wishlist-migration-done-${useAuthStore.getState().user?.id}`;
               if (localStorage.getItem(migrationKey)) {
-                console.log('Wishlist migration already done this session, skipping...');
                 return;
               }
               
@@ -133,7 +132,6 @@ const useWishlistStore = create(
               // Clear guest wishlist
               localStorage.removeItem(currentGuestWishlistKey);
               localStorage.removeItem('current-guest-wishlist-key');
-              console.log('✅ Guest wishlist migrated to user wishlist');
             }
           }
         }

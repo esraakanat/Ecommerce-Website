@@ -78,7 +78,6 @@ const Checkoutcomponent = () => {
       saveInfo: true
     });
 
-    console.log('Order placed:', { formData, paymentMethod, appliedCoupon });
   };
 
   const handleCloseModal = () => {
