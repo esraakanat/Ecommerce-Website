@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import WindowDimensionsDisplay from './shared/components/WindowDimensionsDisplay';
+
 
 // Create a client
 const queryClient = new QueryClient({
@@ -35,7 +35,7 @@ function App() {
         theme="light"
       />
       <ReactQueryDevtools initialIsOpen={false} />
-      <WindowDimensionsDisplay show={true} position="top-right" />
+ 
     </QueryClientProvider>
   );
 }
