@@ -59,6 +59,11 @@ function BestSellingProducts() {
         );
     }
 
+    // Hide section if no products are available
+    if (!loading && products.length === 0) {
+        return null;
+    }
+
     return (
         <div className="px-8 py-8 max-w-8xl mx-auto">
             {/* Header */}

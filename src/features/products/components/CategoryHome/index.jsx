@@ -99,6 +99,11 @@ const CategoryFilter = () => {
     );
   }
 
+  // Hide section if no categories are available
+  if (!loading && (!categories || categories.length === 0)) {
+    return null;
+  }
+
   return (
     <div className="bg-white py-8">
       <div className="px-8 py-8 max-w-8xl mx-auto"> 

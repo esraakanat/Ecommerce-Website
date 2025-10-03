@@ -108,7 +108,7 @@ function ExploreOurProducts() {
     }
 
     if (products.length === 0) {
-        return <EmptyProducts />;
+        return null;
     }
 
     return (
