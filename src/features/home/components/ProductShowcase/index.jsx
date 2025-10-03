@@ -3,7 +3,6 @@ import ps5Image from '../../../../assets/home-assets/ps5.png';
 import womanImage from '../../../../assets/home-assets/woman.png';
 import product3Image from '../../../../assets/home-assets/3.png';
 import perfumeImage from '../../../../assets/home-assets/perfum.png';
-
 const ProductShowcase = () => {
   return (
     <div className="px-8 py-8 max-w-7xl mx-auto">
@@ -26,9 +25,9 @@ const ProductShowcase = () => {
         <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex flex-col md:flex-row">
           {/* Text Content - Left Side */}
           <div className="w-full md:w-[50%] p-4 md:p-5 h-auto md:h-full flex flex-col justify-center md:justify-end text-center md:text-left">
-            <h2 className="text-[#FAFAFA] text-xl md:text-2xl font-semibold font-inter mb-2">PlayStation 5</h2>
-            <p className="text-[#FAFAFA] text-xs md:text-xs mb-3 max-w-full md:max-w-xs">
-              Black and White version of the PS5<br />coming out on sale.
+            <h2 className="text-[#FAFAFA] text-xl md:text-2xl font-semibold font-inter mb-2  drop-shadow-lg">PlayStation 5</h2>
+            <p className="text-[#FAFAFA] text-xs md:text-xs mb-3 max-w-full md:max-w-xs  drop-shadow-lg">
+              Black and White version of the PS5 coming out on sale.
             </p>
             <button className="text-white text-sm font-medium underline underline-offset-4 w-fit mx-auto md:mx-0 hover:text-gray-300 transition-colors">
               Shop Now
@@ -36,11 +35,16 @@ const ProductShowcase = () => {
           </div>
           
           {/* Image - Right Side */}
-          <div className="w-full md:w-[50%] h-48 md:h-full flex items-center justify-center">
+          <div className="w-full md:w-[80%] mt-4 h-48 md:h-full flex items-center justify-center">
             <img 
               src={ps5Image} 
               alt="PlayStation 5" 
-              className="w-full h-full object-contain md:object-cover opacity-80"
+              className="w-auto h-auto object-contain lg:mr-48 lg:mt-12"
+              style={{
+                maxHeight: '120%',
+                maxWidth: '120%'
+                
+              }}
             />
           </div>
         </div>
@@ -61,11 +65,15 @@ const ProductShowcase = () => {
             </div>
             
             {/* Image */}
-            <div className="w-full sm:w-[40%] h-32 sm:h-full flex items-center justify-center">
+            <div className="w-full sm:w-[40%] h-32 sm:h-full flex items-center justify-center mr-12 mb-8 bg-black relative overflow-hidden">
               <img 
                 src={womanImage} 
                 alt="Women's Collections" 
-                className="w-full h-full object-contain sm:object-cover opacity-70"
+                className="w-full h-full object-contain sm:object-cover"
+                style={{
+                  filter: 'brightness(0.8) contrast(1.2)',
+                  backgroundColor: '#000000'
+                }}
               />
             </div>
           </div>
@@ -73,52 +81,77 @@ const ProductShowcase = () => {
    {/* Bottom Row - Speakers & Perfume */}
 <div className="flex flex-row gap-3 w-full flex-wrap">
   {/* Speakers */}
-  <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex-1 min-w-[48%] flex flex-col md:flex-row">
-    {/* Text Content */}
-    <div className="w-full md:w-[50%] p-3 md:p-4 h-auto flex flex-col justify-end text-center md:text-left">
-      <h3 className="text-[#FAFAFA] text-base md:text-lg font-semibold font-inter mb-1">Speakers</h3>
-      <p className="text-[#FAFAFA] text-[10px] md:text-[10px] mb-2">
+  <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex-1 min-w-[48%] flex items-center justify-center">
+    {/* Background Gradient */}
+    <div 
+      className="absolute inset-0 w-full h-full"
+      style={{
+        background: 'linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%)'
+      }}
+    ></div>
+    
+    {/* Image - Background */}
+    <div className="w-full h-full flex items-center justify-center p-4 relative z-10">
+      <img 
+        src={product3Image}
+        alt="Speakers" 
+        className="w-auto h-auto object-contain"
+        style={{
+          maxHeight: '80%',
+          maxWidth: '80%'
+        }}
+      />
+    </div>
+    
+    {/* Text Overlay - On top of image */}
+    <div className="absolute inset-0 flex flex-col justify-start items-start p-3 md:p-4 lg:mt-36 md:mt-12 mt-24 z-20">
+      <h3 className="text-[#FAFAFA] text-base md:text-lg font-semibold font-inter mb-1 drop-shadow-lg">Speakers</h3>
+      <p className="text-[#FAFAFA] text-[10px] md:text-[10px] mb-2 drop-shadow-lg">
         Amazon wireless speakers
       </p>
-      <button className="text-white text-xs font-medium underline underline-offset-2 w-fit mx-auto md:mx-0 hover:text-gray-300 transition-colors">
+      <button className="text-white text-xs font-medium underline underline-offset-2 w-fit hover:text-gray-300 transition-colors drop-shadow-lg">
         Shop Now
       </button>
-    </div>
-    
-    {/* Image */}
-    <div className="w-full md:w-[50%] h-24 md:h-full flex items-center justify-center">
-      <img 
-        src={product3Image} 
-        alt="Speakers" 
-        className="w-full h-full object-contain md:object-cover opacity-70"
-      />
     </div>
   </div>
 
-  {/* Perfume */}
-  <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex-1 min-w-[48%] flex flex-col md:flex-row">
-    {/* Text Content */}
-    <div className="w-full md:w-[50%] p-3 md:p-4 h-auto flex flex-col justify-end text-center md:text-left">
-      <h3 className="text-[#FAFAFA] text-base md:text-lg font-semibold font-inter mb-1">Perfume</h3>
-      <p className="text-[#FAFAFA] text-[10px] md:text-[10px] mb-2">
-        GUCCI INTENSE OUD EDP
-      </p>
-      <button className="text-white text-xs font-medium underline underline-offset-2 w-fit mx-auto md:mx-0 hover:text-gray-300 transition-colors">
-        Shop Now
-      </button>
-    </div>
+  <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex-1 min-w-[48%] flex items-center justify-center">
+    {/* Background Gradient */}
+    <div 
+      className="absolute inset-0 w-full h-full"
+      style={{
+        background: 'linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%,rgba(96, 92, 92, 0.33) 100%)'
+      }}
+    ></div>
     
-    {/* Image */}
-    <div className="w-full md:w-[50%] h-24 md:h-full flex items-center justify-center">
+    {/* Image - Background */}
+    <div className="w-full h-full flex items-center justify-center p-4 relative z-10">
       <img 
-        src={perfumeImage} 
+        src={perfumeImage}
         alt="Perfume" 
-        className="w-full h-full object-contain md:object-cover opacity-70"
+        className="w-auto h-auto object-contain"
+        style={{
+          maxHeight: '80%',
+          maxWidth: '80%'
+        }}
       />
     </div>
+    
+     {/* Text Overlay - On top of image */}
+     <div className="absolute inset-0 flex flex-col justify-start items-start p-3 md:p-4 lg:mt-36 md:mt-16 mt-24 z-20">
+      
+         <h3 className="text-[#FAFAFA] text-base md:text-lg font-semibold font-inter mb-1  ">Perfume</h3>
+         <p className="text-[#FAFAFA] text-[10px] md:text-[10px] mb-2 ">
+         GUCCI INTENSE OUD EDP
+         </p>
+         <button className="text-white text-xs font-medium underline underline-offset-2 w-fit hover:text-gray-300 transition-colors">
+           Shop Now
+         </button>
+       
+     </div>
   </div>
-</div>
 
+</div>
           </div>
         </div>
       </div>

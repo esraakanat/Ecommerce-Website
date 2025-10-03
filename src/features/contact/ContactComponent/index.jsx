@@ -51,7 +51,7 @@ const Contact = () => {
         </div>
       )}
       {/* Breadcrumb */}
-      <div className="ml-48 py-8 ">
+      <div className=" ml-8 lg:ml-48 py-8  ">
         <p className="text-gray-900 text-sm">
           <Link to="/" className="text-gray-500 transition-colors">Home</Link> /contact
         </p>

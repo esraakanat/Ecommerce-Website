@@ -39,7 +39,7 @@ export default function TeamSection() {
 
   return (
     <section className="w-full bg-white py-12">
-      <div className="max-w-[1200px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
         {members.map((m, i) => (
           <div key={i} className="flex flex-col items-center">
             <div className="w-full h-[320px] bg-[#F6F6F6] flex items-center justify-center rounded-[6px] overflow-hidden">

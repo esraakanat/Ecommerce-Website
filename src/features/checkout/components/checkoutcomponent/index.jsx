@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useUserCart } from '../../../cart/hooks/useUserCart';
 import useCouponStore from '../../../cart/store/couponStore';
 import { toast } from 'react-toastify';
@@ -37,9 +37,6 @@ const Checkoutcomponent = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
 
-  // Don't clear coupon when navigating between pages
-  // Only clear when checkout is completed successfully
-
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -48,13 +45,10 @@ const Checkoutcomponent = () => {
     }));
   };
 
-  // Coupon handlers
   const handleCouponSubmit = (e) => {
     e.preventDefault();
     const success = applyCoupon(inputCode);
-    if (success) {
-      setInputCode('');
-    }
+    if (success) setInputCode('');
   };
 
   const handleRemoveCoupon = () => {
@@ -63,33 +57,16 @@ const Checkoutcomponent = () => {
   };
 
   const handlePlaceOrder = () => {
-    // Validate required fields
     if (!formData.firstName || !formData.streetAddress || !formData.townCity || !formData.phoneNumber || !formData.emailAddress) {
-      toast.error('Please fill in all required fields', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error('Please fill in all required fields', { position: "top-right", autoClose: 3000 });
       return;
     }
 
-    // Generate order number
     const newOrderNumber = 'ORD-' + Date.now().toString().slice(-6);
     setOrderNumber(newOrderNumber);
-
-    // Show success modal
     setShowSuccessModal(true);
-
-    // Clear the cart
     clearCart();
-
-    // Clear applied coupon after successful checkout
     removeCoupon();
-
-    // Reset form
     setFormData({
       firstName: '',
       companyName: '',
@@ -107,7 +84,6 @@ const Checkoutcomponent = () => {
   const handleCloseModal = () => {
     setShowSuccessModal(false);
     setOrderNumber('');
-    // Don't clear coupon when modal is closed - user might want to go back to cart
   };
 
   const subtotal = getTotalPrice();
@@ -133,107 +109,34 @@ const Checkoutcomponent = () => {
           </nav>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Grid: sm/md vertical, lg horizontal */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
           {/* Left Section - Billing Details */}
-          <div>
-            <h2 className="text-2xl   text-black font-inter font-base  mb-6">Billing Details</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-[14px] font-base font-poppins text-gray-500 mb-1">
-                  First Name *
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] max-w-md rounded"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Company Name
-                </label>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] rounded max-w-md "
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Street Address *
-                </label>
-                <input
-                  type="text"
-                  name="streetAddress"
-                  value={formData.streetAddress}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] rounded max-w-md "
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Apartment, floor, etc. (optional)
-                </label>
-                <input
-                  type="text"
-                  name="apartment"
-                  value={formData.apartment}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] rounded max-w-md "
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Town/City *
-                </label>
-                <input
-                  type="text"
-                  name="townCity"
-                  value={formData.townCity}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] rounded max-w-md "
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] rounded max-w-md "
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  name="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 borde-none bg-[#F5F5F5] rounded max-w-md "
-                  required
-                />
-              </div>
-
+          <div className="w-full">
+            <h2 className="text-2xl text-black font-inter font-base mb-6">Billing Details</h2>
+            <form className="space-y-4 w-full">
+              {[
+                { label: "First Name *", name: "firstName", type: "text", required: true },
+                { label: "Company Name", name: "companyName", type: "text", required: false },
+                { label: "Street Address *", name: "streetAddress", type: "text", required: true },
+                { label: "Apartment, floor, etc. (optional)", name: "apartment", type: "text", required: false },
+                { label: "Town/City *", name: "townCity", type: "text", required: true },
+                { label: "Phone Number *", name: "phoneNumber", type: "tel", required: true },
+                { label: "Email Address *", name: "emailAddress", type: "email", required: true },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block text-[14px] font-base font-poppins text-gray-500 mb-1">{field.label}</label>
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border-none bg-[#F5F5F5] rounded"
+                    required={field.required}
+                  />
+                </div>
+              ))}
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -250,9 +153,9 @@ const Checkoutcomponent = () => {
             </form>
           </div>
 
-          {/* Right Section - Order */}
-          <div>
-            <div className="bg-white border-none p-6 max-w-md md:ml-6 md:mt-14  ">
+          {/* Right Section - Order & Payment */}
+          <div className="w-full mt-6   md:mt-16  lg:max-w-md lg:ml-6  ">
+            <div className="bg-white border-none p-6 w-full">
               {/* Order Items */}
               <div className="space-y-4 mb-6">
                 {items.map((item) => (
@@ -289,7 +192,7 @@ const Checkoutcomponent = () => {
                   <span className="font-base text-black font-poppins text-[12px]">Free</span>
                 </div>
                 <div className="border-t border-gray-200 pt-2">
-                  <div className="flex justify-between text-md ffont-base text-black font-poppins text-[12px]">
+                  <div className="flex justify-between text-md font-base text-black font-poppins text-[12px]">
                     <span>Total:</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
@@ -305,7 +208,7 @@ const Checkoutcomponent = () => {
                     value="bank"
                     checked={paymentMethod === 'bank'}
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="h-4 w-4 text-red-600 border-gray-300 focus:ring-red-500 "
+                    className="h-4 w-4 text-red-600 border-gray-300 focus:ring-red-500"
                     style={{ accentColor: 'black' }}
                   />
                   <label className="ml-2 text-black font-base font-poppins text-[12px]">Bank</label>
@@ -326,7 +229,7 @@ const Checkoutcomponent = () => {
                     className="h-4 w-4 text-red-600 border-gray-300 focus:ring-red-500 focus:ring-2"
                     style={{ accentColor: '#DB4444' }}
                   />
-                  <label className="ml-2 text-black  font-base font-poppins text-[12px]">Cash on delivery</label>
+                  <label className="ml-2 text-black font-base font-poppins text-[12px]">Cash on delivery</label>
                 </div>
               </div>
 
@@ -342,12 +245,8 @@ const Checkoutcomponent = () => {
                         onChange={(e) => setInputCode(e.target.value)}
                         className="w-full px-4 py-2 border text-sm border-black rounded"
                       />
-                      {couponError && (
-                        <p className="text-red-500 text-xs mt-1">{couponError}</p>
-                      )}
-                      {couponSuccess && (
-                        <p className="text-green-500 text-xs mt-1">Coupon applied successfully!</p>
-                      )}
+                      {couponError && <p className="text-red-500 text-xs mt-1">{couponError}</p>}
+                      {couponSuccess && <p className="text-green-500 text-xs mt-1">Coupon applied successfully!</p>}
                     </div>
                     <button 
                       type="submit"
@@ -362,20 +261,12 @@ const Checkoutcomponent = () => {
                       <span className="text-green-600 text-sm font-medium">
                         Coupon Applied: {appliedCoupon.code}
                       </span>
-                      <p className="text-green-600 text-xs">
-                        {appliedCoupon.description}
-                      </p>
+                      <p className="text-green-600 text-xs">{appliedCoupon.description}</p>
                     </div>
-                    <button
-                      onClick={handleRemoveCoupon}
-                      className="text-red-500 hover:text-red-700 text-sm underline"
-                    >
-                      Remove
-                    </button>
+                    <button onClick={handleRemoveCoupon} className="text-red-500 hover:text-red-700 text-sm underline">Remove</button>
                   </div>
                 )}
                 
-                {/* Available Coupons for Testing */}
                 <div className="text-xs text-gray-500 mt-2">
                   <p>Test coupons: SAVE10, SAVE20, SAVE50, WELCOME, SUMMER, FLASH</p>
                 </div>
@@ -384,7 +275,7 @@ const Checkoutcomponent = () => {
               {/* Place Order Button */}
               <button
                 onClick={handlePlaceOrder}
-                className="max-w-lg bg-[#DB4444] text-white py-3  px-8 rounded hover:bg-red-600 font-base text-[16px] font-poppins text-center block"
+                className="w-full bg-[#DB4444] text-white py-3 px-8 rounded hover:bg-red-600 font-base text-[16px] font-poppins text-center block"
               >
                 Place Order
               </button>

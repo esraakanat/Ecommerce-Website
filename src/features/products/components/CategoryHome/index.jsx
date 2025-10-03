@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CategoryLoading from "../../../../shared/components/loading/CategoryLoading";
 import { useCategories } from "../../hooks/useCategories";
@@ -12,6 +12,7 @@ import gameIcon from "../../../../assets/home-assets/Game.svg";
 
 const CategoryFilter = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
   const location = useLocation();
   const currentCategory = new URLSearchParams(location.search).get("category");
   
@@ -26,17 +27,53 @@ const CategoryFilter = () => {
   // Extract categories from query result
   const categories = categoriesData?.categories || [];
 
+  // Set default hover to furniture category when categories are loaded
+  useEffect(() => {
+    if (categories.length > 0) {
+      const furnitureCategory = categories.find(cat => 
+        cat.name.toLowerCase().includes("furniture")
+      );
+      if (furnitureCategory) {
+        setHoveredCard(furnitureCategory.id);
+      }
+    }
+  }, [categories]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, [hoverTimeout]);
+
   // Function to retry loading categories
   const handleRetry = () => {
     refetchCategories();
   };
 
   const handleMouseEnter = (cardId) => {
+    // Clear any existing timeout when entering a new category
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
     setHoveredCard(cardId);
   };
 
   const handleMouseLeave = () => {
-    setHoveredCard(null);
+    // Add delay before returning to furniture category
+    const timeout = setTimeout(() => {
+      const furnitureCategory = categories.find(cat => 
+        cat.name.toLowerCase().includes("furniture")
+      );
+      if (furnitureCategory) {
+        setHoveredCard(furnitureCategory.id);
+      }
+    }, 300); // 300ms delay
+    
+    setHoverTimeout(timeout);
   };
 
   if (loading) {
@@ -64,14 +101,14 @@ const CategoryFilter = () => {
 
   return (
     <div className="bg-white py-8">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl sm:mx-8 md:mx-16 lg:mx-32 px-4"> 
         {/* عنوان + خط احمر */}
-        <div className="flex items-center mb-4 ml-12">
+        <div className="flex items-center mb-4 ml-8">
           <div className="w-3 h-8 bg-[#DB4444] mr-2 rounded-sm"></div>
           <span className="text-sm font-medium font-poppins text-[#DB4444]">Categories</span>
         </div>
         
-        <h2 className="text-xl md:text-2xl font-bold font-inter text-gray-900 mb-8 ml-12">
+        <h2 className="text-xl md:text-2xl font-bold font-inter text-gray-900 mb-8 ml-8">
           Browse By Category
         </h2>
 
@@ -79,29 +116,9 @@ const CategoryFilter = () => {
 <div className="
   grid 
   grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 
-  gap-6 sm:gap-8 md:gap-12 lg:gap-16 
+  gap-6 sm:gap-8 md:gap-4 lg:gap-4
   justify-items-center
 ">
-  {/* خيار All Products */}
-  <Link
-    to="/products"
-    onMouseEnter={() => handleMouseEnter('all')}
-    onMouseLeave={handleMouseLeave}
-    className={`w-[190px] h-[175px] rounded-md flex flex-col items-center justify-center border transition-all duration-200 ${
-      hoveredCard === 'all' 
-        ? "bg-[#DB4444] text-white"
-        : "bg-white border-gray-300 text-gray-700"
-    }`}
-  >
-    <div className="mb-2 text-2xl">
-      <img 
-        src={cellPhoneIcon} 
-        alt="all products" 
-        className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" 
-      />
-    </div>
-    <span className="text-sm font-medium text-center">All Products</span>
-  </Link>
 
   {categories.map((cat) => (
     <Link
@@ -109,7 +126,7 @@ const CategoryFilter = () => {
       to={`/products?category=${encodeURIComponent(cat.name)}`}
       onMouseEnter={() => handleMouseEnter(cat.id)}
       onMouseLeave={handleMouseLeave}
-      className={`w-[190px] h-[175px] rounded-md flex flex-col items-center justify-center border transition-all duration-200 ${
+      className={`w-[180px] h-[165px] rounded-md flex flex-col items-center justify-center border transition-all duration-200 ${
         hoveredCard === cat.id
           ? "bg-[#DB4444] text-white"
           : "bg-white border-gray-300 text-gray-700"
@@ -118,19 +135,59 @@ const CategoryFilter = () => {
       <div className="mb-2 text-2xl">
         {/* الأيقونات حسب الكاتيجوري */}
         {cat.name.toLowerCase().includes("clothes") && (
-          <img src={computerIcon} alt="clothes" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img 
+            src={computerIcon} 
+            alt="clothes" 
+            className={`w-10 h-10 transition-all duration-200 ${
+              hoveredCard === cat.id 
+                ? "filter brightness-0 invert" 
+                : "filter brightness-0"
+            }`} 
+          />
         )}
         {cat.name.toLowerCase().includes("electronics") && (
-          <img src={smartWatchIcon} alt="electronics" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img 
+            src={smartWatchIcon} 
+            alt="electronics" 
+            className={`w-10 h-10 transition-all duration-200 ${
+              hoveredCard === cat.id 
+                ? "filter brightness-0 invert" 
+                : "filter brightness-0"
+            }`} 
+          />
         )}
         {cat.name.toLowerCase().includes("furniture") && (
-          <img src={cameraIcon} alt="furniture" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img 
+            src={cameraIcon} 
+            alt="furniture" 
+            className={`w-10 h-10 transition-all duration-200 ${
+              hoveredCard === cat.id 
+                ? "filter brightness-0 invert" 
+                : "filter brightness-0"
+            }`} 
+          />
         )}
         {cat.name.toLowerCase().includes("shoes") && (
-          <img src={headphoneIcon} alt="shoes" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img 
+            src={headphoneIcon} 
+            alt="shoes" 
+            className={`w-10 h-10 transition-all duration-200 ${
+              hoveredCard === cat.id 
+                ? "filter brightness-0 invert" 
+                : "filter brightness-0"
+            }`} 
+          />
         )}
         {cat.name.toLowerCase().includes("miscellaneous") && (
-          <img src={gameIcon} alt="Miscellaneous" className="w-10 h-10 filter brightness-0 hover:invert transition-all duration-200" />
+          <img 
+            src={gameIcon} 
+            alt="Miscellaneous" 
+            className={`w-10 h-10 transition-all duration-200 ${
+              hoveredCard === cat.id 
+                ? "filter brightness-0 invert" 
+                : "filter brightness-0"
+            }`} 
+          />
         )}
       </div>
       <span className="text-sm font-medium text-center">{cat.name}</span>

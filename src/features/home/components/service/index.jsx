@@ -24,9 +24,9 @@ const ServiceSection = () => {
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Free and Fast Delivery */}
-          <div className="flex flex-col items-center text-center space-y-4">
+          <div className="flex flex-col items-center text-center space-y-4 space-x-4">
             <div className="relative">
-              <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
+              <div className="w-16 h-16 bg-[#a3a3a3] rounded-full flex items-center justify-center border-2 border-[#a3a3a3]">
                 <img src={deliveryIcon} alt="delivery" className="w-12 h-12 px-2 bg-black rounded-full" />
               </div>
             </div>
@@ -41,7 +41,7 @@ const ServiceSection = () => {
           {/* 24/7 Customer Service */}
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="relative">
-              <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
+              <div className="w-16 h-16 bg-[#a3a3a3]  rounded-full flex items-center justify-center border-2 border-[#a3a3a3]">
                 <img src={serviceIcon} alt="customer" className="w-12 h-12 px-2 bg-black rounded-full" />
               </div>
             </div>
@@ -56,7 +56,7 @@ const ServiceSection = () => {
           {/* Money Back Guarantee */}
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="relative">
-              <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-400">
+              <div className="w-16 h-16  bg-[#a3a3a3]  rounded-full flex items-center justify-center border-2 border-[#a3a3a3]">
                 <img src={secureIcon} alt="money" className="w-12 h-12 px-2 bg-black rounded-full" />
               </div>
             </div>

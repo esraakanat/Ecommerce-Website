@@ -172,92 +172,66 @@ const HeroSection = () => {
         </nav>
       </div>
 
-      {/* === زر الهامبرغر خارج البانر (يظهر فقط على الموبايل) === */}
-      <div className="flex md:hidden px-4 mt-4">
-        <button
-          className="text-black"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      <div className="relative bg-black mt-4 sm:mt-6 mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-24 
+  rounded-md overflow-hidden w-full 
+  min-h-[250px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[420px] xl:min-h-[480px] 
+  flex flex-col sm:flex-row items-center px-6 sm:px-8 md:px-10">
 
-      {/* === Main Banner === */}
-      <div className="flex-1 relative bg-black mt-4 md:mt-6 mx-4 md:ml-24 md:mr-56 rounded-xl overflow-hidden 
-        min-h-[250px] md:h-[344px] md:w-[892px] flex items-center justify-between">
-        
-        {/* النصوص على يسار البانر */}
-        <div className="absolute top-10 md:top-6 left-6 z-10">
-          <div className="flex items-center mb-4">
-            <img
-              src={appleLogo}
-              alt="Apple"
-              className="h-6 w-6 md:h-10 md:w-10 mr-2"
-            />
-            <span className="text-white text-xs md:text-sm font-poppins">
-              iPhone 14 Series
-            </span>
-          </div>
+  {/* النصوص */}
+  <div className="sm:basis-[40%] xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 sm:pr-6">
+    <div className="flex items-center mb-3">
+      <img
+        src={appleLogo}
+        alt="Apple"
+        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9 mr-2"
+      />
+      <span className="text-white text-xs sm:text-sm md:text-base font-poppins">
+        iPhone 14 Series
+      </span>
+    </div>
 
-          <div className="mb-3 md:mb-4">
-            <div className="text-white text-2xl md:text-5xl font-bold font-poppins leading-tight">
-              Up to 10%
-            </div>
-            <div className="text-white text-2xl md:text-5xl font-poppins mt-1">
-              off Voucher
-            </div>
-          </div>
+    <h2 className="text-white text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-poppins leading-tight">
+      Up to 10% <br className="hidden sm:block" /> off Voucher
+    </h2>
 
-          <Link
-            to="/products"
-            className="inline-flex items-center text-[#FAFAFA] text-xs md:text-sm font-poppins underline hover:text-gray-300 transition-colors"
-          >
-            Shop Now
-            <svg
-              className="h-3 w-3 md:h-4 md:w-4 ml-2"
-              fill="white"
-              viewBox="0 0 8 13"
-            >
-              <path
-                d="M4.95 6.63597L0 1.68597L1.414 0.271973L7.778 6.63597L1.414 13L0 11.586L4.95 6.63597Z"
-                fill="white"
-              />
-            </svg>
-          </Link>
-        </div>
+    <Link
+      to="/products"
+      className="mt-4 inline-flex items-center text-[#FAFAFA] text-sm sm:text-base font-poppins underline hover:text-gray-300 transition-colors"
+    >
+      Shop Now
+      <svg
+        className="h-3 w-3 sm:h-4 sm:w-4 ml-2"
+        fill="white"
+        viewBox="0 0 8 13"
+      >
+        <path
+          d="M4.95 6.63597L0 1.68597L1.414 0.271973L7.778 6.63597L1.414 13L0 11.586L4.95 6.63597Z"
+          fill="white"
+        />
+      </svg>
+    </Link>
+  </div>
 
- {/* صورة الآيفون */}
-<div className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 w-full max-w-[400px] md:max-w-[350px] lg:max-w-[300px]">
-  <div className="relative w-full aspect-[16/9]">
+  {/* صورة الآيفون */}
+  <div className="sm:basis-[60%] xl:basis-1/2 flex justify-center items-center w-full mt-6 sm:mt-0">
     <img
       src={heroImage}
       alt="iPhone 14"
-      className="w-full h-full object-contain"
+      className="w-full max-w-[260px] sm:max-w-[360px] md:max-w-[420px] lg:max-w-[480px] xl:max-w-[540px] object-contain"
     />
-    <div className="absolute inset-0 bg-purple-500 opacity-20 blur-2xl rounded-xl"></div>
+  </div>
+
+  {/* نقاط التبديل */}
+  <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
   </div>
 </div>
 
 
-
-
-        {/* نقاط التبديل */}
-        <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-        </div>
-      </div>
     </div>
   );
 };

@@ -82,167 +82,125 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
     </div>
   </div>
 </div>
-      {/* النافبار الرئيسي */}
-      <nav className="border-b sticky top-10 z-40 bg-white">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* شعار الموقع */}
-            <div className="flex items-center">
-              <Link to="/" className="flex-shrink-0">
-                <h1 className="text-2xl font-bold font-inter text-black">
-                  Exclusive
-                </h1>
-              </Link>
-            </div>
+<nav className="border-b sticky top-10 z-40 bg-white">
+  <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 overflow-x-visible">
+    
+    {/* شعار الموقع */}
+    <div className="flex items-center">
+      <Link to="/" className="flex-shrink-0">
+        <h1 className="text-2xl font-bold font-inter text-black">
+          Exclusive
+        </h1>
+      </Link>
+    </div>
 
-            {/* روابط النافبار - تظهر فقط على الشاشات المتوسطة فما فوق */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
-                  location.pathname === "/" 
-                    ? "text-black border-b-2 border-black" 
-                    : "text-gray-700 hover:text-black"
-                }`}
-              >
-                Home
-              </Link>
-              <Link
-                to="/contact"
-                className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
-                  location.pathname === "/contact" 
-                    ? "text-black border-b-2 border-black" 
-                    : "text-gray-700 hover:text-black"
-                }`}
-              >
-                Contact
-              </Link>
-              <Link
-                to="/about"
-                className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
-                  location.pathname === "/about" 
-                    ? "text-black border-b-2 border-black" 
-                    : "text-gray-700 hover:text-black"
-                }`}
-              >
-                About
-              </Link>
-              <Link
-                to="/signup"
-                className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
-                  location.pathname === "/signup" 
-                    ? "text-black border-b-2 border-black" 
-                    : "text-gray-700 hover:text-black"
-                }`}
-              >
-                Sign Up
-              </Link>
-            </div>
+    {/* روابط النافبار */}
+    <div className="hidden lg:flex items-center space-x-6">
+      <Link
+        to="/"
+        className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
+          location.pathname === "/" 
+            ? "text-black border-b-2 border-black" 
+            : "text-gray-700 hover:text-black"
+        }`}
+      >
+        Home
+      </Link>
+      <Link
+        to="/contact"
+        className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
+          location.pathname === "/contact" 
+            ? "text-black border-b-2 border-black" 
+            : "text-gray-700 hover:text-black"
+        }`}
+      >
+        Contact
+      </Link>
+      <Link
+        to="/about"
+        className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
+          location.pathname === "/about" 
+            ? "text-black border-b-2 border-black" 
+            : "text-gray-700 hover:text-black"
+        }`}
+      >
+        About
+      </Link>
+      <Link
+        to="/signup"
+        className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
+          location.pathname === "/signup" 
+            ? "text-black border-b-2 border-black" 
+            : "text-gray-700 hover:text-black"
+        }`}
+      >
+        Sign Up
+      </Link>
+    </div>
 
-            {/* البحث + الأيقونات (تصغر مع الشاشة) */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              {/* مربع البحث - يتقلص حجمه على الشاشات الصغيرة */}
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onFocus={() => setIsSearchModalOpen(true)}
-                  className="w-28 sm:w-48 md:w-64 px-2 sm:px-3 md:px-4 py-1 sm:py-2 pr-8 text-xs sm:text-sm bg-[#F5F5F5] font-poppins border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all"
-                />
-                <button
-                  onClick={() => setIsSearchModalOpen(true)}
-                  className="absolute inset-y-0 right-0 pr-2 flex items-center hover:bg-gray-100 rounded-r-md transition-colors"
-                >
-                  <img
-                    src={searchIcon}
-                    alt="Search"
-                    className="h-3 w-3 sm:h-4 sm:w-4"
-                  />
-                </button>
-              </div>
+    {/* البحث + الأيقونات */}
+    <div className="flex items-center space-x-3 sm:space-x-5 flex-shrink-0">
+      
+      {/* مربع البحث */}
+      <div className="relative flex-1 max-w-[180px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[350px]">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => setIsSearchModalOpen(true)}
+          className="w-full px-3 py-2 pr-8 text-xs sm:text-sm bg-[#F5F5F5] font-poppins border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all"
+        />
+        <button
+          onClick={() => setIsSearchModalOpen(true)}
+          className="absolute inset-y-0 right-0 pr-2 flex items-center hover:bg-gray-100 rounded-r-md transition-colors"
+        >
+          <img
+            src={searchIcon}
+            alt="Search"
+            className="h-3 w-3 sm:h-4 sm:w-4"
+          />
+        </button>
+      </div>
 
-              {/* أيقونات */}
-              {!hideIcons && (
-                <>
-                  <Link to="/wishlist" className="p-1 sm:p-2 text-gray-600 hover:text-black relative">
-                    <img
-                      src={wishlistIcon}
-                      alt="Wishlist"
-                      className="h-5 w-5 sm:h-6 sm:w-6"
-                    />
-                    {wishlistCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-                        {wishlistCount}
-                      </span>
-                    )}
-                  </Link>
-                  <Link to="/cart" className="p-1 sm:p-2 text-gray-600 hover:text-black relative">
-                    <img
-                      src={cartIcon}
-                      alt="Cart"
-                      className="h-5 w-5 sm:h-6 sm:w-6"
-                    />
-                    {cartCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-                        {cartCount}
-                      </span>
-                    )}
-                  </Link>
-                  {!hideUserIcon && (
-                    <ProfileMenu />
-                  )}
-                </>
-              )}
-
-              {/* زر الهامبرغر للشاشات الصغيرة */}
-              <div className="md:hidden flex items-center">
-                <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="text-gray-800"
-                >
-                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
-            </div>
-          </div>
+      {/* أيقونات */}
+      {!hideIcons && (
+        <div className="flex items-center space-x-3 sm:space-x-4 flex-shrink-0">
+          <Link to="/wishlist" className="relative">
+            <img src={wishlistIcon} alt="Wishlist" className="h-5 w-5 sm:h-6 sm:w-6" />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
+          <Link to="/cart" className="relative">
+            <img src={cartIcon} alt="Cart" className="h-5 w-5 sm:h-6 sm:w-6" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+          {!hideUserIcon && <ProfileMenu />}
         </div>
+      )}
 
-        {/* قائمة الموبايل للروابط فقط */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t px-4 py-4 space-y-4">
-            <Link
-              to="/"
-              onClick={() => setIsMenuOpen(false)}
-              className="block text-gray-700 hover:text-black"
-            >
-              Home
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="block text-gray-700 hover:text-black"
-            >
-              Contact
-            </Link>
-            <Link
-              to="/about"
-              onClick={() => setIsMenuOpen(false)}
-              className="block text-gray-700 hover:text-black"
-            >
-              About
-            </Link>
-            <Link
-              to="/signup"
-              onClick={() => setIsMenuOpen(false)}
-              className="block text-gray-700 hover:text-black"
-            >
-              Sign Up
-            </Link>
-          </div>
-        )}
-      </nav>
+      {/* زر الهامبرغر فقط للشاشات الصغيرة */}
+      <div className="flex md:flex lg:hidden items-center flex-shrink-0">
+  <button
+    onClick={() => setIsMenuOpen(!isMenuOpen)}
+    className="text-gray-800"
+  >
+    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+  </button>
+</div>
+
+    </div>
+
+  </div>
+</nav>
+
       
       {/* Search Modal */}
       <SearchModal 
