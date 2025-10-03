@@ -116,7 +116,7 @@ function ExploreOurProducts() {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
             <div>
-                        <div className="flex items-center gap-2 mb-8 ">
+                        <div className="flex items-center gap-2 mb-8 ml-12 ">
                             <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
                             <h2 className="text-sm font-semibold text-[#DB4444] font-inter">Our Products</h2>
                         </div>
