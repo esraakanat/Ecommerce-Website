@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { useUserCart } from "../../hooks/useUserCart";
 import useCouponStore from "../../store/couponStore";
 import useAuthStore from "../../../auth/store";
@@ -20,6 +21,7 @@ const CartSummary = () => {
   } = useCouponStore();
   
   const [inputCode, setInputCode] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
 
   // Coupon handlers
   const handleCouponSubmit = (e) => {
@@ -35,12 +37,20 @@ const CartSummary = () => {
     setInputCode('');
   };
 
-  const handleQuantityChange = (itemId, newQuantity) => {
+  const handleQuantityChange = async (itemId, newQuantity) => {
     if (newQuantity < 1) {
       removeFromCart(itemId);
       return;
     }
+    
+    // Show animation when updating quantity
+    setIsUpdating(true);
     updateQuantity(itemId, newQuantity);
+    
+    // Reset animation after delay
+    setTimeout(() => {
+      setIsUpdating(false);
+    }, 500);
   };
 
   // Function to add offers to cart items (same logic as ProductList)
@@ -235,18 +245,40 @@ const CartSummary = () => {
                   </div>
 
                   {/* Subtotal */}
-                  <div className="font-base text-black font-poppins text-[12px] text-center">
+                  <motion.div 
+                    className="font-base text-black font-poppins text-[12px] text-center"
+                    animate={isUpdating ? {
+                      scale: [1, 1.1, 1],
+                      color: ["#000000", "#3b82f6", "#000000"]
+                    } : {}}
+                    transition={{ duration: 0.3 }}
+                  >
                     {item.hasOffer ? (
                       <div className="flex flex-col items-center gap-1">
-                        <span className="text-black font-poppins">
+                        <motion.span 
+                          className="text-black font-poppins"
+                          animate={isUpdating ? {
+                            scale: [1, 1.2, 1],
+                            y: [0, -2, 0]
+                          } : {}}
+                          transition={{ duration: 0.4 }}
+                        >
                           ${(item.discountedPrice * item.quantity).toFixed(2)}
-                        </span>
+                        </motion.span>
                        
                       </div>
                     ) : (
-                      <span>${(item.price * item.quantity).toFixed(2)}</span>
+                      <motion.span
+                        animate={isUpdating ? {
+                          scale: [1, 1.2, 1],
+                          y: [0, -2, 0]
+                        } : {}}
+                        transition={{ duration: 0.4 }}
+                      >
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </motion.span>
                     )}
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             ))}
@@ -331,35 +363,103 @@ const CartSummary = () => {
           </div>
 
           {/* Cart Total */}
-          <div className="border border-black  rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3">
+          <motion.div 
+            className="border border-black  rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3"
+            animate={isUpdating ? {
+              scale: [1, 1.02, 1],
+              boxShadow: ["0 0 0 rgba(0,0,0,0)", "0 0 20px rgba(59, 130, 246, 0.3)", "0 0 0 rgba(0,0,0,0)"]
+            } : {}}
+            transition={{ duration: 0.5 }}
+          >
             <h3 className="text-lg font-medium font-poppins  text-black mb-4">Cart Total</h3>
             <div className="space-y-6 text-sm  font-poppins  text-black">
-              <div className="flex justify-between">
+              <motion.div 
+                className="flex justify-between"
+                animate={isUpdating ? {
+                  scale: [1, 1.05, 1]
+                } : {}}
+                transition={{ duration: 0.3 }}
+              >
                 <span>Subtotal:</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>
+                <motion.span
+                  animate={isUpdating ? {
+                    scale: [1, 1.2, 1],
+                    color: ["#000000", "#3b82f6", "#000000"],
+                    y: [0, -3, 0]
+                  } : {}}
+                  transition={{ duration: 0.4 }}
+                >
+                  ${subtotal.toFixed(2)}
+                </motion.span>
+              </motion.div>
               {totalDiscount > 0 && (
-                <div className="flex justify-between text-green-600">
+                <motion.div 
+                  className="flex justify-between text-green-600"
+                  animate={isUpdating ? {
+                    scale: [1, 1.05, 1]
+                  } : {}}
+                  transition={{ duration: 0.3 }}
+                >
                   <span>Product Discounts:</span>
-                  <span>-${totalDiscount.toFixed(2)}</span>
-                </div>
+                  <motion.span
+                    animate={isUpdating ? {
+                      scale: [1, 1.2, 1],
+                      y: [0, -3, 0]
+                    } : {}}
+                    transition={{ duration: 0.4 }}
+                  >
+                    -${totalDiscount.toFixed(2)}
+                  </motion.span>
+                </motion.div>
               )}
               {couponDiscount > 0 && (
-                <div className="flex justify-between text-blue-600">
+                <motion.div 
+                  className="flex justify-between text-blue-600"
+                  animate={isUpdating ? {
+                    scale: [1, 1.05, 1]
+                  } : {}}
+                  transition={{ duration: 0.3 }}
+                >
                   <span>Coupon Discount ({appliedCoupon?.code}):</span>
-                  <span>-${couponDiscount.toFixed(2)}</span>
-                </div>
+                  <motion.span
+                    animate={isUpdating ? {
+                      scale: [1, 1.2, 1],
+                      y: [0, -3, 0]
+                    } : {}}
+                    transition={{ duration: 0.4 }}
+                  >
+                    -${couponDiscount.toFixed(2)}
+                  </motion.span>
+                </motion.div>
               )}
               <div className="flex justify-between border-t border-gray-400 pt-4">
                 <span>Shipping:</span>
                 <span className="text-black">Free</span>
               </div>
-              <div className="border-t border-gray-400 pt-3 flex justify-between text-[16px] font-base font-poppins  ">
+              <motion.div 
+                className="border-t border-gray-400 pt-3 flex justify-between text-[16px] font-base font-poppins"
+                animate={isUpdating ? {
+                  scale: [1, 1.05, 1],
+                  backgroundColor: ["transparent", "rgba(59, 130, 246, 0.1)", "transparent"]
+                } : {}}
+                transition={{ duration: 0.5 }}
+              >
                 <span>Total:</span>
-                <span>${total.toFixed(2)}</span>
-              </div>
+                <motion.span
+                  animate={isUpdating ? {
+                    scale: [1, 1.3, 1],
+                    color: ["#000000", "#3b82f6", "#000000"],
+                    y: [0, -5, 0],
+                    fontWeight: ["normal", "bold", "normal"]
+                  } : {}}
+                  transition={{ duration: 0.6 }}
+                  className="text-lg font-bold"
+                >
+                  ${total.toFixed(2)}
+                </motion.span>
+              </motion.div>
             </div>
-             {isAuthenticated ? (
+            {isAuthenticated ? (
                <Link
                  to="/checkout"
                  onClick={() => {
@@ -402,7 +502,7 @@ const CartSummary = () => {
                  </div>
                </div>
              )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

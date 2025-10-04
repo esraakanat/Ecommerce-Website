@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useUserWishlist } from "../../../features/whislist/hooks/useUserWishlist";
 import { useUserCart } from "../../../features/cart/hooks/useUserCart";
 import useAuthStore from "../../../features/auth/store";
@@ -48,7 +49,12 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
   return (
     <>
       {/* شريط الإعلان العلوي */}
-      <div className="bg-black text-white w-full flex items-center sticky top-0 z-50">
+      <motion.div 
+        className="bg-black text-white w-full flex items-center sticky top-0 z-50"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
   <div className="w-full max-w-[1440px] mx-auto px-2 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center h-10 sm:h-12">
       
@@ -78,21 +84,41 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
       </div>
     </div>
   </div>
-</div>
-<nav className="border-b sticky top-10 z-40 bg-white">
+</motion.div>
+
+<motion.nav 
+  className="border-b sticky top-10 z-40 bg-white"
+  initial={{ y: -20, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+>
   <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 overflow-x-visible">
     
     {/* شعار الموقع */}
-    <div className="flex items-center">
+    <motion.div 
+      className="flex items-center"
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+    >
       <Link to="/" className="flex-shrink-0">
-        <h1 className="text-2xl font-bold font-inter text-black">
+        <motion.h1 
+          className="text-2xl font-bold font-inter text-black"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.2 }}
+        >
           Exclusive
-        </h1>
+        </motion.h1>
       </Link>
-    </div>
+    </motion.div>
 
     {/* روابط النافبار */}
-    <div className="hidden lg:flex items-center space-x-6">
+    <motion.div 
+      className="hidden lg:flex items-center space-x-6"
+      initial={{ x: 50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+    >
       <Link
         to="/"
         className={`px-3 py-2 text-sm font-poppins font-medium transition-colors ${
@@ -133,10 +159,15 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
       >
         Sign Up
       </Link>
-    </div>
+    </motion.div>
 
     {/* البحث + الأيقونات */}
-    <div className="flex items-center space-x-3 sm:space-x-5 flex-shrink-0">
+    <motion.div 
+      className="flex items-center space-x-3 sm:space-x-5 flex-shrink-0"
+      initial={{ x: 50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
+    >
       
       {/* مربع البحث */}
       <div className="relative flex-1 max-w-[180px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[350px]">
@@ -168,48 +199,109 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
 
       {/* أيقونات */}
       {!hideIcons && (
-        <div className="flex items-center space-x-3 sm:space-x-4 flex-shrink-0">
-          <Link to="/wishlist" className="relative">
-            <img src={wishlistIcon} alt="Wishlist" className="h-5 w-5 sm:h-6 sm:w-6" />
-            {wishlistCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">
-                {wishlistCount}
-              </span>
-            )}
-          </Link>
-          <Link to="/cart" className="relative">
-            <img src={cartIcon} alt="Cart" className="h-5 w-5 sm:h-6 sm:w-6" />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </Link>
+        <motion.div 
+          className="flex items-center space-x-3 sm:space-x-4 flex-shrink-0"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.3, ease: "easeOut", delay: 0.6 }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Link to="/wishlist" className="relative">
+              <img src={wishlistIcon} alt="Wishlist" className="h-5 w-5 sm:h-6 sm:w-6" />
+              <AnimatePresence>
+                {wishlistCount > 0 && (
+                  <motion.span 
+                    className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {wishlistCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Link>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Link to="/cart" className="relative">
+              <img src={cartIcon} alt="Cart" className="h-5 w-5 sm:h-6 sm:w-6" />
+              <AnimatePresence>
+                {cartCount > 0 && (
+                  <motion.span 
+                    className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] sm:text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {cartCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Link>
+          </motion.div>
           {!hideUserIcon && <ProfileMenu />}
-        </div>
+        </motion.div>
       )}
+    </motion.div>
 
       {/* زر الهامبرغر فقط للشاشات الصغيرة */}
-      <div className="flex md:flex lg:hidden items-center flex-shrink-0">
-  <button
-    onClick={() => setIsMenuOpen(!isMenuOpen)}
-    className="text-gray-800"
-  >
-    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-  </button>
-</div>
+      <motion.div 
+        className="flex md:flex lg:hidden items-center flex-shrink-0"
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
+      >
+        <motion.button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-gray-800"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+        >
+          <AnimatePresence mode="wait">
+            {isMenuOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X size={24} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu size={24} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </motion.div>
 
     </div>
+  
+</motion.nav>
 
-  </div>
-</nav>
-
-      
-      {/* Search Modal */}
-      <SearchModal 
-        isOpen={isSearchModalOpen} 
-        onClose={() => setIsSearchModalOpen(false)} 
-      />
+<SearchModal 
+  isOpen={isSearchModalOpen} 
+  onClose={() => setIsSearchModalOpen(false)} 
+/>
     </>
   );
 };

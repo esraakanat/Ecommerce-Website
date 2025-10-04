@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useHeroSection } from "../../hooks/useHeroSection";
 import appleLogo from "../../../../assets/home-assets/1200px-Apple_gray_logo 1.svg";
 import heroImage from "../../../../assets/home-assets/hero.png";
@@ -46,7 +47,12 @@ const HeroSection = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full bg-white relative">
+    <motion.div 
+      className="flex flex-col md:flex-row w-full bg-white relative"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       {/* === Overlay when Sidebar Open === */}
       {sidebarOpen && (
         <div
@@ -56,9 +62,12 @@ const HeroSection = () => {
       )}
 
       {/* === Sidebar Drawer for Mobile === */}
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg border-r border-gray-200 transform transition-transform duration-300 z-50
+      <motion.div
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg border-r border-gray-200 z-50
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+        initial={{ x: -256 }}
+        animate={{ x: sidebarOpen ? 0 : -256 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         {/* زر إغلاق */}
         <button
@@ -119,10 +128,15 @@ const HeroSection = () => {
             </Link>
           ))}
         </nav>
-      </div>
+      </motion.div>
 
       {/* === Sidebar (Desktop Only) === */}
-      <div className="hidden md:block w-64 bg-white border-r border-gray-200 pl-16 pt-6">
+      <motion.div 
+        className="hidden md:block w-64 bg-white border-r border-gray-200 pl-16 pt-6"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+      >
         <nav className="space-y-1">
           {/* All Products */}
           <Link
@@ -171,66 +185,143 @@ const HeroSection = () => {
             </Link>
           ))}
         </nav>
-      </div>
+      </motion.div>
 
-      <div className="relative bg-black  sm:mt-6 md:mt-12 mx-4  sm:mx-8 md:mx-12 lg:mr-12 xl:mr-24
+      <motion.div 
+        className="relative bg-black  sm:mt-6 md:mt-12 mx-4  sm:mx-8 md:mx-12 lg:mr-12 xl:mr-24
   rounded-sm overflow-hidden w-full  
   min-h-[150px] sm:min-h-[320px] md:min-h-[280px] lg:min-h-[320px] xl:min-h-[380px] 
-  flex flex-col sm:flex-row items-center px-6 sm:px-8 md:px-8">
+  flex flex-col sm:flex-row items-center px-6 sm:px-8 md:px-8"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+      >
 
   {/* النصوص */}
-  <div className="sm:basis-[40%] xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 sm:pr-6 lg:ml-8 ">
-    <div className="flex items-center mb-3">
-      <img
+  <motion.div 
+    className="sm:basis-[40%] xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 sm:pr-6 lg:ml-8"
+    initial={{ x: -50, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+  >
+    <motion.div 
+      className="flex items-center mb-3"
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
+    >
+      <motion.img
         src={appleLogo}
         alt="Apple"
-        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-11 lg:w-11 mr-2 "
+        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-11 lg:w-11 mr-2"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
       />
-      <span className="text-white text-xs sm:text-sm md:text-base font-poppins tracking-wider">
+      <motion.span 
+        className="text-white text-xs sm:text-sm md:text-base font-poppins tracking-wider"
+        initial={{ x: -20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
+      >
         iPhone 14 Series
-      </span>
-    </div>
+      </motion.span>
+    </motion.div>
 
-    <h2 className="text-white lg:py-4 text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-poppins tracking-wider">
-      <div>Up to 10%</div>
-      <div className="mt-4">off Voucher</div>
-    </h2>
-
-    <Link
-      to="/products"
-      className="mt-4 inline-flex items-center text-[#FAFAFA] text-md sm:text-base font-poppins underline hover:text-gray-300 transition-colors tracking-wide underline-offset-8"
+    <motion.h2 
+      className="text-white lg:py-4 text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-poppins tracking-wider"
+      initial={{ y: 30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 1.4 }}
     >
-      Shop Now
-       <img
-         src={arrowIcon}
-         alt="Arrow"
-         className="h-5 w-5 sm:h-4 mt-2 sm:w-4 ml-2 brightness-0 invert"
-       />
-      
-    </Link>
-  </div>
+      <motion.div
+        initial={{ x: -30, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 1.6 }}
+      >
+        Up to 10%
+      </motion.div>
+      <motion.div 
+        className="mt-4"
+        initial={{ x: -30, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 1.8 }}
+      >
+        off Voucher
+      </motion.div>
+    </motion.h2>
+
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut", delay: 2.0 }}
+    >
+      <Link
+        to="/products"
+        className="mt-4 inline-flex items-center text-[#FAFAFA] text-md sm:text-base font-poppins underline hover:text-gray-300 transition-colors tracking-wide underline-offset-8"
+      >
+        Shop Now
+        <motion.img
+          src={arrowIcon}
+          alt="Arrow"
+          className="h-5 w-5 sm:h-4 mt-2 sm:w-4 ml-2 brightness-0 invert"
+          whileHover={{ x: 5 }}
+          transition={{ duration: 0.2 }}
+        />
+      </Link>
+    </motion.div>
+  </motion.div>
 
   {/* صورة الآيفون */}
-  <div className="sm:basis-[60%] xl:basis-1/2 flex justify-center items-center w-full mt-6 sm:mt-0">
-    <img
+  <motion.div 
+    className="sm:basis-[60%] xl:basis-1/2 flex justify-center items-center w-full mt-6 sm:mt-0"
+    initial={{ x: 50, opacity: 0, scale: 0.8 }}
+    animate={{ x: 0, opacity: 1, scale: 1 }}
+    transition={{ duration: 1.0, ease: "easeOut", delay: 0.8 }}
+  >
+    <motion.img
       src={heroImage}
       alt="iPhone 14"
       className="w-full max-w-[260px] sm:max-w-[360px] md:max-w-[420px] lg:max-w-[480px] xl:max-w-[540px] object-contain"
+      initial={{ y: 50, opacity: 0, rotate: 5 }}
+      animate={{ y: 0, opacity: 1, rotate: 0 }}
+      transition={{ duration: 1.2, ease: "easeOut", delay: 1.0 }}
+      whileHover={{ 
+        scale: 1.05, 
+        rotate: 2,
+        transition: { duration: 0.3 }
+      }}
     />
-  </div>
+  </motion.div>
 
   {/* نقاط التبديل */}
-  <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
-    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-    <div className="w-3 h-3 bg-red-500 border-2 border-white rounded-full"></div>
-    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-  </div>
-</div>
+  <motion.div 
+    className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3"
+    initial={{ y: 20, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.6, ease: "easeOut", delay: 2.2 }}
+  >
+    {[0, 1, 2, 3, 4].map((index) => (
+      <motion.div
+        key={index}
+        className={`w-3 h-3 rounded-full ${index === 2 ? 'bg-red-500 border-2 border-white' : 'bg-gray-400'}`}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ 
+          duration: 0.3, 
+          ease: "easeOut", 
+          delay: 2.4 + (index * 0.1) 
+        }}
+        whileHover={{ 
+          scale: 1.2,
+          transition: { duration: 0.2 }
+        }}
+      />
+    ))}
+  </motion.div>
+</motion.div>
 
-
-    </div>
+    </motion.div>
   );
 };
 
