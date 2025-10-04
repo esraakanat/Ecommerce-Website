@@ -6,21 +6,15 @@ import { useProductSearch } from "../../../features/products/hooks/useProductSea
 import { useUserWishlist } from "../../../features/whislist/hooks/useUserWishlist";
 import { useUserCart } from "../../../features/cart/hooks/useUserCart";
 import { toast } from "react-toastify";
+import useDebounce from "../../hooks/useDebounce";
 
 const SearchModal = ({ isOpen, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Debounce search query
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(searchQuery);
-    }, 300);
-    
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
+  // Use useDebounce hook for search query
+  const debouncedQuery = useDebounce(searchQuery, 300);
 
   // Update URL when debounced search query changes
   useEffect(() => {
@@ -131,7 +125,6 @@ const SearchModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (!isOpen) {
       setSearchQuery("");
-      setDebouncedQuery("");
     }
   }, [isOpen]);
 
