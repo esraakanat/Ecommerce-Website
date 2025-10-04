@@ -1,6 +1,6 @@
 
 import { lazy } from 'react';
-import { ProtectedRoute } from '../../auth/guards';
+import ProtectedRoute from '../../auth/guards/ProtectedRoute';
 
 const Checkout = lazy(() => import('../pages/checkout'))
 
