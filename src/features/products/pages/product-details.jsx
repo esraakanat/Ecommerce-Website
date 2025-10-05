@@ -1,7 +1,7 @@
-import ProductDetails from '../components/ProductDetails/index.jsx'
+import ProductDetails from '../product-details/components/ProductDetails/index.jsx'
 import Navbar from '../../../shared/components/Navbar/index.jsx'
 import Footer from '../../../shared/components/Footer/index.jsx'
-import RelatedProducts from '../components/RelatedProducts/index.jsx';
+import RelatedProducts from '../product-details/components/RelatedProducts/index.jsx';
 import { useParams } from 'react-router-dom';
 
 const ProductDetailsPage = () => {

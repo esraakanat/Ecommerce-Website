@@ -8,22 +8,12 @@ import useAuthStore from "../../../auth/store";
 const CartSummary = () => {
   const { items, updateQuantity, removeFromCart, getTotalPrice } = useUserCart();
   const { isAuthenticated } = useAuthStore();
-  const { 
-    appliedCoupon, 
-    couponCode, 
-    couponError, 
-    couponSuccess,
-    setCouponCode, 
-    applyCoupon, 
-    removeCoupon, 
-    calculateDiscount,
-    clearCouponMessages 
-  } = useCouponStore();
+  const {  appliedCoupon, couponCode,  couponError, couponSuccess, setCouponCode, applyCoupon, removeCoupon, 
+    calculateDiscount,clearCouponMessages } = useCouponStore();
   
   const [inputCode, setInputCode] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // Coupon handlers
   const handleCouponSubmit = (e) => {
     e.preventDefault();
     const success = applyCoupon(inputCode);
@@ -43,25 +33,20 @@ const CartSummary = () => {
       return;
     }
     
-    // Show animation when updating quantity
     setIsUpdating(true);
     updateQuantity(itemId, newQuantity);
     
-    // Reset animation after delay
     setTimeout(() => {
       setIsUpdating(false);
     }, 500);
   };
 
-  // Function to add offers to cart items (same logic as ProductList)
   const addOffersToCartItems = (cartItems) => {
     return cartItems.map(item => {
-      // Check if item already has offer data
       if (item.hasOffer) {
         return item;
       }
       
-      // Add offer with 30% chance
       const shouldHaveOffer = Math.random() < 0.3;
       
       if (shouldHaveOffer) {
@@ -82,10 +67,8 @@ const CartSummary = () => {
     });
   };
 
-  // Apply offers to cart items
   const itemsWithOffers = addOffersToCartItems(items);
 
-  // Calculate totals with offers and coupon
   const calculateTotals = () => {
     let subtotal = 0;
     let totalDiscount = 0;
@@ -99,7 +82,6 @@ const CartSummary = () => {
       }
     });
     
-    // Apply coupon discount
     const couponDiscount = calculateDiscount(subtotal);
     const finalTotal = subtotal - couponDiscount;
     
@@ -140,9 +122,7 @@ const CartSummary = () => {
         </p>
       </div>
 
-        {/* Cart Table */}
         <div className="my-8 w-full ">
-          {/* Table Header */}
           <div className="grid grid-cols-4 px-6 py-4 mb-12 bg-white border shadow-md border-white rounded-lg font-poppins font-medium text-black text-sm">
             <div className="text-center">Product</div>
             <div className="text-center">Price</div>
@@ -150,7 +130,6 @@ const CartSummary = () => {
             <div className="text-center">Subtotal</div>
           </div>
 
-          {/* Table Rows */}
           <div className="space-y-4">
             {itemsWithOffers.map((item) => (
               <div
@@ -158,20 +137,19 @@ const CartSummary = () => {
                 className=" mb-12 bg-white border shadow-md border-white rounded-lg font-poppins font-medium text-black text-sm p-4"
               >
                 <div className="grid grid-cols-4 items-center text-sm">
-                  {/* Product */}
                   <div className="flex items-center space-x-4">
                     <div className="relative">
                       <img
                         src={item.images?.[0] || "/src/assets/cart assets/g27cq4-500x500 1.png"}
                         alt={item.title}
-                        className="w-16 h-16  object-cover rounded"
+                        className="w-14 h-14 md:w-16 md:h-16 object-contain  rounded"
                       />
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="absolute -top-2 -left-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600"
+                        className="absolute -top-1 -left-1 md:-top-2 md:-left-2 w-4 h-4 md:w-5 md:h-5 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600"
                       >
                         <svg
-                          className="w-3 h-3 text-white"
+                          className="w-2 h-2 md:w-3 md:h-3 text-white"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -187,10 +165,9 @@ const CartSummary = () => {
                         </svg>
                       </button>
                     </div>
-                    <span className="font-base text-black font-poppins text-[12px]">{item.title}</span>
+                    <span className="font-base text-black font-poppins text-[12px] truncate max-w-[120px] md:max-w-none">{item.title}</span>
                   </div>
 
-                  {/* Price */}
                   <div className="font-base text-black font-poppins text-[14px] ml-12 md:ml-16 lg:ml-32">
                     {item.hasOffer ? ( 
                       <div className="flex items-center gap-2">
@@ -206,7 +183,6 @@ const CartSummary = () => {
                     )}
                   </div>
 
-                  {/* Quantity */}
                   <div className="flex justify-center">
                     <div className="flex items-center border border-gray-300 rounded-lg bg-white">
                       <input
@@ -244,7 +220,6 @@ const CartSummary = () => {
                     </div>
                   </div>
 
-                  {/* Subtotal */}
                   <motion.div 
                     className="font-base text-black font-poppins text-[12px] text-center"
                     animate={isUpdating ? {
@@ -285,12 +260,10 @@ const CartSummary = () => {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-between mt-6 gap-4">
           <Link
             to="/products"
             onClick={() => {
-              // Scroll to top when navigating to products
               window.scrollTo({
                 top: 0,
                 left: 0,
@@ -309,9 +282,7 @@ const CartSummary = () => {
           </button>
         </div>
 
-        {/* Coupon + Cart Total */}
         <div className="mt-12 flex flex-col lg:flex-row justify-between gap-6">
-          {/* Coupon Section */}
           <div className="flex flex-col gap-4">
             {!appliedCoupon ? (
               <form onSubmit={handleCouponSubmit} className="flex flex-row gap-4 items-start">
@@ -356,13 +327,11 @@ const CartSummary = () => {
               </div>
             )}
             
-            {/* Available Coupons for Testing */}
             <div className="text-xs text-gray-500">
-              <p className="mb-1">Test coupons: SAVE10, SAVE20, SAVE50, WELCOME, SUMMER, FLASH</p>
+             
             </div>
           </div>
 
-          {/* Cart Total */}
           <motion.div 
             className="border border-black  rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3"
             animate={isUpdating ? {
@@ -463,7 +432,6 @@ const CartSummary = () => {
                <Link
                  to="/checkout"
                  onClick={() => {
-                   // Scroll to top when navigating to checkout
                    window.scrollTo({
                      top: 0,
                      left: 0,
@@ -479,7 +447,6 @@ const CartSummary = () => {
                  <Link
                    to="/checkout"
                    onClick={() => {
-                     // Scroll to top when navigating to checkout
                      window.scrollTo({
                        top: 0,
                        left: 0,

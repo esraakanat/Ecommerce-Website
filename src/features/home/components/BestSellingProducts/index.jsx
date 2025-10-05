@@ -2,26 +2,18 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserWishlist } from "../../../whislist/hooks/useUserWishlist";
 import ProductListSkeleton from "../../../../shared/components/loading/ProductListSkeleton";
-import { useBestSellingProducts } from "../../hooks/useBestSellingProducts";
+import { useQueryBestSelling } from "../../services/queryBestSelling";
+import { getProductImage, handleImageError } from "../../../../shared/utils/imageUtils";
 
 function BestSellingProducts() {
     const navigate = useNavigate();
     
-    // React Query hook for best selling products
-    const { 
-        data: bestSellingData, 
-        isLoading: loading, 
-        error, 
-        refetch: refetchBestSelling 
-    } = useBestSellingProducts();
+    const { data: bestSellingData, isLoading: loading, error, refetch: refetchBestSelling } = useQueryBestSelling();
     
-    // Extract products from query result
     const products = bestSellingData?.products || [];
-    
-    // Wishlist store
+ 
     const { addToWishlist, removeFromWishlist, isInWishlist } = useUserWishlist();
 
-    // Handle wishlist toggle
     const handleWishlistToggle = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -33,7 +25,6 @@ function BestSellingProducts() {
         }
     };
 
-    // Function to retry loading products
     const handleRetry = () => {
         refetchBestSelling();
     };
@@ -59,63 +50,58 @@ function BestSellingProducts() {
         );
     }
 
-    // Hide section if no products are available
     if (!loading && products.length === 0) {
         return null;
     }
 
     return (
         <div className="px-8 py-8 max-w-8xl mx-auto">
-            {/* Header */}
             <div className="flex items-center justify-between mb-6">
                         <div>
-                        <div className="flex items-center gap-2 mb-8 ml-12">
+                        <div className="flex items-center gap-2 mb-8 ml-4 lg:ml-4 xl:ml-8">
                             <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
                             <h2 className="text-sm font-semibold text-[#DB4444] font-inter">This Month</h2>
                         </div>
-                        {/* Flash Sales Title */}
-                        <h1 className="text-2xl font-bold ml-10 text-black font-inter tracking-wider">Best Selling Products</h1>
+                
+                        <h1 className=" text-lg sm:text-2xl font-bold ml-4 xl:ml-8 text-black font-inter tracking-wider">Best Selling Products</h1>
                     </div>
-                {/* View All Button */}
+                
                 <button 
                     onClick={() => {
                         navigate('/products');
-                        // Scroll to top when navigating to products page
                         window.scrollTo({
                             top: 0,
                             left: 0,
                             behavior: 'smooth'
                         });
                     }}
-                    className="bg-[#DB4444] text-white px-4 py-2 mr-10 sm:px-6 sm:py-2  mt-16 md:px-4 md:mr-6 lg:mr-8 xl:mr-12 md:py-2 rounded-sm font-base text-[14px] p-12  font-poppins hover:bg-red-600 transition-colors"
+                    className="bg-[#DB4444] text-white px-4 py-2 mr-10 sm:px-6 sm:py-2  mt-16 md:px-4  mr-4 md:mr-4 lg:mr-4 xl:mr-8 md:py-2 rounded-sm font-base text-[14px] p-12  font-poppins hover:bg-red-600 transition-colors"
                 >
                     View All
                 </button>
             </div>
 
-            {/* Products Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {products.map((product, index) => (
                     <Link 
                         key={product.id} 
                         to={`/products/${product.id}`} 
-                        className="bg-white rounded-lg p-1 relative group w-[75%] mx-auto block hover:shadow-lg transition-shadow"
+                        className="bg-white rounded-lg p-1 relative group w-[90%] mx-auto block hover:shadow-lg transition-shadow"
                     >
-                        {/* Product Image Container */}
-                        <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
-                            <div 
-                                className="w-full h-full flex items-center justify-center"
-                                style={{ 
-                                    backgroundColor: '#F5F5F5',
-                                    backgroundImage: `url(${product.images?.[0]})`,
-                                    backgroundSize: 'contain',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: 'center'
-                                }}
-                            >
-                            </div>
+                        <div className="relative mb-2 aspect-square mx-auto rounded-sm overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
+                            <img
+                                src={getProductImage(product)}
+                                alt={product.title}
+                                className="w-full h-full object-cover"
+                                onError={handleImageError}
+                            />
                             
-                            {/* Action Icons */}
+                            {product.hasOffer && product.discountPercent && (
+                                <div className="absolute top-2 left-2 bg-[#DB4444] text-white px-2 py-1 rounded text-xs font-poppins font-sm">
+                                    -{product.discountPercent}%
+                                </div>
+                            )}
+                            
                             <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button 
                                     onClick={(e) => handleWishlistToggle(product, e)}
@@ -144,23 +130,30 @@ function BestSellingProducts() {
                             </div>
                         </div>
 
-                        {/* Product Info */}
+                   
                         <div className="space-y-0.5">
                             <h3 className=" text-black font-poppins  font-medium text-[10px]  leading-tight">
                                 {product.title}
                             </h3>
+                            
                             <div className="flex items-center gap-2">
-                                <p className="text-[#DB4444]  font-poppins font-medium text-[12px] ">
-                                    ${product.discountedPrice}
-                                </p>
-                                {product.originalPrice && (
-                                    <p className="text-gray-500 font-poppins text-[12px] line-through">
-                                        ${product.originalPrice}
+                                {product.hasOffer ? (
+                                    <>
+                                        <p className="text-[#DB4444] font-poppins font-medium text-[12px]">
+                                            ${product.discountedPrice}
+                                        </p>
+                                        <p className="text-gray-500 font-poppins text-[12px] line-through">
+                                            ${product.originalPrice}
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p className="text-[#DB4444] font-poppins font-medium text-[12px]">
+                                        ${product.price || product.originalPrice}
                                     </p>
                                 )}
                             </div>
                             
-                            {/* Rating */}
+                           
                             <div className="flex items-center gap-1">
                                 <div className="flex">
                                     {[...Array(5)].map((_, i) => {

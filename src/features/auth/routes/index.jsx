@@ -1,10 +1,10 @@
 
 import { lazy } from 'react';
+
 const Login = lazy(() => import('../pages/login'))
 const Signup = lazy(() => import('../pages/sign-up'))
 
 export const authRoutes = [
-
   {
     path: '/login',
     element: <Login />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useUserCart } from '../../../cart/hooks/useUserCart';
 import useCouponStore from '../../../cart/store/couponStore';
 import { toast } from 'react-toastify';
@@ -10,17 +11,8 @@ import nagadIcon from '../../../../assets/check out assets/image 33.svg';
 
 const Checkoutcomponent = () => {
   const { items, getTotalPrice, clearCart } = useUserCart();
-  const { 
-    appliedCoupon, 
-    couponCode, 
-    couponError, 
-    couponSuccess,
-    setCouponCode, 
-    applyCoupon, 
-    removeCoupon, 
-    calculateDiscount,
-    clearCouponMessages 
-  } = useCouponStore();
+  const { appliedCoupon, couponCode, couponError, couponSuccess,setCouponCode, applyCoupon, removeCoupon, 
+calculateDiscount, clearCouponMessages } = useCouponStore();
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -93,16 +85,20 @@ const Checkoutcomponent = () => {
   return (
     <div className="min-h-screen bg-white py-8">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Breadcrumb */}
+      
         <div className="mb-8">
           <nav className="text-sm">
             <span className="text-gray-500">Account</span>
             <span className="mx-2 text-gray-400">/</span>
             <span className="text-gray-500">My Account</span>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-500">Product</span>
+            <Link to="/products" className="text-gray-500 hover:text-red-600 transition-colors">
+              Products
+            </Link>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-500">View Cart</span>
+            <Link to="/cart" className="text-gray-500 hover:text-red-600 transition-colors">
+              View Cart
+            </Link>
             <span className="mx-2 text-gray-400">/</span>
             <span className="text-black font-medium">CheckOut</span>
           </nav>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { X, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useProductSearch } from "../../../features/products/hooks/useProductSearch";
+import { useQueryProductSearch } from "../../../features/products/services/queryProductSearch";
 import { useUserWishlist } from "../../../features/whislist/hooks/useUserWishlist";
 import { useUserCart } from "../../../features/cart/hooks/useUserCart";
 import { toast } from "react-toastify";
@@ -13,20 +13,17 @@ const SearchModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Use useDebounce hook for search query
   const debouncedQuery = useDebounce(searchQuery, 300);
 
-  // Update URL when debounced search query changes
+
   useEffect(() => {
     
     if (debouncedQuery && debouncedQuery.trim() !== '') {
-      // Update URL with search query without navigation
       const newParams = new URLSearchParams(location.search);
       newParams.set('search', debouncedQuery.trim());
       const newUrl = `${location.pathname}?${newParams.toString()}`;
       window.history.replaceState({}, '', newUrl);
     } else if (debouncedQuery === '') {
-      // If search is cleared, remove search param from URL
       const newParams = new URLSearchParams(location.search);
       newParams.delete('search');
       const newUrl = newParams.toString() ? `${location.pathname}?${newParams.toString()}` : location.pathname;
@@ -34,22 +31,13 @@ const SearchModal = ({ isOpen, onClose }) => {
     }
   }, [debouncedQuery, location]);
   
-  // React Query hook for product search
-  const { 
-    data: searchData, 
-    isLoading: loading, 
-    error, 
-    refetch: refetchSearch 
-  } = useProductSearch(debouncedQuery, 6); // Limit to 6 products for modal
   
-  // Extract data from query result
+  const {data: searchData,isLoading: loading, error, refetch: refetchSearch} = useQueryProductSearch(debouncedQuery, 6); 
   const products = searchData?.products || [];
   
-  // Wishlist store
   const { addToWishlist, removeFromWishlist, isInWishlist } = useUserWishlist();
   const { addToCart, removeFromCart, items } = useUserCart();
   
-  // Handle wishlist toggle
   const handleWishlistToggle = (product, e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -63,12 +51,10 @@ const SearchModal = ({ isOpen, onClose }) => {
     }
   };
   
-  // Check if product is in cart
   const isInCart = (productId) => {
     return items.some(item => item.id === productId);
   };
-  
-  // Handle cart toggle
+ 
   const handleCartToggle = (product, e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -82,13 +68,11 @@ const SearchModal = ({ isOpen, onClose }) => {
     }
   };
   
-  // Handle product click
   const handleProductClick = (productId) => {
     navigate(`/products/${productId}`);
     onClose();
   };
-  
-  // Handle search submit
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -97,12 +81,10 @@ const SearchModal = ({ isOpen, onClose }) => {
     }
   };
   
-  // Handle retry
   const handleRetry = () => {
     refetchSearch();
   };
   
-  // Close modal on escape key and handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -121,21 +103,18 @@ const SearchModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen, onClose]);
 
-  // Clear search query when modal closes
+  
   useEffect(() => {
     if (!isOpen) {
       setSearchQuery("");
     }
   }, [isOpen]);
 
-  // Global keyboard shortcut to open search modal
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
-      
-      // Check if user pressed "/" key and not typing in an input field
+
       if (e.key === '/' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT') {
         e.preventDefault();
-        // Dispatch custom event to open search modal
         document.dispatchEvent(new CustomEvent('openSearchModal'));
       }
     };
@@ -157,7 +136,6 @@ const SearchModal = ({ isOpen, onClose }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {/* Backdrop */}
           <motion.div 
             className="fixed inset-0 bg-black bg-opacity-50"
             initial={{ opacity: 0 }}
@@ -166,8 +144,7 @@ const SearchModal = ({ isOpen, onClose }) => {
             transition={{ duration: 0.3 }}
             onClick={onClose}
           />
-      
-          {/* Modal */}
+    
           <div className="relative min-h-screen flex items-start justify-center p-4 pt-32">
             <motion.div 
               className="relative bg-white rounded-2xl shadow-2xl w-full max-w-xl max-h-[60vh] overflow-hidden border border-gray-100"
@@ -182,7 +159,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                 damping: 30
               }}
             >
-              {/* Header */}
+           
               <motion.div 
                 className="flex items-center justify-between p-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50"
                 initial={{ opacity: 0, y: -20 }}
@@ -235,7 +212,6 @@ const SearchModal = ({ isOpen, onClose }) => {
                 </motion.button>
               </motion.div>
           
-              {/* Search Input */}
               <motion.div 
                 className="p-4 bg-gray-50"
                 initial={{ opacity: 0, y: 20 }}
@@ -262,27 +238,18 @@ const SearchModal = ({ isOpen, onClose }) => {
                       whileFocus={{ scale: 1.02 }}
                       transition={{ duration: 0.2 }}
                     />
-                    <motion.div
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2"
-                      animate={{ 
-                        scale: searchQuery ? [1, 1.2, 1] : 1,
-                        rotate: searchQuery ? [0, 10, 0] : 0
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Search className="h-4 w-4 text-gray-400" />
-                    </motion.div>
+                   
                     <motion.button
                       type="submit"
                       className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1.5 hover:bg-blue-50 rounded-lg transition-colors"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      
                       whileTap={{ scale: 0.9 }}
                       transition={{ duration: 0.2 }}
                     >
                       <Search className="h-3 w-3 text-blue-500" />
                     </motion.button>
                   </motion.div>
-                  {/* Keyboard shortcuts hint */}
+               
                   <motion.div 
                     className="flex items-center justify-between mt-2 text-xs text-gray-500"
                     initial={{ opacity: 0, y: 10 }}
@@ -324,7 +291,6 @@ const SearchModal = ({ isOpen, onClose }) => {
                 </form>
               </motion.div>
           
-              {/* Content */}
               <motion.div 
                 className="p-4 max-h-64 overflow-y-auto bg-white"
                 initial={{ opacity: 0, y: 20 }}
@@ -500,7 +466,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                           }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          {/* Product Image */}
+                        
                           <motion.div 
                             className="flex-shrink-0 w-12 h-12 bg-gray-100 rounded-lg overflow-hidden shadow-sm"
                             whileHover={{ scale: 1.1, rotate: 5 }}
@@ -518,7 +484,6 @@ const SearchModal = ({ isOpen, onClose }) => {
                             />
                           </motion.div>
                       
-                          {/* Product Info */}
                           <motion.div 
                             className="flex-1 min-w-0"
                             initial={{ opacity: 0, x: 20 }}
@@ -574,7 +539,6 @@ const SearchModal = ({ isOpen, onClose }) => {
                             </motion.div>
                           </motion.div>
                       
-                          {/* Actions */}
                           <motion.div 
                             className="flex items-center space-x-0.5"
                             initial={{ opacity: 0, x: 20 }}

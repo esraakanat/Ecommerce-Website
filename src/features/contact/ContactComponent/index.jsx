@@ -21,16 +21,14 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Show success toast
+   
     setShowToast(true);
     
-    // Hide toast after 3 seconds
     setTimeout(() => {
       setShowToast(false);
     }, 3000);
     
-    // Reset form
+    
     setFormData({
       name: "",
       email: "",
@@ -40,7 +38,7 @@ const Contact = () => {
   };
   return (
     <div className="min-h-screen bg-white relative">
-      {/* Success Toast */}
+
       {showToast && (
         <div className="fixed top-20 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-pulse">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -49,19 +47,17 @@ const Contact = () => {
           <span className="font-medium">Message sent successfully!</span>
         </div>
       )}
-      {/* Breadcrumb */}
+   
       <div className=" ml-8 lg:ml-48 py-8  ">
         <p className="text-gray-900 text-sm">
           <Link to="/" className="text-gray-500 transition-colors">Home</Link> /contact
         </p>
       </div>
 
-      {/* Content */}
       <div className="mx-auto max-w-[1100px] px-6 py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Left */}
+         
           <div className="lg:col-span-1 rounded-lg border border-gray-200 bg-white p-7 shadow-sm">
-            {/* Call */}
             <div>
               <div className="mb-4 flex items-center">
                 <div className="mr-3 flex h-11 w-11 items-center justify-center rounded-full bg-[#DB4444]">
@@ -82,8 +78,6 @@ const Contact = () => {
             </div>
 
             <div className="my-6 border-t border-gray-200" />
-
-            {/* Write */}
             <div>
               <div className="mb-4 flex items-center">
                 <div className="mr-3 flex h-11 w-11 items-center justify-center rounded-full bg-[#DB4444]">
@@ -106,7 +100,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right */}
           <div className="lg:col-span-2 rounded-lg border border-gray-200 bg-white p-7 shadow-sm">
             <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

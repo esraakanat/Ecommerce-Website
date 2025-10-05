@@ -14,12 +14,10 @@ function Wishlistcomponent() {
         removeFromWishlist(productId);
     };
 
-    // Check if product is in cart
     const isInCart = (productId) => {
         return items.some(item => item.id === productId);
     };
 
-    // Handle add to cart
     const handleAddToCart = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -28,7 +26,6 @@ function Wishlistcomponent() {
         toast.success(`Product added to cart successfully!`);
     };
 
-    // Handle remove from cart
     const handleRemoveFromCart = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -39,7 +36,6 @@ function Wishlistcomponent() {
 
     return (
         <div className="px-4 py-8 max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="flex items-center justify-between mb-12 ml-12">
                     <p className="text-black font-poppins font-base text-medium">
                         wishlist  ({wishlist.length})  
@@ -48,7 +44,6 @@ function Wishlistcomponent() {
                     {wishlist.length > 0 && (
                         <button 
                             onClick={() => {
-                                // Move all items to cart
                                 wishlist.forEach(product => {
                                     if (!isInCart(product.id)) {
                                         addToCart(product, 1);
@@ -63,7 +58,6 @@ function Wishlistcomponent() {
                     )}
                 </div>
 
-                {/* Wishlist Items */}
                 {wishlist.length === 0 ? (
                     <div className="text-center py-20">
                         <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
@@ -88,7 +82,6 @@ function Wishlistcomponent() {
                                 to={`/products/${product.id}`} 
                                 className="bg-white  rounded-lg p-1 relative group w-[75%] mx-auto block hover:shadow-lg transition-shadow"
                             >
-                                {/* Product Image Container */}
                                 <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
                                     <div 
                                         className="w-full h-full flex items-center justify-center"
@@ -102,7 +95,7 @@ function Wishlistcomponent() {
                                     >
                                     </div>
                                     
-                                    {/* Add to Cart / Remove Button - Inside Image */}
+                                
                                     <div className="absolute bottom-0 left-0 right-0">
                                         {isInCart(product.id) ? (
                                             <button 
@@ -121,7 +114,6 @@ function Wishlistcomponent() {
                                         )}
                                     </div>
                                     
-                                    {/* Remove from Wishlist Button */}
                                     <button
                                         onClick={(e) => handleRemoveFromWishlist(product.id, e)}
                                         className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-50 transition-colors group"
@@ -133,7 +125,6 @@ function Wishlistcomponent() {
                                     </button>
                                 </div>
 
-                                {/* Product Info */}
                                 <div className="space-y-1">
                                     <h3 className=" text-black font-poppins  font-medium text-[10px]  leading-tight">
                                         {product.title}

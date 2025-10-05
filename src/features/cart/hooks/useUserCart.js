@@ -8,14 +8,11 @@ export const useUserCart = () => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      // User is logged in - load their cart and migrate guest cart if exists
-      cartStore.loadUserCart();
-      cartStore.migrateGuestToUser();
+      cartStore.loadUserCart(); // للمستخدم المصادق
     } else {
-      // User is guest - load guest cart
-      cartStore.loadUserCart();
+      cartStore.loadUserCart(); // للضيف
     }
-  }, [isAuthenticated, user?.id]); // Only depend on user.id to avoid infinite loops
+  }, [isAuthenticated, user?.id]);
 
   return cartStore;
 };

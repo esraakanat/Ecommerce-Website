@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useHeroSection } from "../../hooks/useHeroSection";
+import { usequeryHeroSection } from "../../services/queryHeroSection";
 import appleLogo from "../../../../assets/home-assets/1200px-Apple_gray_logo 1.svg";
 import heroImage from "../../../../assets/home-assets/hero.png";
 import arrowIcon from "../../../../assets/home-assets/Vector (3).svg";
@@ -9,23 +9,14 @@ import arrowIcon from "../../../../assets/home-assets/Vector (3).svg";
 const HeroSection = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
-  // React Query hook for hero section data
-  const { 
-    data: heroData, 
-    isLoading: loading, 
-    error, 
-    refetch: refetchHero 
-  } = useHeroSection();
+  const { data: heroData, isLoading: loading, error, refetch: refetchHero } = usequeryHeroSection();
   
-  // Extract categories from query result
   const categories = heroData?.categories || [];
 
-  // Handle retry for failed requests
   const handleRetry = () => {
     refetchHero();
   };
 
-  // Error state
   if (error) {
     return (
       <div className="flex flex-col md:flex-row w-full bg-white relative">
@@ -53,7 +44,7 @@ const HeroSection = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      {/* === Overlay when Sidebar Open === */}
+      
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -61,7 +52,7 @@ const HeroSection = () => {
         ></div>
       )}
 
-      {/* === Sidebar Drawer for Mobile === */}
+   
       <motion.div
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg border-r border-gray-200 z-50
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
@@ -69,7 +60,7 @@ const HeroSection = () => {
         animate={{ x: sidebarOpen ? 0 : -256 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        {/* زر إغلاق */}
+       
         <button
           className="absolute top-4 right-4 text-gray-600 hover:text-black"
           onClick={() => setSidebarOpen(false)}
@@ -77,9 +68,8 @@ const HeroSection = () => {
           ✕
         </button>
 
-        {/* عناصر القائمة */}
         <nav className="mt-12 space-y-1 px-4">
-          {/* All Products */}
+      
           <Link
             to="/products"
             className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded cursor-pointer"
@@ -101,7 +91,6 @@ const HeroSection = () => {
             </svg>
           </Link>
           
-          {/* Categories from API */}
           {categories.map((cat) => (
             <Link
               key={cat.id}
@@ -130,7 +119,6 @@ const HeroSection = () => {
         </nav>
       </motion.div>
 
-      {/* === Sidebar (Desktop Only) === */}
       <motion.div 
         className="hidden md:block w-64 bg-white border-r border-gray-200 pl-16 pt-6"
         initial={{ x: -100, opacity: 0 }}
@@ -138,7 +126,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
       >
         <nav className="space-y-1">
-          {/* All Products */}
+          
           <Link
             to="/products"
             className="flex items-center justify-between py-2 hover:bg-gray-50 px-3 rounded cursor-pointer"
@@ -159,7 +147,6 @@ const HeroSection = () => {
             </svg>
           </Link>
           
-          {/* Categories from API */}
           {categories.map((cat) => (
             <Link
               key={cat.id}
@@ -188,18 +175,18 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div 
-        className="relative bg-black  sm:mt-6 md:mt-12 mx-4  sm:mx-8 md:mx-12 lg:mr-12 xl:mr-24
+        className="relative bg-black mt-10 md:mt-12 mx-4 sm:mx-8 md:mx-12 lg:mr-12 xl:mr-24
   rounded-sm overflow-hidden w-full  
   min-h-[150px] sm:min-h-[320px] md:min-h-[280px] lg:min-h-[320px] xl:min-h-[380px] 
-  flex flex-col sm:flex-row items-center px-6 sm:px-8 md:px-8"
+  flex flex-row items-center px-6 sm:px-8 md:px-8"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
       >
 
-  {/* النصوص */}
+ 
   <motion.div 
-    className="sm:basis-[40%] xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 sm:pr-6 lg:ml-8"
+    className="basis-[40%] sm:basis-[40%] lg:basis-1/2 xl:basis-1/2 flex flex-col justify-center items-start text-left py-6 sm:py-0 pr-6 sm:pr-6 lg:pr-6 lg:ml-8"
     initial={{ x: -50, opacity: 0 }}
     animate={{ x: 0, opacity: 1 }}
     transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
@@ -219,7 +206,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
       />
       <motion.span 
-        className="text-white text-xs sm:text-sm md:text-base font-poppins tracking-wider"
+        className="text-white text-[10px] sm:text-xs md:text-sm lg:text-base font-poppins tracking-wider"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
@@ -229,7 +216,7 @@ const HeroSection = () => {
     </motion.div>
 
     <motion.h2 
-      className="text-white lg:py-4 text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-poppins tracking-wider"
+      className="text-white lg:py-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-poppins tracking-wider"
       initial={{ y: 30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 1.4 }}
@@ -258,7 +245,7 @@ const HeroSection = () => {
     >
       <Link
         to="/products"
-        className="mt-4 inline-flex items-center text-[#FAFAFA] text-md sm:text-base font-poppins underline hover:text-gray-300 transition-colors tracking-wide underline-offset-8"
+        className="mt-4 inline-flex items-center text-[#FAFAFA] text-sm sm:text-md md:text-base font-poppins underline hover:text-gray-300 transition-colors tracking-wide underline-offset-8"
       >
         Shop Now
         <motion.img
@@ -272,9 +259,8 @@ const HeroSection = () => {
     </motion.div>
   </motion.div>
 
-  {/* صورة الآيفون */}
   <motion.div 
-    className="sm:basis-[60%] xl:basis-1/2 flex justify-center items-center w-full mt-6 sm:mt-0"
+    className="basis-[60%] sm:basis-[60%] lg:basis-1/2 xl:basis-1/2 flex justify-center items-center w-full mt-6 sm:mt-0"
     initial={{ x: 50, opacity: 0, scale: 0.8 }}
     animate={{ x: 0, opacity: 1, scale: 1 }}
     transition={{ duration: 1.0, ease: "easeOut", delay: 0.8 }}
@@ -294,7 +280,6 @@ const HeroSection = () => {
     />
   </motion.div>
 
-  {/* نقاط التبديل */}
   <motion.div 
     className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3"
     initial={{ y: 20, opacity: 0 }}

@@ -1,32 +1,22 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useJustForYouProducts } from "../../hooks/useJustForYouProducts";
+import { useQueryJustForYouProducts } from "../../services/queryJustForYouProducts";
 import { useUserCart } from "../../../cart/hooks/useUserCart";
 import { toast } from "react-toastify";
 
 function JustForYou() {
     const navigate = useNavigate();
+  
+  const { data: productsData, isLoading: loading, error, refetch: refetchProducts } = useQueryJustForYouProducts();
     
-    // React Query hook for fetching products
-    const { 
-        data: productsData, 
-        isLoading: loading, 
-        error, 
-        refetch: refetchProducts 
-    } = useJustForYouProducts();
-    
-    // Cart store
     const { addToCart, removeFromCart, items } = useUserCart();
-    
-    // Extract products from query result
+   
     const products = productsData?.products || [];
 
-    // Check if product is in cart
     const isInCart = (productId) => {
         return items.some(item => item.id === productId);
     };
 
-    // Handle add to cart
     const handleAddToCart = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -35,7 +25,6 @@ function JustForYou() {
         toast.success(`Product added to cart successfully!`);
     };
 
-    // Handle remove from cart
     const handleRemoveFromCart = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -44,7 +33,6 @@ function JustForYou() {
         toast.success(`Product removed from cart!`);
     };
 
-    // Handle error state
     if (error) {
         return (
             <div className="px-4 py-8 max-w-7xl mx-auto">
@@ -102,7 +90,6 @@ function JustForYou() {
 
     return (
         <div className="px-4 py-8 max-w-7xl mx-auto">
-            {/* Header */}
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3 ">
                     <div className="w-3 h-8  ml-12 rounded-sm bg-[#DB4444]"></div>
@@ -119,7 +106,7 @@ function JustForYou() {
                 </div>
             </div>
 
-            {/* Products Grid */}
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {products.map((product, index) => (
                     <Link 
@@ -140,8 +127,7 @@ function JustForYou() {
                                 }}
                             >
                             </div>
-                            
-                            {/* Add to Cart / Remove Button - Inside Image */}
+                    
                             <div className="absolute bottom-0 left-0 right-0">
                                 {isInCart(product.id) ? (
                                     <button 
@@ -159,8 +145,7 @@ function JustForYou() {
                                     </button>
                                 )}
                             </div>
-                            
-                            {/* Eye Icon */}
+                    
                             <div className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-50 transition-colors group opacity-0 group-hover:opacity-100">
                                 <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -169,14 +154,12 @@ function JustForYou() {
                             </div>
                         </div>
 
-                        {/* Product Info */}
                         <div className="space-y-1">
                             <h3 className=" text-black font-poppins  font-medium text-[10px]  leading-tight">
                                 {product.title}
                             </h3>
                             <p className="text-[#DB4444]  font-poppins font-medium text-[12px] ">${product.price}</p>
                             
-                            {/* Rating */}
                             <div className="flex items-center gap-1">
                                 <div className="flex">
                                     {[...Array(5)].map((_, i) => (

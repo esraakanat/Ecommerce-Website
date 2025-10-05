@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { loginSchema, loginDefaultValues } from './config';
 import { loginUser } from '../../services/api';
 import useAuthStore from '../../store';
-import { getNextUrl, getSafeRedirectUrl } from '../../../../shared/utilities/authRedirect';
+import { getNextUrl, getSafeRedirectUrl } from '../../../../shared/utils/authRedirect';
 import loginImage from '../../../../assets/login assets/dl.beatsnoop 1.png';
 
 function Login() {
@@ -18,11 +18,7 @@ function Login() {
     // Get the next parameter from URL and validate it
     const nextUrl = getSafeRedirectUrl(getNextUrl(searchParams));
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting }
-    } = useForm({
+    const {register,handleSubmit,formState: { errors, isSubmitting }} = useForm({
         resolver: yupResolver(loginSchema),
         defaultValues: loginDefaultValues
     });
@@ -31,14 +27,10 @@ function Login() {
         try {
             setApiError('');
             
-            // Call login API
             const result = await loginUser(data);
             
             if (result.success) {
-                // Store user data and token
                 login(result.user, result.token);
-                
-                // Redirect to the intended page or home page
                 navigate(nextUrl);
             }
         } catch (error) {
@@ -54,14 +46,12 @@ function Login() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            {/* Main Content */}
             <motion.div 
                 className="flex flex-col lg:flex-row min-h-screen lg:min-h-[calc(80vh-35px)]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
             >
-                {/* Left Side - Image Section */}
                 <motion.div 
                     className="w-full lg:w-[45%] mt-0 lg:mt-12 rounded-none md:rounded-md flex items-center justify-center relative overflow-hidden h-80 sm:h-96 md:h-[500px] lg:h-auto lg:max-h-[500px]"
                     initial={{ opacity: 0, x: -50 }}
@@ -74,7 +64,6 @@ function Login() {
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        {/* Original Image */}
                         <motion.img 
                             src={loginImage} 
                             alt="Shopping illustration" 
@@ -86,8 +75,6 @@ function Login() {
                         />
                     </motion.div>
                 </motion.div>
-                
-                {/* Right Side - Form Section */}
                 <motion.div 
                     className="w-full lg:w-[55%] bg-white flex items-center justify-center p-6 sm:p-8 lg:p-12"
                     initial={{ opacity: 0, x: 50 }}
@@ -100,7 +87,6 @@ function Login() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
                     >
-                        {/* Header */}
                         <motion.div 
                             className="mb-6 lg:mb-8"
                             initial={{ opacity: 0, y: 20 }}
@@ -125,7 +111,6 @@ function Login() {
                             </motion.p>
                         </motion.div>
 
-                        {/* Error Message */}
                         {apiError && (
                             <motion.div 
                                 className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md"
@@ -161,7 +146,6 @@ function Login() {
                             </motion.div>
                         )}
 
-                        {/* Form */}
                         <motion.form 
                             onSubmit={handleSubmit(onSubmit)} 
                             className="space-y-5 sm:space-y-6"
@@ -170,7 +154,6 @@ function Login() {
                             transition={{ duration: 0.6, delay: 0.8 }}
                         >
                            
-                            {/* Email Field */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -198,7 +181,6 @@ function Login() {
                                 )}
                             </motion.div>
 
-                            {/* Password Field */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -226,7 +208,6 @@ function Login() {
                                 )}
                             </motion.div>
 
-                            {/* Log In Button and Forget Password Link */}
                             <motion.div 
                                 className="flex items-center justify-between"
                                 initial={{ opacity: 0, y: 20 }}

@@ -29,16 +29,6 @@ const useAuthStore = create(
         });
         userStorage.set(token);
         
-        // Trigger cart and wishlist migration after a short delay
-        setTimeout(() => {
-          // Import stores dynamically to avoid circular dependencies
-          import('../../cart/store').then(({ default: useCartStore }) => {
-            useCartStore.getState().migrateGuestToUser();
-          });
-          import('../../whislist/store').then(({ default: useWishlistStore }) => {
-            useWishlistStore.getState().migrateGuestToUser();
-          });
-        }, 100);
       },
       
       // Login
@@ -50,16 +40,6 @@ const useAuthStore = create(
         });
         userStorage.set(token);
         
-        // Trigger cart and wishlist migration after a short delay
-        setTimeout(() => {
-          // Import stores dynamically to avoid circular dependencies
-          import('../../cart/store').then(({ default: useCartStore }) => {
-            useCartStore.getState().migrateGuestToUser();
-          });
-          import('../../whislist/store').then(({ default: useWishlistStore }) => {
-            useWishlistStore.getState().migrateGuestToUser();
-          });
-        }, 100);
       },
       
       // Logout
@@ -78,7 +58,7 @@ const useAuthStore = create(
         // البيانات تبقى محفوظة في localStorage حسب userId
       },
       
-      // Set user
+      
       setUser: (userData) => {
         set({ user: userData });
       }

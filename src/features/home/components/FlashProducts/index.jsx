@@ -4,37 +4,22 @@ import { useUserWishlist } from "../../../whislist/hooks/useUserWishlist";
 import { useUserCart } from "../../../cart/hooks/useUserCart";
 import ProductListSkeleton from "../../../../shared/components/loading/ProductListSkeleton";
 import ProductsErrorState from "../../../../shared/components/error/ProductsErrorState";
-import EmptyProducts from "../../../../shared/components/empty/EmptyProducts";
-import { useFlashProducts } from "../../hooks/useFlashProducts";
+import { useQueryFlash } from "../../services/queryFlash";
+import { getProductImage, handleImageError } from "../../../../shared/utils/imageUtils";
 import { toast } from "react-toastify";
 function FlashProducts() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [timeLeft, setTimeLeft] = useState({
-        days: 3,
-        hours: 23,
-        minutes: 19,
-        seconds: 56
-    });
+    const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 23, minutes: 19,seconds: 56});
     const navigate = useNavigate();
     
-    // React Query hook for flash products
-    const { 
-        data: flashProductsData, 
-        isLoading: loading, 
-        error, 
-        refetch: refetchFlashProducts 
-    } = useFlashProducts();
+    const { data: flashProductsData, isLoading: loading, error, refetch: refetchFlashProducts } = useQueryFlash();
     
-    // Extract products from query result
     const products = flashProductsData?.products || [];
     
-    // Wishlist store
     const { addToWishlist, removeFromWishlist, isInWishlist } = useUserWishlist();
-    
-    // Cart store
+  
     const { addToCart, removeFromCart, items } = useUserCart();
 
-    // Handle wishlist toggle
     const handleWishlistToggle = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -46,40 +31,27 @@ function FlashProducts() {
         }
     };
 
-    // Check if product is in cart
     const isInCart = (productId) => {
         return items.some(item => item.id === productId);
     };
 
-    // Handle cart toggle
     const handleCartToggle = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
         
         if (isInCart(product.id)) {
             removeFromCart(product.id);
-            toast.success('Product removed from cart!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
-        } else {
+        toast.success('Product removed from cart!', {  position: "top-right",autoClose: 3000, hideProgressBar: false,
+          closeOnClick: true,pauseOnHover: true,draggable: true });
+        } 
+        else {
             addToCart(product);
-            toast.success('Product added to cart successfully!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            toast.success('Product added to cart successfully!', {position: "top-right",  autoClose: 3000,hideProgressBar: false,
+             closeOnClick: true, pauseOnHover: true,draggable: true,});
         }
     };
 
-    // Countdown timer
+
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft(prev => {
@@ -100,13 +72,11 @@ function FlashProducts() {
         return () => clearInterval(timer);
     }, []);
 
-    // Function to retry loading products
+  
     const handleRetry = () => {
         refetchFlashProducts();
     };
 
-
-    // Navigation functions
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % Math.ceil(products.length / 4));
     };
@@ -115,7 +85,7 @@ function FlashProducts() {
         setCurrentSlide((prev) => (prev - 1 + Math.ceil(products.length / 4)) % Math.ceil(products.length / 4));
     };
 
-    // Get current slide products
+
     const getCurrentSlideProducts = () => {
         const startIndex = currentSlide * 4;
         return products.slice(startIndex, startIndex + 4);
@@ -141,97 +111,90 @@ function FlashProducts() {
     }
 
     return (
-        <div className="px-8 py-8 max-w-8xl mx-auto">
-            {/* Header */}
+        <div className="px-4 pl-8 pr-4 py-8 max-w-8xl mx-auto">
+         
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
                     <div>
-                        {/* Today's Label */}
-                        <div className="flex items-center gap-2 ml-10 mb-4">
+                   
+                        <div className="flex items-center gap-2 ml-4  lg:ml-8  mb-4">
                             <div className="w-4 h-8 rounded-sm bg-[#DB4444]"></div>
                             <h2 className="text-sm font-semibold text-[#DB4444] font-inter ">Today's</h2>
                         </div>
-                        {/* Flash Sales Title */}
-                        <h1 className="text-2xl font-bold ml-10 text-black font-inter tracking-wider">Flash Sales</h1>
+                     
+                        <h1 className="text-lg sm:text-2xl font-bold ml-4 lg:ml-8 xl:ml-8 text-black font-inter tracking-wider">Flash Sales</h1>
                     </div>
                     
-                    {/* Countdown Timer */}
-                    <div className="flex items-center gap-2 mt-12 md:ml-8 ">
+                   
+                    <div className="flex items-center gap-1 sm:gap-2 mt-12 ml-4 md:ml-8 lg:ml-16 xl:ml-48">
                         <div className="text-center">
-                        <div className="text-xs text-black">Days</div>
-                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black tracking-wider">{timeLeft.days.toString().padStart(2, '0')}</div>
+                        <div className="text-[10px] sm:text-xs text-black">Days</div>
+                            <div className="text-[12px] sm:text-[14px] md:text-[26px] font-inter font-bold text-black tracking-wider">{timeLeft.days.toString().padStart(2, '0')}</div>
                            
                         </div>
-                        <div className="text-[#DB4444] text-lg font-bold">:</div>
+                        <div className="text-[#DB4444] text-sm sm:text-lg font-bold">:</div>
                         <div className="text-center">
-                        <div className="text-xs text-black">Hours</div>
-                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                        <div className="text-[10px] sm:text-xs text-black">Hours</div>
+                            <div className="text-[12px] sm:text-[14px] md:text-[26px] font-inter font-bold text-black">{timeLeft.hours.toString().padStart(2, '0')}</div>
                           
                         </div>
-                        <div className="text-[#DB4444] text-lg font-bold">:</div>
+                        <div className="text-[#DB4444] text-sm sm:text-lg font-bold">:</div>
                         <div className="text-center">
-                        <div className="text-xs text-black">Minutes</div>
-                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                        <div className="text-[10px] sm:text-xs text-black">Minutes</div>
+                            <div className="text-[12px] sm:text-[14px] md:text-[26px] font-inter font-bold text-black">{timeLeft.minutes.toString().padStart(2, '0')}</div>
                      
                         </div>
-                        <div className="text-[#DB4444] text-lg font-bold">:</div>
+                        <div className="text-[#DB4444] text-sm sm:text-lg font-bold">:</div>
                         <div className="text-center">
-                        <div className="text-xs text-black">Seconds</div>
-                            <div className="md:text-[26px] text-[14px] font-inter font-bold text-black">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+                        <div className="text-[10px] sm:text-xs text-black">Seconds</div>
+                            <div className="text-[12px] sm:text-[14px] md:text-[26px] font-inter font-bold text-black">{timeLeft.seconds.toString().padStart(2, '0')}</div>
                         
                         </div>
                     </div>
                 </div>
                 
-                {/* Navigation Arrows */}
-                <div className="flex gap-2  md:mr-10 mt-16">
+            
+                <div className="flex gap-2  md:mr-4 mt-16">
                     <button 
                         onClick={prevSlide}
-                        className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+                        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
                     >
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
                     <button 
                         onClick={nextSlide}
-                        className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+                        className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
                     >
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                 </div>
             </div>
 
-            {/* Products Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-0 mb-8">
                 {getCurrentSlideProducts().map((product, index) => (
                     <Link 
                         key={product.id} 
                         to={`/products/${product.id}`} 
-                        className="bg-white  rounded-lg p-1 relative group w-[75%] mx-auto block hover:shadow-lg transition-shadow"
+                        className="bg-white  rounded-lg p-1 relative group w-[90%] mx-auto block hover:shadow-lg transition-shadow"
                     >
-                        {/* Product Image Container */}
-                        <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
-                            <div 
-                                className="w-full h-full flex items-center justify-center"
-                                style={{ 
-                                    backgroundColor: '#F5F5F5',
-                                    backgroundImage: `url(${product.images?.[0]})`,
-                                    backgroundSize: 'contain',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: 'center'
-                                }}
-                            >
-                            </div>
+                        <div className="relative mb-2 aspect-square mx-auto rounded-sm overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
+                            <img
+                                src={getProductImage(product)}
+                                alt={product.title}
+                                className="w-full h-full object-cover"
+                                onError={handleImageError}
+                            />
                             
-                            {/* Discount Badge */}
+                            
                             <div className="absolute top-2 left-2 bg-[#DB4444] text-white px-2 py-1 rounded text-xs font-poppins font-sm">
                                 -{product.discountPercent}%
                             </div>
                             
-                            {/* Action Icons */}
+                       
                             <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button 
                                     onClick={(e) => handleWishlistToggle(product, e)}
@@ -259,7 +222,6 @@ function FlashProducts() {
                                 </button>
                             </div>
                             
-                            {/* Add to Cart Button */}
                             <div className="absolute bottom-0 left-0 right-0">
                                 <button 
                                     onClick={(e) => handleCartToggle(product, e)}
@@ -274,7 +236,7 @@ function FlashProducts() {
                             </div>
                         </div>
 
-                        {/* Product Info */}
+                      
                         <div className="space-y-0.5">
                             <h3 className=" text-black font-poppins  font-medium text-[10px]  leading-tight">
                                 {product.title}
@@ -288,7 +250,7 @@ function FlashProducts() {
                                 </p>
                             </div>
                             
-                            {/* Rating */}
+                         
                             <div className="flex items-center gap-1">
                                 <div className="flex">
                                     {[...Array(5)].map((_, i) => {
@@ -308,12 +270,11 @@ function FlashProducts() {
                 ))}
             </div>
 
-            {/* View All Products Button */}
+        
             <div className="text-center">
                 <button 
                     onClick={() => {
                         navigate('/products');
-                        // Scroll to top when navigating to products page
                         window.scrollTo({
                             top: 0,
                             left: 0,

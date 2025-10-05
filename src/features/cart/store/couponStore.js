@@ -51,7 +51,6 @@ const useCouponStore = create(
             couponSuccess: true 
           });
           
-          // Clear success message after 3 seconds
           setTimeout(() => {
             set({ couponSuccess: false });
           }, 3000);
@@ -82,7 +81,6 @@ const useCouponStore = create(
         });
       },
 
-      // Calculate discount amount
       calculateDiscount: (subtotal) => {
         const { appliedCoupon } = get();
         
@@ -95,7 +93,6 @@ const useCouponStore = create(
         }
       },
 
-      // Get available coupon codes for testing
       getAvailableCoupons: () => {
         return Object.keys(COUPON_CODES).map(code => ({
           code,
@@ -103,22 +100,21 @@ const useCouponStore = create(
         }));
       },
 
-      // Clear coupon only when browser is closed or page is refreshed
       clearCouponOnBrowserClose: () => {
-        // Only clear when browser is actually closed, not when navigating
+      
         window.addEventListener('beforeunload', () => {
-          // Only clear if it's a page refresh or browser close
-          if (performance.navigation.type === 1) { // Page refresh
+        
+          if (performance.navigation.type === 1) {
             removeCoupon();
           }
         });
       }
     }),
     {
-      name: 'coupon-storage', // localStorage key
+      name: 'coupon-storage', 
       partialize: (state) => ({ 
         appliedCoupon: state.appliedCoupon 
-      }), // Only persist appliedCoupon
+      }), 
     }
   )
 );

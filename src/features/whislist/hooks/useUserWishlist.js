@@ -8,14 +8,10 @@ export const useUserWishlist = () => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      // User is logged in - load their wishlist and migrate guest wishlist if exists
-      wishlistStore.loadUserWishlist();
-      wishlistStore.migrateGuestToUser();
+      wishlistStore.loadUserWishlist(); // للمستخدم المصادق
     } else {
-      // User is guest - load guest wishlist
-      wishlistStore.loadUserWishlist();
+      wishlistStore.loadUserWishlist(); // للضيف
     }
-  }, [isAuthenticated, user?.id]); // Only depend on user.id to avoid infinite loops
-
+  }, [isAuthenticated, user?.id]); 
   return wishlistStore;
 };

@@ -4,8 +4,7 @@ import { useUserWishlist } from "../../../whislist/hooks/useUserWishlist";
 import { useUserCart } from "../../../cart/hooks/useUserCart";
 import ProductListSkeleton from "../../../../shared/components/loading/ProductListSkeleton";
 import ProductsErrorState from "../../../../shared/components/error/ProductsErrorState";
-import EmptyProducts from "../../../../shared/components/empty/EmptyProducts";
-import { useExploreProducts } from "../../hooks/useExploreProducts";
+import { useQueryExplore } from "../../services/queryExplore";
 import { getProductImage, handleImageError } from "../../../../shared/utils/imageUtils";
 import { toast } from "react-toastify";
 
@@ -13,25 +12,15 @@ function ExploreOurProducts() {
     const [currentPage, setCurrentPage] = useState(0);
     const navigate = useNavigate();
     
-    // React Query hook for explore products
-    const { 
-        data: exploreData, 
-        isLoading: loading, 
-        error, 
-        refetch: refetchExplore 
-    } = useExploreProducts(currentPage);
+   const { data: exploreData,isLoading: loading, error, refetch: refetchExplore} = useQueryExplore(currentPage);
     
-    // Extract products from query result
     const products = exploreData?.products || [];
     const hasMore = exploreData?.hasMore || false;
     
-    // Wishlist store
     const { addToWishlist, removeFromWishlist, isInWishlist } = useUserWishlist();
     
-    // Cart store
     const { addToCart, removeFromCart, items } = useUserCart();
 
-    // Handle wishlist toggle
     const handleWishlistToggle = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -43,45 +32,30 @@ function ExploreOurProducts() {
         }
     };
 
-    // Check if product is in cart
     const isInCart = (productId) => {
         return items.some(item => item.id === productId);
     };
 
-    // Handle cart toggle
     const handleCartToggle = (product, e) => {
         e.preventDefault();
         e.stopPropagation();
         
         if (isInCart(product.id)) {
             removeFromCart(product.id);
-            toast.success('Product removed from cart!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            toast.success('Product removed from cart!', {  position: "top-right", autoClose: 3000,hideProgressBar: false,
+                closeOnClick: true, pauseOnHover: true, draggable: true,});
         } else {
             addToCart(product);
-            toast.success('Product added to cart successfully!', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            toast.success('Product added to cart successfully!', {position: "top-right",
+         autoClose: 3000,hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, });
         }
     };
 
-    // Function to retry loading products
+
     const handleRetry = () => {
         refetchExplore();
     };
 
-    // Navigation functions
     const nextPage = () => {
         if (hasMore) {
             setCurrentPage(prev => prev + 1);
@@ -113,18 +87,15 @@ function ExploreOurProducts() {
 
     return (
         <div className="px-8 py-8 max-w-8xl mx-auto">
-            {/* Header */}
             <div className="flex items-center justify-between mb-6">
             <div>
                         <div className="flex items-center gap-2 mb-8 ml-12 ">
                             <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
                             <h2 className="text-sm font-semibold text-[#DB4444] font-inter">Our Products</h2>
                         </div>
-                        {/* Flash Sales Title */}
                         <h1 className="text-2xl font-bold ml-12 text-black font-inter tracking-wider">Explore Our Products</h1>
                     </div>
-                
-                 {/* Navigation Arrows */}
+        
                  <div className="flex gap-2 mr-12 mt-16">
                      <button 
                          onClick={prevPage}
@@ -155,7 +126,6 @@ function ExploreOurProducts() {
                  </div>
             </div>
 
-            {/* Products Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 {products.map((product, index) => (
                     <Link 
@@ -163,7 +133,7 @@ function ExploreOurProducts() {
                         to={`/products/${product.id}`} 
                         className="bg-white  rounded-lg p-1 relative group w-[75%] mx-auto block hover:shadow-lg transition-shadow"
                     >
-                        {/* Product Image Container */}
+
                         <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
                             <img
                                 src={getProductImage(product)}
@@ -172,14 +142,18 @@ function ExploreOurProducts() {
                                 onError={handleImageError}
                             />
                             
-                            {/* NEW Badge */}
                             {product.hasNewBadge && (
                                 <div className="absolute top-2 left-2 bg-[#00FF66] font-poppins font-sm text-[10px] text-white px-2 py-1 rounded text-xs font-medium">
                                     NEW
                                 </div>
                             )}
                             
-                            {/* Action Icons */}
+                            {product.hasOffer && product.discountPercent && (
+                                <div className="absolute top-2 left-2 bg-[#DB4444] text-white px-2 py-1 rounded text-xs font-poppins font-sm">
+                                    -{product.discountPercent}%
+                                </div>
+                            )}
+                            
                             <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button 
                                     onClick={(e) => handleWishlistToggle(product, e)}
@@ -206,8 +180,7 @@ function ExploreOurProducts() {
                                     </svg>
                                 </button>
                             </div>
-                            
-                            {/* Add to Cart Button - Only for some products */}
+                        
                             {index === 1 && (
                                 <div className="absolute bottom-0 left-0 right-0">
                                     <button 
@@ -224,28 +197,29 @@ function ExploreOurProducts() {
                             )}
                         </div>
 
-                        {/* Product Info */}
                         <div className="space-y-0.5">
                             <h3 className=" text-black font-poppins  font-medium text-[10px]  leading-tight">
                                 {product.title}
                             </h3>
-                            <p className="text-[#DB4444]  font-poppins font-medium text-[12px] ">${product.price}</p>
+                            <div className="flex items-center gap-2">
+                                {product.hasOffer ? (
+                                    <>
+                                        <p className="text-[#DB4444] font-poppins font-medium text-[12px]">
+                                            ${product.discountedPrice}
+                                        </p>
+                                        <p className="text-gray-500 font-poppins text-[12px] line-through">
+                                            ${product.originalPrice}
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p className="text-[#DB4444] font-poppins font-medium text-[12px]">
+                                        ${product.price || product.originalPrice}
+                                    </p>
+                                )}
+                            </div>
                             
-                            {/* Color Options */}
-                            {product.colorOptions && product.colorOptions.length > 0 && (
-                                <div className="flex gap-1 mt-1">
-                                    {product.colorOptions.map((color, colorIndex) => (
-                                        <div 
-                                            key={colorIndex}
-                                            className={`w-3 h-3 rounded-full ${color.bg} ${
-                                                color.selected ? 'ring-2 ring-gray-800 ring-offset-1' : ''
-                                            }`}
-                                        ></div>
-                                    ))}
-                                </div>
-                            )}
-                            
-                            {/* Rating */}
+                
+                    
                             <div className="flex items-center gap-1">
                                 <div className="flex">
                                     {[...Array(5)].map((_, i) => {

@@ -62,7 +62,7 @@ export default function TeamSection() {
       <img
         src={social.icon}
         alt={social.alt}
-        className="w-4 h-4" // لا تستعمل invert هنا
+        className="w-4 h-4" 
       />
     </span>
   ))}
@@ -72,7 +72,6 @@ export default function TeamSection() {
         ))}
       </div>
 
-      {/* Carousel dots */}
       <div className="flex justify-center mt-8 gap-2">
         <span className="w-2 h-2 bg-[#ccc] rounded-full"></span>
         <span className="w-2 h-2 bg-[#ccc] rounded-full"></span>

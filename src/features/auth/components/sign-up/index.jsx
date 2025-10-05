@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { signUpSchema, signUpDefaultValues } from './config';
 import { registerUser } from '../../services/api';
 import useAuthStore from '../../store';
-import { getNextUrl, getSafeRedirectUrl } from '../../../../shared/utilities/authRedirect';
+import { getNextUrl, getSafeRedirectUrl } from '../../../../shared/utils/authRedirect';
 import signupImage from '../../../../assets/sign up assets/dl.beatsnoop 1.png';
 import googleIcon from '../../../../assets/sign up assets/Icon-Google.svg';
 
@@ -20,11 +20,7 @@ function SignUp() {
     // Get the next parameter from URL and validate it
     const nextUrl = getSafeRedirectUrl(getNextUrl(searchParams));
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting }
-    } = useForm({
+    const { register,handleSubmit,formState: { errors, isSubmitting } } = useForm({
         resolver: yupResolver(signUpSchema),
         defaultValues: signUpDefaultValues
     });
@@ -60,14 +56,12 @@ function SignUp() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            {/* Main Content */}
             <motion.div 
                 className="flex flex-col lg:flex-row min-h-screen lg:min-h-[calc(80vh-35px)]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
             >
-                {/* Left Side - Image Section */}
                 <motion.div 
                     className="w-full lg:w-[45%] mt-0 lg:mt-12 rounded-none md:rounded-md flex items-center justify-center relative overflow-hidden h-80 sm:h-96 md:h-[500px] lg:h-auto lg:max-h-[500px]"
                     initial={{ opacity: 0, x: -50 }}
@@ -80,7 +74,6 @@ function SignUp() {
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        {/* Original Image */}
                         <motion.img 
                             src={signupImage} 
                             alt="Shopping illustration" 
@@ -93,7 +86,6 @@ function SignUp() {
                     </motion.div>
                 </motion.div>
                 
-                {/* Right Side - Form Section */}
                 <motion.div 
                     className="w-full lg:w-[55%] bg-white flex items-center justify-center p-6 sm:p-8 lg:p-12"
                     initial={{ opacity: 0, x: 50 }}
@@ -106,7 +98,6 @@ function SignUp() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
                     >
-                        {/* Header */}
                         <motion.div 
                             className="mb-6 lg:mb-8"
                             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +122,6 @@ function SignUp() {
                             </motion.p>
                         </motion.div>
 
-                        {/* Success Message */}
                         {isSuccess && (
                             <motion.div 
                                 className="mb-4 p-4 bg-green-50 border border-green-200 rounded-md"
@@ -167,7 +157,6 @@ function SignUp() {
                             </motion.div>
                         )}
 
-                        {/* Error Message */}
                         {apiError && (
                             <motion.div 
                                 className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md"
@@ -202,8 +191,6 @@ function SignUp() {
                                 </div>
                             </motion.div>
                         )}
-
-                        {/* Form */}
                         <motion.form 
                             onSubmit={handleSubmit(onSubmit)} 
                             className="space-y-5 sm:space-y-6"
@@ -211,7 +198,6 @@ function SignUp() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.8 }}
                         >
-                            {/* Name Field */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -239,7 +225,6 @@ function SignUp() {
                                 )}
                             </motion.div>
 
-                            {/* Email Field */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -266,8 +251,6 @@ function SignUp() {
                                     </motion.p>
                                 )}
                             </motion.div>
-
-                            {/* Password Field */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -295,7 +278,6 @@ function SignUp() {
                                 )}
                             </motion.div>
 
-                            {/* Create Account Button */}
                             <motion.button
                                 type="submit"
                                 disabled={isSubmitting}
@@ -309,7 +291,6 @@ function SignUp() {
                                 {isSubmitting ? 'Creating Account...' : 'Create Account'}
                             </motion.button>
 
-                            {/* Google Sign Up Button */}
                             <motion.button
                                 type="button"
                                 className="w-full bg-white border border-gray-300 text-black font-poppins py-2.5 sm:py-3 rounded-md font-medium text-sm sm:text-base flex items-center justify-center space-x-2 hover:bg-gray-50 transition-colors shadow-sm"
@@ -330,7 +311,6 @@ function SignUp() {
                             </motion.button>
                         </motion.form>
 
-                        {/* Login Link */}
                         <motion.div 
                             className="mt-6 sm:mt-8 text-center"
                             initial={{ opacity: 0, y: 20 }}

@@ -6,8 +6,8 @@ import HeroSection from '../components/HeroSection';
 import PromotionalBanner from '../components/PromotionalBanner';
 import ProductShowcase from '../components/ProductShowcase';
 import Footer from '../../../shared/components/Footer';
-import Service from '../components/service';
-import CategoryFilter from '../../products/components/CategoryHome';
+import FeaturesSection from '../../../shared/components/FeaturesSection';
+import CategoryFilter from '../../products/product-list/components/CategoryHome';
 import FlashProducts from '../components/FlashProducts';
 import BestSellingProducts from '../components/BestSellingProducts';
 import ExploreOurProducts from '../components/ExploreOurProducts';
@@ -15,9 +15,9 @@ import ExploreOurProducts from '../components/ExploreOurProducts';
 const Home = () => {
   const location = useLocation();
 
-  // Track previous page for breadcrumb
+  
   useEffect(() => {
-    // Save current page as previous page for breadcrumb
+    
     sessionStorage.setItem('previousPage', location.pathname + location.search);
   }, [location]);
   return (
@@ -33,7 +33,7 @@ const Home = () => {
         <PromotionalBanner />
         <ExploreOurProducts />
         <ProductShowcase />
-        <Service />
+        <FeaturesSection />
       </div>
       <Footer />
     </div>

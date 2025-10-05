@@ -1,4 +1,4 @@
-import ProductsList from "../components/ProductList";
+import ProductsList from "../product-list/components/ProductList";
 import Navbar from '../../../shared/components/Navbar/index.jsx'
 import Footer from '../../../shared/components/Footer/index.jsx'
 import { useSearchParams } from 'react-router-dom';
