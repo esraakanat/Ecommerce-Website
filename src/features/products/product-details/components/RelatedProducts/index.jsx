@@ -14,36 +14,23 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
   
   const { addToCart, removeFromCart, items } = useUserCart();
 
-  // Check if product is in cart
+ 
   const isInCart = (productId) => {
     return items.some(item => item.id === productId);
   };
 
-  // Handle cart toggle
   const handleCartToggle = (product, e) => {
     e.preventDefault();
     e.stopPropagation();
     
     if (isInCart(product.id)) {
       removeFromCart(product.id);
-      toast.success('Product removed from cart!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.success('Product removed from cart!', { position: "top-right", autoClose: 3000, hideProgressBar: false,
+        closeOnClick: true,pauseOnHover: true, draggable: true,});
     } else {
       addToCart(product);
-      toast.success('Product added to cart successfully!', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.success('Product added to cart successfully!', { position: "top-right", autoClose: 3000, hideProgressBar: false,
+        closeOnClick: true,pauseOnHover: true,draggable: true, });
     }
   };
 
@@ -93,14 +80,13 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
 
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto">
-      {/* Header Section - Responsive */}
+      
       <div className="px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6">
         <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
           <div className="w-2 h-5 sm:w-3 sm:h-7 rounded-sm bg-[#DB4444]"></div>
           <span className="text-[#DB4444] text-xs sm:text-sm font-medium">Related items</span>
         </div>
 
-        {/* Products Grid - Fully Responsive */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
           {related.map((product, index) => (
             <Link
@@ -108,14 +94,13 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
               to={`/products/${product.id}`}
               className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow flex flex-col group relative"
             >
-              {/* Product Image Container */}
+           
               <div className="relative aspect-square w-full bg-gray-100">
                 <div
                   className="w-full h-full bg-center bg-contain bg-no-repeat"
                   style={{ backgroundImage: `url(${product.images[0]})` }}
                 />
                 
-                {/* Add to Cart Button - Responsive */}
                 <button
                   onClick={(e) => handleCartToggle(product, e)}
                   className={`absolute bottom-0 left-0 right-0 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors ${
@@ -125,9 +110,8 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
                   }`}
                 >
                   {isInCart(product.id) ? 'Remove' : 'Add To Cart'}
-                </button>
 
-                {/* Action Icons - Responsive */}
+                </button>
                 <div className="absolute top-1.5 sm:top-2 right-1.5 sm:right-2 flex flex-col gap-1.5 sm:gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button className="w-6 h-6 sm:w-7 sm:h-7 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-50">
                     <svg className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,7 +127,6 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
                 </div>
               </div>
 
-              {/* Product Info - Responsive */}
               <div className="p-1.5 sm:p-2 flex flex-col gap-0.5 sm:gap-1">
                 <h3 className="text-black font-poppins font-medium text-xs sm:text-sm truncate leading-tight">
                   {product.title}
@@ -152,7 +135,6 @@ export default function RelatedProducts({ categoryId, currentProductId }) {
                   ${product.price || 'N/A'}
                 </p>
 
-                {/* Rating - Responsive */}
                 <div className="flex items-center gap-0.5 sm:gap-1">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => {

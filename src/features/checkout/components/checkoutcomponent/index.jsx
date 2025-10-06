@@ -104,10 +104,9 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
           </nav>
         </div>
 
-        {/* Grid: sm/md vertical, lg horizontal */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          {/* Left Section - Billing Details */}
           <div className="w-full">
             <h2 className="text-2xl text-black font-inter font-base mb-6">Billing Details</h2>
             <form className="space-y-4 w-full">
@@ -148,7 +147,6 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
             </form>
           </div>
 
-          {/* Right Section - Order & Payment */}
           <div className="w-full mt-6   md:mt-16  lg:max-w-md lg:ml-6  ">
             <div className="bg-white border-none p-6 w-full">
               {/* Order Items */}
@@ -170,7 +168,7 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
                 ))}
               </div>
 
-              {/* Cost Summary */}
+             
               <div className="space-y-4 mb-6 text-sm">
                 <div className="flex justify-between">
                   <span className="font-base text-black font-poppins text-[12px]">Subtotal:</span>
@@ -194,7 +192,7 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
                 </div>
               </div>
 
-              {/* Payment Options */}
+         
               <div className="mb-6 space-y-3">
                 <div className="flex items-center">
                   <input
@@ -228,7 +226,7 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
                 </div>
               </div>
 
-              {/* Coupon Code */}
+             
               <div className="mb-6">
                 {!appliedCoupon ? (
                   <form onSubmit={handleCouponSubmit} className="flex space-x-2">
@@ -263,11 +261,11 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
                 )}
                 
                 <div className="text-xs text-gray-500 mt-2">
-                  <p>Test coupons: SAVE10, SAVE20, SAVE50, WELCOME, SUMMER, FLASH</p>
+                
                 </div>
               </div>
 
-              {/* Place Order Button */}
+           
               <button
                 onClick={handlePlaceOrder}
                 className="w-full bg-[#DB4444] text-white py-3 px-8 rounded hover:bg-red-600 font-base text-[16px] font-poppins text-center block"
@@ -279,7 +277,7 @@ calculateDiscount, clearCouponMessages } = useCouponStore();
         </div>
       </div>
 
-      {/* Success Modal */}
+      
       <SuccessModal
         isOpen={showSuccessModal}
         onClose={handleCloseModal}

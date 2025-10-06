@@ -15,11 +15,11 @@ const MusicBanner = () => {
   };
 
   return (
-    <div className="px-4 py-6 md:px-10 md:py-8 lg:px-32 xl:px-48   mx-auto w-full  xl:w-[1535px] ">
-      <div className="relative bg-black rounded-sm overflow-hidden  lg:-mx-16 xl:-mx-24"></div>
+    <div className="px-6 py-6 sm:px-8 md:px-10 md:py-8 lg:px-20 xl:px-28 mx-auto w-full xl:w-[1535px]">
+      <div className="relative bg-black rounded-sm overflow-hidden lg:-mx-8 xl:-mx-12"></div>
 
-      <div className="relative bg-black rounded-sm overflow-hidden  min-h-[360px] sm:min-h-[380px] md:min-h-[420px]
-                   lg:min-h-[370px] xl:min-h-[420px] lg:-mx-16 xl:-mx-24" >
+      <div className="relative bg-black rounded-sm overflow-hidden min-h-[360px] sm:min-h-[380px] md:min-h-[420px]
+                   lg:min-h-[370px] xl:min-h-[420px] lg:-mx-8 xl:-mx-12">
         
 
         <div className="flex flex-col md:flex-col lg:flex-row items-center lg:items-center justify-between
@@ -87,7 +87,7 @@ const MusicBanner = () => {
     src={jblImage}
     alt="JBL Speaker"
     className="relative z-10
-               w-[230px] sm:w-[270px] md:w-[320px] lg:w-[360px] xl:w-[450px]
+               w-[230px] sm:w-[270px] md:w-[320px] lg:w-[400px] xl:w-[500px]
                max-w-none object-contain drop-shadow-2xl transition-all duration-300 xl:mr-24"
   />
         </div>

@@ -86,17 +86,21 @@ function ExploreOurProducts() {
     }
 
     return (
-        <div className="px-8 py-8 max-w-8xl mx-auto">
+        <div className="px-8 py-8 pl-8 pr-4  max-w-8xl mx-auto">
             <div className="flex items-center justify-between mb-6">
+
             <div>
-                        <div className="flex items-center gap-2 mb-8 ml-12 ">
-                            <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
-                            <h2 className="text-sm font-semibold text-[#DB4444] font-inter">Our Products</h2>
-                        </div>
-                        <h1 className="text-2xl font-bold ml-12 text-black font-inter tracking-wider">Explore Our Products</h1>
-                    </div>
+                   
+                   <div className="flex items-center gap-2 ml-4  xl:ml-6  mb-4">
+                       <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
+                       <h2 className="text-sm font-semibold text-[#DB4444] font-inter ">Our Products</h2>
+                   </div>
+                
+                   <h1 className="text-lg sm:text-2xl font-bold ml-4 xl:ml-6 text-black font-inter tracking-wider">Explore Our Products</h1>
+               </div>
+            
         
-                 <div className="flex gap-2 mr-12 mt-16">
+                 <div className="flex gap-2 mr-4 mt-16">
                      <button 
                          onClick={prevPage}
                          disabled={currentPage === 0}
@@ -126,13 +130,13 @@ function ExploreOurProducts() {
                  </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0.5 mb-8">
                 {products.map((product, index) => (
-                    <Link 
-                        key={product.id} 
-                        to={`/products/${product.id}`} 
-                        className="bg-white  rounded-lg p-1 relative group w-[75%] mx-auto block hover:shadow-lg transition-shadow"
-                    >
+                    <div key={product.id}>
+                        <Link 
+                            to={`/products/${product.id}`} 
+                            className="bg-white rounded-lg p-1 relative group w-[90%] mx-auto block hover:shadow-lg transition-shadow"
+                        >
 
                         <div className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" style={{ backgroundColor: '#F5F5F5' }}>
                             <img
@@ -197,36 +201,34 @@ function ExploreOurProducts() {
                             )}
                         </div>
 
-                        <div className="space-y-0.5">
-                            <h3 className=" text-black font-poppins  font-medium text-[10px]  leading-tight">
+                        <div className="space-y-1">
+                            <h3 className="text-black font-poppins font-medium text-[12px] leading-tight">
                                 {product.title}
                             </h3>
                             <div className="flex items-center gap-2">
                                 {product.hasOffer ? (
                                     <>
-                                        <p className="text-[#DB4444] font-poppins font-medium text-[12px]">
+                                        <p className="text-[#DB4444] font-poppins font-medium text-[14px]">
                                             ${product.discountedPrice}
                                         </p>
-                                        <p className="text-gray-500 font-poppins text-[12px] line-through">
+                                        <p className="text-gray-500 font-poppins text-[14px] line-through">
                                             ${product.originalPrice}
                                         </p>
                                     </>
                                 ) : (
-                                    <p className="text-[#DB4444] font-poppins font-medium text-[12px]">
+                                    <p className="text-[#DB4444] font-poppins font-medium text-[14px]">
                                         ${product.price || product.originalPrice}
                                     </p>
                                 )}
                             </div>
-                            
-                
-                    
+                           
                             <div className="flex items-center gap-1">
                                 <div className="flex">
                                     {[...Array(5)].map((_, i) => {
                                         const rating = (index % 5) + 1;
                                         const isFilled = i < rating;
                                         return (
-                                            <svg key={i} className={`w-3 h-3 ${isFilled ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                                            <svg key={i} className={`w-4 h-4 ${isFilled ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                             </svg>
                                         );
@@ -235,7 +237,8 @@ function ExploreOurProducts() {
                                 <span className="text-gray-500 text-xs">({Math.floor(Math.random() * 300) + 35})</span>
                             </div>
                         </div>
-                    </Link>
+                        </Link>
+                    </div>
                 ))}
             </div>
 

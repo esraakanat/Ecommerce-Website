@@ -11,7 +11,7 @@ export const useQueryFlash = () => {
         let attempts = 0;
         const maxAttempts = 15; 
         
-        while (allProducts.length < 12 && attempts < maxAttempts) {
+        while (allProducts.length < 15 && attempts < maxAttempts) {
           try {
             const response = await httpClient.get(`/products`, {
               params: { 
@@ -24,7 +24,7 @@ export const useQueryFlash = () => {
             
             if (response.data && response.data.length > 0) {
               for (const product of response.data) {
-                if (allProducts.length >= 12) break;
+                if (allProducts.length >= 15) break;
                 
                 const productWithImage = ensureProductImage(product);
                  

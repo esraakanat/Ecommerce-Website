@@ -9,28 +9,28 @@ const ProductShowcase = () => {
        {/* Featured Section */}
   <div className="flex flex-col gap-2 mb-6 ">
     {/* المربع والكلمة في صف واحد */}
-    <div className="flex items-center gap-2 md:ml-10 xl:ml-12 ">
+    <div className="flex items-center gap-2 md:ml-4  ">
       <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
       <span className="text-[#DB4444] text-sm font-medium font-inter">Featured</span>
     </div>
 
     {/* New Arrival تحتهم */}
-    <p className="text-black text-2xl font-semibold font-inter mb-4 md:ml-10 xl:ml-12">New Arrival</p>
+    <p className="text-black text-2xl font-semibold font-inter mb-4 md:ml-4 ">New Arrival</p>
   
   
         
 
-        <div className=" md:w-[750px] lg:w-[950px] xl:w-[1350px] mx-auto">
+        <div className=" md:w-[750px] lg:w-[950px] xl:w-[1420px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-auto md:h-[400px] ">
         {/* PlayStation 5 Section - Left Large */}
         <div className="relative bg-black rounded-sm overflow-hidden group cursor-pointer flex flex-col md:flex-row">
           {/* Text Content - Left Side */}
           <div className="w-full md:w-[50%] p-4 md:p-5 h-auto md:h-full flex flex-col justify-center md:justify-end text-center md:text-left">
             <h2 className="text-[#FAFAFA] text-xl md:text-2xl font-semibold font-inter mb-2  drop-shadow-lg">PlayStation 5</h2>
-            <p className="text-[#FAFAFA] text-xs md:text-xs mb-3 max-w-full md:max-w-xs  drop-shadow-lg">
+            <p className="text-[#FAFAFA] text-xs md:text-xs mb-3 max-w-full md:max-w-xs font-poppins  drop-shadow-lg">
               Black and White version of the PS5 coming out on sale.
             </p>
-            <button className="text-white text-sm font-medium underline underline-offset-4 w-fit mx-auto md:mx-0 hover:text-gray-300 transition-colors">
+            <button className="text-white text-sm font-medium underline underline-offset-4 w-fit lg:mb-8 xl:mb-12 mx-auto md:mx-0 hover:text-gray-300 transition-colors relative z-30">
               Shop Now
             </button>
           </div>
@@ -40,10 +40,10 @@ const ProductShowcase = () => {
             <img 
               src={ps5Image} 
               alt="PlayStation 5" 
-              className="w-auto h-auto object-contain lg:mr-48 lg:mt-12"
+              className="w-auto h-auto object-contain  md:mr-16 lg:mr-48 lg:mt-12"
               style={{
-                maxHeight: '120%',
-                maxWidth: '120%'
+                maxHeight: '110%',
+                maxWidth: '110%'
                 
               }}
             />
@@ -55,25 +55,27 @@ const ProductShowcase = () => {
           {/* Women's Collections - Top */}
           <div className="relative bg-black rounded-sm overflow-hidden flex-1 group cursor-pointer flex flex-col sm:flex-row">
             {/* Text Content */}
-            <div className="w-full sm:w-[60%] p-4 md:p-5 h-auto sm:h-full flex flex-col justify-center text-center sm:text-left">
-              <h2 className="text-[#FAFAFA] text-lg md:text-2xl font-semibold font-inter mb-2">Women's Collections</h2>
-              <p className="text-[#FAFAFA] text-xs mb-3 max-w-full sm:max-w-xs">
+            <div className="w-full sm:w-[60%] p-4 md:p-5 h-auto sm:h-full flex flex-col justify-center text-center sm:text-left xl:mt-8 xl:ml-4">
+              <h2 className="text-[#FAFAFA] text-lg md:text-sm lg:text-md xl:text-2xl font-semibold font-inter mb-2 tracking-wider ">Women's Collections</h2>
+              <p className="text-[#FAFAFA] text-xs md:text-[10px] xl:text-xs mb-3 max-w-full sm:max-w-xs font-poppins tracking-wider xl:mt-2">
                 Featured women collections that<br />give you another vibe.
               </p>
-              <button className="text-white text-sm font-medium underline underline-offset-4 w-fit mx-auto sm:mx-0 hover:text-gray-300 transition-colors">
+              <button className="text-white text-sm font-medium underline underline-offset-4 w-fit mx-auto sm:mx-0 hover:text-gray-300 transition-colors tracking-wider xl:mt-4">
                 Shop Now
               </button>
             </div>
             
             {/* Image */}
-            <div className="w-full sm:w-[40%] h-32 sm:h-full flex items-center justify-center mr-12 mb-8 bg-black relative overflow-hidden">
+            <div className="w-full sm:w-[40%] h-32 sm:h-full flex items-center justify-center mr-16 mb-8 bg-black relative overflow-hidden">
               <img 
                 src={womanImage} 
                 alt="Women's Collections" 
-                className="w-full h-full object-contain sm:object-cover"
+                className="w-auto h-auto object-contain sm:object-cover scale-120 sm:scale-125 md:scale-130 lg:scale-135 xl:scale-140"
                 style={{
                   filter: 'brightness(0.8) contrast(1.2)',
-                  backgroundColor: '#000000'
+                  backgroundColor: '#000000',
+                  maxHeight: '110%',
+                  maxWidth: '150%'
                 }}
               />
             </div>
@@ -105,8 +107,8 @@ const ProductShowcase = () => {
     </div>
     
     {/* Text Overlay - On top of image */}
-    <div className="absolute inset-0 flex flex-col justify-start items-start p-3 md:p-4 lg:mt-36 md:mt-12 mt-24 z-20">
-      <h3 className="text-[#FAFAFA] text-base md:text-lg font-semibold font-inter mb-1 drop-shadow-lg">Speakers</h3>
+    <div className="absolute inset-0 flex flex-col justify-start items-start p-3 md:p-4 lg:mt-36 mt-24 sm:mt-32 md:mt-12 lg:mt-24 xl:mt-24 z-20">
+      <h3 className="text-[#FAFAFA] text-base md:text-sm lg:text-lg font-semibold font-inter mb-1 drop-shadow-lg">Speakers</h3>
       <p className="text-[#FAFAFA] text-[10px] md:text-[10px] mb-2 drop-shadow-lg">
         Amazon wireless speakers
       </p>
@@ -139,9 +141,9 @@ const ProductShowcase = () => {
     </div>
     
      {/* Text Overlay - On top of image */}
-     <div className="absolute inset-0 flex flex-col justify-start items-start p-3 md:p-4 lg:mt-36 md:mt-16 mt-24 z-20">
+     <div className="absolute inset-0 flex flex-col justify-start items-start p-3 md:p-4 mt-24 sm:mt-32 md:mt-12 lg:mt-24 xl:mt-24 z-20">
       
-         <h3 className="text-[#FAFAFA] text-base md:text-lg font-semibold font-inter mb-1  ">Perfume</h3>
+         <h3 className="text-[#FAFAFA] text-base md:text-sm lg:text-lg font-semibold font-inter mb-1  ">Perfume</h3>
          <p className="text-[#FAFAFA] text-[10px] md:text-[10px] mb-2 ">
          GUCCI INTENSE OUD EDP
          </p>

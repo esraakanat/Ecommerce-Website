@@ -3,15 +3,12 @@ import { AppRouterProvider } from './routes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-
-// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      cacheTime: 10 * 60 * 1000, // 10 minutes
+      staleTime: 5 * 60 * 1000,
+      cacheTime: 10 * 60 * 1000, 
       retry: 3,
       retryDelay: 1000,
     },
@@ -34,7 +31,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      <ReactQueryDevtools initialIsOpen={false} />
+     
  
     </QueryClientProvider>
   );

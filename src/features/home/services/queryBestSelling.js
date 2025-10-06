@@ -11,7 +11,7 @@ export const useQueryBestSelling = () => {
         let attempts = 0;
         const maxAttempts = 16;
         
-        while (allProducts.length < 4 && attempts < maxAttempts) {
+        while (allProducts.length < 5 && attempts < maxAttempts) {
           try {
             const response = await httpClient.get(`/products`, {
               params: { 

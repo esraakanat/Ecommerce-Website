@@ -110,7 +110,7 @@ const Pagination = ({
   };
 
   return (
-    <div className={`flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-1 ${className}`}>
+    <div className={`flex flex-row items-center justify-center space-x-1 ${className}`}>
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}

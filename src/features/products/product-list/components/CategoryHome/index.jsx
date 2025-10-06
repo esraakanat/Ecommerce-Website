@@ -95,16 +95,20 @@ const CategoryFilter = () => {
 
   return (
     <div className="bg-white py-8">
-      <div className="px-8 py-8 max-w-8xl mx-auto"> 
+      <div className="px-4 py-8 max-w-8xl mx-auto"> 
    
-        <div className="flex items-center mb-4 ml-8">
-          <div className="w-4 h-7 bg-[#DB4444] mr-2 rounded-sm"></div>
-          <span className="text-sm font-semibold font-poppins text-[#DB4444]">Categories</span>
-        </div>
-        
-        <h2 className="text-xl md:text-2xl font-bold font-inter text-gray-900 mb-8 ml-8 tracking-wider">
-          Browse By Category
-        </h2>
+      <div>
+                   
+                   <div className="flex items-center gap-2 ml-4 sm:ml-8 md:ml-14 lg:ml-10  xl:ml-12  mb-4">
+                       <div className="w-4 h-7 rounded-sm bg-[#DB4444]"></div>
+                       <h2 className="text-sm font-semibold text-[#DB4444] font-inter ">Categories</h2>
+                   </div>
+                
+                   <h1 className="text-lg sm:text-2xl font-bold ml-4 sm:ml-8 md:ml-14 lg:ml-10 xl:ml-12 text-black font-inter tracking-wider mb-8">Browse By Category</h1>
+               </div>
+
+   
+       
 
     
    <div className=" grid  grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 

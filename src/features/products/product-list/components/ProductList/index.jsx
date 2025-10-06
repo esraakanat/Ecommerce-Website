@@ -282,7 +282,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
         
         {!loading && !error && products.length > 0 && (
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-2"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
@@ -308,7 +308,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
                 >
                   <Link 
                     to={`/products/${product.id}`} 
-                    className="bg-white rounded-lg p-1 relative group w-full sm:w-[75%] sm:mx-auto block hover:shadow-lg transition-shadow"
+                    className="bg-white rounded-lg p-1 relative group w-[90%] mx-auto block hover:shadow-lg transition-shadow"
                   >
               <motion.div 
                 className="relative mb-2 aspect-square mx-auto rounded-lg overflow-hidden" 
@@ -333,7 +333,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
                 >
                   <motion.button 
                     onClick={(e) => handleCartToggle(product, e)}
-                    className={`w-full py-2 px-4 rounded-b-lg text-sm font-medium transition-colors ${
+                    className={`w-full py-2 px-4 rounded-b-lg text-sm md:text-xs font-medium transition-colors ${
                       isInCart(product.id) 
                         ? 'bg-gray-500 hover:bg-gray-600 text-white' 
                         : 'bg-black hover:bg-gray-800 text-white'
@@ -405,13 +405,13 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
               </motion.div>
 
               <motion.div 
-                className="space-y-0.5"
+                className="space-y-1"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.1 + 0.6 }}
               >
                 <motion.h3 
-                  className=" text-black font-poppins  font-medium text-[10px]  leading-tight"
+                  className=" text-black font-poppins  font-medium text-[12px]  leading-tight"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.1 + 0.7 }}
@@ -427,7 +427,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
                   {product.hasOffer ? (
                     <>
                       <motion.p 
-                        className="text-[#DB4444] font-poppins font-medium text-[12px]"
+                        className="text-[#DB4444] font-poppins font-medium text-[14px]"
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.3, delay: index * 0.1 + 0.9 }}
@@ -435,7 +435,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
                         ${product.discountedPrice}
                       </motion.p>
                       <motion.p 
-                        className="text-gray-500 font-poppins text-[12px] line-through"
+                        className="text-gray-500 font-poppins text-[14px] line-through"
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.3, delay: index * 0.1 + 1.0 }}
@@ -445,7 +445,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
                     </>
                   ) : (
                     <motion.p 
-                      className="text-[#DB4444] font-poppins font-medium text-[12px]"
+                      className="text-[#DB4444] font-poppins font-medium text-[14px]"
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.3, delay: index * 0.1 + 0.9 }}
@@ -468,7 +468,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
                       return (
                         <motion.svg 
                           key={i} 
-                          className={`w-3 h-3 ${isFilled ? 'text-yellow-400' : 'text-gray-300'}`} 
+                          className={`w-4 h-4 ${isFilled ? 'text-yellow-400' : 'text-gray-300'}`} 
                           fill="currentColor" 
                           viewBox="0 0 20 20"
                           initial={{ scale: 0, rotate: -180 }}
@@ -506,7 +506,7 @@ export default function ProductsList({ searchQuery = null,  initialCategory = nu
     
       {!loading && !error && products.length > 0 && (
         <motion.div 
-          className="px-4 py-8 max-w-7xl mx-auto border-t border-gray-200"
+          className="px-4 py-8 max-w-8xl mx-auto border-t border-gray-200"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}

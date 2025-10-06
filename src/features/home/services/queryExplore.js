@@ -10,9 +10,9 @@ export const useQueryExplore = (page = 0) => {
         const allProducts = [];
         let attempts = 0;
         const maxAttempts = 30;
-        const startOffset = page * 8;
+        const startOffset = page * 10;
         
-        while (allProducts.length < 8 && attempts < maxAttempts) {
+        while (allProducts.length < 10 && attempts < maxAttempts) {
           try {
             const response = await httpClient.get(`/products`, {
               params: { 
@@ -76,7 +76,7 @@ export const useQueryExplore = (page = 0) => {
           products: allProducts,
           totalCount: allProducts.length,
           page: page,
-          hasMore: allProducts.length === 8 
+          hasMore: allProducts.length === 10 
         };
         
       } catch (error) {

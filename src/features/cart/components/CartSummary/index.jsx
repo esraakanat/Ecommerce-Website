@@ -142,7 +142,7 @@ const CartSummary = () => {
                       <img
                         src={item.images?.[0] || "/src/assets/cart assets/g27cq4-500x500 1.png"}
                         alt={item.title}
-                        className="w-14 h-14 md:w-16 md:h-16 object-contain  rounded"
+                        className="w-16 h-16 sm:w-16 sm:h-16 md:w-16 md:h-16 object-contain rounded"
                       />
                       <button
                         onClick={() => removeFromCart(item.id)}
@@ -165,7 +165,10 @@ const CartSummary = () => {
                         </svg>
                       </button>
                     </div>
-                    <span className="font-base text-black font-poppins text-[12px] truncate max-w-[120px] md:max-w-none">{item.title}</span>
+                    <span className="font-base text-black font-poppins text-[12px] truncate max-w-[60px] sm:max-w-[140px] md:max-w-none">
+                      <span className="sm:hidden">{item.title.substring(0, 5)}</span>
+                      <span className="hidden sm:inline">{item.title}</span>
+                    </span>
                   </div>
 
                   <div className="font-base text-black font-poppins text-[14px] ml-12 md:ml-16 lg:ml-32">
@@ -333,7 +336,7 @@ const CartSummary = () => {
           </div>
 
           <motion.div 
-            className="border border-black  rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3"
+            className="border border-black  rounded-lg p-6 w-full sm:w-1/2  lg:w-1/3"
             animate={isUpdating ? {
               scale: [1, 1.02, 1],
               boxShadow: ["0 0 0 rgba(0,0,0,0)", "0 0 20px rgba(59, 130, 246, 0.3)", "0 0 0 rgba(0,0,0,0)"]

@@ -175,8 +175,8 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div 
-        className="relative bg-black mt-10 md:mt-12 mx-4 sm:mx-8 md:mx-12 lg:mr-12 xl:mr-24
-  rounded-sm overflow-hidden w-full  
+        className="relative bg-black mt-10 md:mt-12 ml-10 mr-2 sm:ml-12 sm:mr-2 md:mx-8 xl:mr-10
+  rounded-sm overflow-hidden w-[85%] sm:w-[87%] md:w-full
   min-h-[150px] sm:min-h-[320px] md:min-h-[280px] lg:min-h-[320px] xl:min-h-[380px] 
   flex flex-row items-center px-6 sm:px-8 md:px-8"
         initial={{ opacity: 0, scale: 0.95 }}
@@ -200,13 +200,13 @@ const HeroSection = () => {
       <motion.img
         src={appleLogo}
         alt="Apple"
-        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-11 lg:w-11 mr-2"
+        className="h-6 w-6 sm:h-7 sm:w-7 lg:h-11 lg:w-11 xl:h-16 xl:w-16 mr-2 xl:ml-2"
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
       />
       <motion.span 
-        className="text-white text-[10px] sm:text-xs md:text-sm lg:text-base font-poppins tracking-wider"
+        className="text-white text-[10px] sm:text-xs md:text-sm lg:text-base xl:ml-2 xl:text-xl font-poppins tracking-wider"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
@@ -216,7 +216,7 @@ const HeroSection = () => {
     </motion.div>
 
     <motion.h2 
-      className="text-white lg:py-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-poppins tracking-wider"
+      className="text-white lg:py-4 text-lg sm:text-2xl lg:text-4xl xl:text-5xl xl:ml-2 font-semibold font-poppins tracking-wider"
       initial={{ y: 30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 1.4 }}
@@ -245,7 +245,7 @@ const HeroSection = () => {
     >
       <Link
         to="/products"
-        className="mt-4 inline-flex items-center text-[#FAFAFA] text-sm sm:text-md md:text-base font-poppins underline hover:text-gray-300 transition-colors tracking-wide underline-offset-8"
+        className="mt-4 inline-flex items-center text-[#FAFAFA] xl:ml-2 text-sm sm:text-md md:text-base xl:text-lg font-poppins underline hover:text-gray-300 transition-colors tracking-wider underline-offset-8"
       >
         Shop Now
         <motion.img
@@ -268,7 +268,7 @@ const HeroSection = () => {
     <motion.img
       src={heroImage}
       alt="iPhone 14"
-      className="w-full max-w-[260px] sm:max-w-[360px] md:max-w-[420px] lg:max-w-[480px] xl:max-w-[540px] object-contain"
+      className="w-full max-w-[2800px] sm:max-w-[380px] md:max-w-[450px] lg:max-w-[520px] xl:max-w-[600px] 2xl:max-w-[700px] object-contain"
       initial={{ y: 50, opacity: 0, rotate: 5 }}
       animate={{ y: 0, opacity: 1, rotate: 0 }}
       transition={{ duration: 1.2, ease: "easeOut", delay: 1.0 }}
@@ -281,7 +281,7 @@ const HeroSection = () => {
   </motion.div>
 
   <motion.div 
-    className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3"
+    className="absolute bottom-4 sm:bottom-6 left-[45%] transform -translate-x-1/2 flex space-x-3"
     initial={{ y: 20, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
     transition={{ duration: 0.6, ease: "easeOut", delay: 2.2 }}
@@ -289,7 +289,7 @@ const HeroSection = () => {
     {[0, 1, 2, 3, 4].map((index) => (
       <motion.div
         key={index}
-        className={`w-3 h-3 rounded-full ${index === 2 ? 'bg-red-500 border-2 border-white' : 'bg-gray-400'}`}
+        className={`  w-1.5 h-1.5  sm:w-3 sm:h-3    rounded-full ${index === 2 ? 'bg-red-500 border-2 border-white' : 'bg-gray-400'}`}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ 
