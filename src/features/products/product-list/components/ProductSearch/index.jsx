@@ -149,7 +149,7 @@ const ProductSearch = ({ searchQuery,  onProductsChange = () => {}, onLoadingCha
                           if (isInCart(product.id)) {
                             removeFromCart(product.id);
                             toast.success("Product removed from cart", {
-                              position: "bottom-right",
+                              position: "top-right",
                               autoClose: 2000,
                               hideProgressBar: false,
                               closeOnClick: true,
@@ -159,7 +159,7 @@ const ProductSearch = ({ searchQuery,  onProductsChange = () => {}, onLoadingCha
                           } else {
                             addToCart(product);
                             toast.success("Product added to cart", {
-                              position: "bottom-right",
+                              position: "top-right",
                               autoClose: 2000,
                               hideProgressBar: false,
                               closeOnClick: true,
