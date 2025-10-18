@@ -15,7 +15,7 @@ const MusicBanner = () => {
   };
 
   return (
-    <div className="px-6 py-6 sm:px-8 md:px-10 md:py-8 lg:px-20 xl:px-28 mx-auto w-full xl:w-[1535px]">
+    <div className="px-6 py-6 sm:px-8 md:px-10 md:py-8 lg:px-20 xl:px-28 mx-auto w-full max-w-8xl">
       <div className="relative bg-black rounded-sm overflow-hidden lg:-mx-8 xl:-mx-12"></div>
 
       <div className="relative bg-black rounded-sm overflow-hidden min-h-[360px] sm:min-h-[380px] md:min-h-[420px]

@@ -41,6 +41,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+      
       >
   <div className="w-full max-w-[1440px] mx-auto px-2 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center h-10 sm:h-12">
@@ -80,7 +81,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
   
     <motion.div 
       className="flex items-center"
-      initial={{ x: -50, opacity: 0 }}
+      initial={{ x: 50, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
     >
@@ -97,7 +98,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
 
     <motion.div 
       className="hidden lg:flex items-center space-x-6"
-      initial={{ x: 50, opacity: 0 }}
+      initial={{ x: -50, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
     >
@@ -145,7 +146,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
 
     <motion.div 
       className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0"
-      initial={{ x: 50, opacity: 0 }}
+      initial={{ x: -50, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
     >
@@ -234,7 +235,7 @@ const Navbar = ({ hideIcons = false, hideUserIcon = false }) => {
 
       <motion.div 
         className="flex md:flex lg:hidden items-center flex-shrink-0"
-        initial={{ x: 50, opacity: 0 }}
+        initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
       >
